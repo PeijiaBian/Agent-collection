@@ -37,7 +37,7 @@
 
 ## 工作流示意图
 
-![思维导图流程](./content mind mapper agent/workflow.png)
+![思维导图流程](./workflow.png)
 
 ## 示例输入
 
