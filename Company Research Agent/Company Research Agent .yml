@@ -1,0 +1,1367 @@
+app:
+  description: Does deep research on a company and creates a report that includes
+    demographic information, funding data, web traffic trends and competitor analysis
+  icon: money_mouth_face
+  icon_background: '#FCE7F6'
+  mode: workflow
+  name: Company Research Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 60
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1733279860341-source-1734507275504-target
+      source: '1733279860341'
+      sourceHandle: source
+      target: '1734507275504'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: parameter-extractor
+      id: 1734507275504-source-1734678366009-target
+      selected: false
+      source: '1734507275504'
+      sourceHandle: source
+      target: '1734678366009'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: llm
+      id: 1734678366009-source-1734924672607-target
+      source: '1734678366009'
+      sourceHandle: source
+      target: '1734924672607'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1734936735586-source-1734937368759-target
+      source: '1734936735586'
+      sourceHandle: source
+      target: '1734937368759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1734924672607-source-1734937368759-target
+      source: '1734924672607'
+      sourceHandle: source
+      target: '1734937368759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1734937628896-source-1734937368759-target
+      source: '1734937628896'
+      sourceHandle: source
+      target: '1734937368759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: llm
+      id: 1734678366009-source-1734936735586-target
+      source: '1734678366009'
+      sourceHandle: source
+      target: '1734936735586'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: llm
+      id: 1734678366009-source-1734937628896-target
+      source: '1734678366009'
+      sourceHandle: source
+      target: '1734937628896'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: llm
+      id: 1734678366009-source-1734933530931-target
+      source: '1734678366009'
+      sourceHandle: source
+      target: '1734933530931'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1734933530931-source-1734937368759-target
+      source: '1734933530931'
+      sourceHandle: source
+      target: '1734937368759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1734933599165-source-1734937368759-target
+      source: '1734933599165'
+      sourceHandle: source
+      target: '1734937368759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: llm
+      id: 1734678366009-source-1734933656264-target
+      source: '1734678366009'
+      sourceHandle: source
+      target: '1734933656264'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1734933656264-source-1734937368759-target
+      source: '1734933656264'
+      sourceHandle: source
+      target: '1734937368759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: llm
+      id: 1734678366009-source-1733298413203-target
+      source: '1734678366009'
+      sourceHandle: source
+      target: '1733298413203'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1733298413203-source-1734937368759-target
+      source: '1733298413203'
+      sourceHandle: source
+      target: '1734937368759'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: parameter-extractor
+        targetType: tool
+      id: 1734678366009-source-1734937561942-target
+      source: '1734678366009'
+      sourceHandle: source
+      target: '1734937561942'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: llm
+      id: 1734937561942-source-1734933599165-target
+      source: '1734937561942'
+      sourceHandle: source
+      target: '1734933599165'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: 输入公司域名或者公司名称
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: company name or domain
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: company_info
+        - label: Language of output
+          max_length: 48
+          options:
+          - 中文
+          - English
+          required: true
+          type: select
+          variable: output_language
+      height: 144
+      id: '1733279860341'
+      position:
+        x: -698.5343503386146
+        y: 293.38410256894775
+      positionAbsolute:
+        x: -698.5343503386146
+        y: 293.38410256894775
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 根据输入的主域名或者名称，以及补充信息，并使用大模型生成公司的一些question信息，通过问答的形式，来展示公司的特点，让用户更了解公司的情况。
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: 4fd8f55a-380f-4823-adb5-32802568adcf
+          role: system
+          text: 你是一名企业研究分析专家，擅长为公司定制研究问题并提供详细解答。
+        - id: f7ef7868-fe56-4d93-8d13-e5b48fb5c40a
+          role: user
+          text: "你是一名企业研究分析专家，擅长为公司定制研究问题并提供详细解答。请根据用户提供的公司名称或域名{{#1734678366009.nameordomain#}}和补充信息{{#1734678366009.other_info#}}，设计并回答与该公司业务、市场定位、商业模式、发展战略等密切相关的研究问题。以下是具体要求：\n\
+            \n语言要求：\n根据{{#1733279860341.output_language#}}的语言要求，进行输出内容\n\n内容要求：\n\n\
+            1. 问题设计：\n• 生成 5-7 个高质量问题，必须基于公司的特点、行业背景和核心业务进行定制。\n• 问题应涵盖以下方面：\n• 公司业务模式（盈利方式、市场定位等）。\n\
+            • 产品或服务（独特优势、目标用户、竞争力）。\n• 市场表现（竞争环境、用户评价、行业地位）。\n• 公司战略（发展方向、技术创新、团队增长）。\n\
+            • 行业挑战（市场趋势、政策环境、技术瓶颈）。\n2. 回答问题：\n• 针对每个问题提供清晰、准确、且内容充实的答案。\n• 如果没有具体数据，用“暂无数据”标注。\n\
+            • 回答应包括具体事例或数据支持（如适用）。\n\n问题示例，仅为示例作用，针对不同公司的特质应该设置不同的问题：\n1. Do they\
+            \ have a sales team? Who is the head of sales?\n2. How do they make money?\
+            \ What is their business model?\n3. On a scale of 1-10 how clear and effective\
+            \ is the website?\n4. What is the primary tagline on the website?\n5.\
+            \ When was the company founded?\n6. Who is the CEO?\n7. What is the lowest\
+            \ price they offer and for which product?\n8. What is the highest priced\
+            \ they offer and for which product?\n9. Do they sell a subscription product?\n\
+            10. Where cities are their offices located in?\n11. What is their primary\
+            \ tagline?\n12. What are the main CTAs and what are recommendations to\
+            \ improve them?\n13. Who are the company's founders?\n14. Who is the CEO\
+            \ of the company?\n\n排版要求：\n\n1. 以 Markdown 格式输出。\n2. 问题用列表编号标识，例如：问题\
+            \ 1、问题 2。\n3. 每个问题后用 **回答**： 开头并附上答案。\n4. 确保内容清晰、段落分明，回答不少于 2-3 行文字。\n\
+            5. 如果适用，超链接以 [显示文本](链接) 格式插入。\n\n输入示例：\n\n公司名称：NVIDIA\n或域名：nvidia.com\n\
+            \n### 研究问题 \n\n**问题 1：公司是否有销售团队？他们的销售策略是什么？**  \n   **回答**：是的，NVIDIA 拥有一个专业的销售团队，负责推动\
+            \ GeForce 系列产品、数据中心解决方案等的市场扩展。他们的销售策略主要通过订阅模式（如 GeForce NOW 云游戏服务）和直接与\
+            \ OEM 厂商合作来实现。此外，公司还通过与大型科技公司合作（如 AWS、Google）扩大其技术生态系统。\n\n**问题 2：该公司的主要收入来源是什么？其商业模式如何运作？**\
+            \  \n   **回答**：NVIDIA 的主要收入来源包括 GPU 硬件销售（用于游戏、人工智能和数据中心）、订阅服务（如 GeForce\
+            \ NOW），以及软件许可费用。他们的商业模式以硬件销售为主，同时通过生态系统支持（CUDA 平台）绑定开发者，形成技术护城河。\n\n**问题\
+            \ 3：公司官网内容是否清晰、有效？用户体验如何？**  \n   **回答**：NVIDIA 的官网以产品和技术展示为核心，页面设计简洁，导航清晰。用户可以轻松找到所需信息，如最新的\
+            \ GPU 产品、驱动程序更新和支持服务。用户体验被评为 9/10，因其快速响应和视觉吸引力。\n\n**问题 4：该公司的主要竞争对手是谁？他们如何在市场中与之竞争？**\
+            \  \n   **回答**：NVIDIA 的主要竞争对手包括 AMD 和 Intel。在 GPU 市场，AMD 提供价格更具竞争力的显卡，而\
+            \ Intel 近年来推出了自家 GPU 产品线。此外，在 AI 硬件领域，Google 和 AWS 提供自研的 TPU，形成一定竞争压力。\n\
+            \n**问题 5：公司目前的市场定位和核心优势是什么？**  \n   **回答**：NVIDIA 的市场定位是高性能计算和 AI 硬件领域的领导者。他们的核心优势在于\
+            \ GPU 技术领先、生态系统完善（如 CUDA 开发平台）以及在游戏、数据中心和自动驾驶市场中的广泛应用。\n\n**问题 6：公司是否提供订阅产品或服务？主要的模式和价格范围是什么？**\
+            \  \n   **回答**：是的，NVIDIA 提供订阅服务，例如 GeForce NOW 云游戏平台，分为三种模式：免费、优先级会员（约\
+            \ $9.99/月）和旗舰会员（约 $19.99/月）。这些模式主要基于性能和访问优先级的差异化设计。\n\n**问题 7：当前行业趋势对公司的影响有哪些？**\
+            \  \n   **回答**：随着 AI 和自动驾驶技术的快速发展，NVIDIA 在这些领域的需求持续增长。同时，竞争对手也在加强研发，迫使\
+            \ NVIDIA 在价格和性能之间寻找平衡。此外，芯片制造链中的半导体短缺问题也对其供应链管理提出了挑战。\n\n提示词总结：\n\n• 生成的问题必须与公司特性相关，不泛泛而谈。\n\
+            • 回答应结合数据或实例增强可信度。\n• Markdown 排版必须整齐、清晰，方便后续直接使用。\n• 生成内容实用{{#1733279860341.output_language#}}进行输出。"
+        selected: false
+        title: 7. research questions
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 190
+      id: '1733298413203'
+      position:
+        x: 629.5044641698546
+        y: 1123.1148432414263
+      positionAbsolute:
+        x: 629.5044641698546
+        y: 1123.1148432414263
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: 通过搜索引擎来搜索输入公司名称或者公司域名的官网地址，主域名
+        provider_id: tavily
+        provider_name: tavily
+        provider_type: builtin
+        selected: false
+        title: 搜索公司的官网地址
+        tool_configurations:
+          days: 3
+          exclude_domains: null
+          include_answer: 0
+          include_domains: null
+          include_image_descriptions: 0
+          include_images: 0
+          include_raw_content: 0
+          max_results: 5
+          search_depth: basic
+          topic: general
+        tool_label: TavilySearch
+        tool_name: tavily_search
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#1733279860341.company_info#}} 官网地址'
+        type: tool
+      height: 368
+      id: '1734507275504'
+      position:
+        x: -369.28336172500735
+        y: 293.38410256894775
+      positionAbsolute:
+        x: -369.28336172500735
+        y: 293.38410256894775
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: 从搜索结果中提取出来公司名称或者主域名。并且将搜索结果中的其余信息提取总结在一起，为后面的分析做补充信息。
+        instruction: "提取任务描述\n从输入文本 {{#1734507275504.text#}}中提取与公司相关的信息，优先找到公司的主域名和名称。输出信息需要经过验证，并确保选择一个最匹配、最相关的公司。\n\
+          输出结构\n生成以下 JSON 对象：\n{\n  \"nameordomain\": \"<公司名称或主域名>\",\n  \"other_info\"\
+          : \"<关于该公司的所有相关信息>\"\n}\n\n提取规则\n公司名称和主域名提取\n主域名优先级：提取有效的主域名，并确保其可以访问。\n\
+          对于带有子域名的链接，提取其主域名（如 llm.emotibot.com 转换为 emotibot.com）。\n公司名称补充：若主域名未明确，则提取公司全称。\n\
+          验证规则：\n主域名需与公司信息匹配。\n若域名无法验证或与公司不匹配，则仅提取公司名称。\n公司选择标准\n信息完整性：优先选择包含公司名称、主域名、简介等完整信息的条目。\n\
+          主题相关性：选择与输入文本内容主题最相关的公司。\n单一公司输出：确保输出只包含一个公司的信息。\n信息整合要求\n将所有与选定公司相关的完整信息整合为\
+          \ other_info，包括但不限于：\n公司简介\n官网链接\n服务范围\n技术特点\n相关附加信息\n去重与清理：移除重复或无关信息，确保输出逻辑清晰、简洁。\n\
+          数据准确性\n真实性保障：仅基于输入文本提取，杜绝生成虚假信息。\n域名验证：确保主域名和公司信息匹配，无效或与公司无关的域名不予输出。\n必要字段：若无法确定公司名称或域名，则只输出确定的信息，避免虚假内容。\n\
+          示例\n输入文本\n### Result 1:\n**URL:** https://example.com  \n**Content:** Example\
+          \ 公司是一家专注于人工智能技术开发的企业，提供全球领先的 AI 服务。\n\n### Result 2:\n**URL:** https://example2.com\
+          \  \n**Content:** Example Inc. 是一家位于美国的科技公司，致力于 NLP 和深度学习技术。\n\n### Result\
+          \ 3:\n**URL:** https://anothercompany.com  \n**Content:** Another Company\
+          \ 提供全球领先的区块链解决方案，与人工智能无关。\n\n输出 JSON\n{\n  \"nameordomain\": \"https://example.com\"\
+          ,\n  \"other_info\": \"Example 公司是一家专注于人工智能技术开发的企业，提供全球领先的 AI 服务。\"\n}\n\
+          \n特殊场景说明\n如果域名无效但公司名称明确：\n{\n  \"nameordomain\": \"Example Inc.\",\n  \"\
+          other_info\": \"Example Inc. 是一家位于美国的科技公司，致力于 NLP 和深度学习技术。\"\n}\n\n如果未找到公司名称且域名有效：\n\
+          {\n  \"nameordomain\": \"https://example2.com\",\n  \"other_info\": \"Example\
+          \ Inc. 是一家位于美国的科技公司，致力于 NLP 和深度学习技术。\"\n}\n\n注意事项\n域名验证：仅提取可以正常访问的主域名，并确保与公司信息匹配。\n\
+          输出单一性：确保输出内容与选择的公司信息一致，忽略其他公司。\n排除无关内容：与公司无关的信息无需包含。"
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        parameters:
+        - description: company name or company domain
+          name: nameordomain
+          required: false
+          type: string
+        - description: 其余有关信息提取
+          name: other_info
+          required: false
+          type: string
+        query:
+        - '1734507275504'
+        - text
+        reasoning_mode: prompt
+        selected: false
+        title: 公司名称/域名提取&其余信息
+        type: parameter-extractor
+        variables: []
+        vision:
+          enabled: false
+      height: 174
+      id: '1734678366009'
+      position:
+        x: -63.299799089855696
+        y: 293.38410256894775
+      positionAbsolute:
+        x: -63.299799089855696
+        y: 293.38410256894775
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 根据输入的主域名或者名称，以及补充信息，并使用大模型生成公司的overview。如果信息缺失则输出“暂无数据”
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: a3c562ce-6573-4524-b99d-308ab4872458
+          role: system
+          text: 你是一名专业的企业数据分析师，专注于生成全面、准确的公司概览信息。
+        - id: bac69601-f892-4da2-8a96-668fdc2dc0f4
+          role: user
+          text: "请根据用户提供的公司名称或域名{{#1734678366009.nameordomain#}}和补充信息{{#1734678366009.other_info#}}，生成一份详细的公司概览报告，覆盖以下所有内容，并按照要求清晰排版。\n\
+            \n语言要求：\n根据{{#1733279860341.output_language#}}的语言要求，进行输出内容\n\n需要生成的内容：\n\
+            \n1. 公司名称 (Company Name)：\n提供该公司的完整名称，并确保拼写正确。例如：NVIDIA Corporation。\n\
+            2. 公司网站 (Website)：\n提供公司的官方网站链接，并以 Markdown 格式添加超链接。例如：nvidia.com。一定要确保是主域名，不是子域名\n\
+            3. 行业 (Industry)：\n描述公司所属的主要行业类别。例如：“信息技术”、“金融服务”、“电子商务”等。\n4. 所属部门 (Sector)：\n\
+            提供公司在其行业中的细分领域。例如，“人工智能”、“游戏硬件”、“在线教育”等。\n5. 公司地点 (Location)：\n提供公司总部的具体地址，包括国家、城市和街道。如果有多个总部，请列出主总部的地址。\n\
+            6. 员工人数 (Number of Employees)：\n提供公司的总员工数量（如有确切数据）。如果只有范围信息，请说明（如“5000-10000人”）。\n\
+            7. 成立年份 (Founding Year)：\n列出公司创立的年份。例如：1993。\n8. 公司类型 (Company Type)：\n\
+            说明公司是上市公司、私营公司还是非营利组织。例如：“上市公司（Public）”或“私营公司（Private）”。\n9. 市值 (Market\
+            \ Cap)：\n提供公司的最新市值数据（以美元为单位）。如果没有确切数据，请说明“暂无数据”。\n10. 年收入 (Annual Revenue)：\n\
+            提供公司的年度收入（如有公开数据）。用美元表示，并注明时间范围（如“2023 年预计收入 60 亿美元”）。\n11. LinkedIn 页面\
+            \ (LinkedIn URL)：\n提供公司的 LinkedIn 主页链接，并以 Markdown 格式添加超链接。例如：LinkedIn\
+            \ - NVIDIA。注意，如果有LinkedIn界面则显示链接，如果没有，则显示“暂无数据”。不要给出虚假链接，请检查是否和公司信息一致，不一致则显示“暂无信息”\n\
+            12. 股票代码 (Stock Ticker)：\n如果公司上市，提供其股票代码。例如：NASDAQ: NVDA。如果不是上市公司，请注明“非上市公司”。\n\
+            13. 公司口号 (Tagline)：\n提供公司官网或官方宣传中显示的主要口号。例如：“The way it’s meant to be\
+            \ played”。\n14. 公司专长领域 (Specialties)：\n列出公司在特定领域的专业技术、产品或服务。例如：“GPU 加速计算、深度学习、虚拟现实、自主驾驶”。\n\
+            \n排版要求：\n\n1. 使用 Markdown 格式排版，确保信息清晰、条理分明。\n2. 每项内容以独立的列表项呈现，并按以下顺序输出：\n\
+            • 公司名称/Company Name\n• 公司网站/Website\n• 行业/Industry\n• 所属部门/Sector\n• 公司地点/Location\n\
+            • 员工人数/Number of Employees\n• 成立年份/Founding Year\n• 公司类型/Company Type\n\
+            • 市值/Market Cap\n• 年收入/Annual Revenue\n• LinkedIn 页面/LinkedIn URL\n• 股票代码/Stock\
+            \ Ticker\n• 公司口号/Tagline\n• 公司专长领域/Specialties\n3. 如果某项内容数据不足或未公开，用“暂无数据”/“No\
+            \ data available“明确标注。\n4. 确保超链接的格式正确，所有链接内容以 [显示文本](链接地址) 形式输出。\n5. 优先使用补充信息完善数据。\n\
+            6. 对补充信息中的数据进行整合，避免重复。\n\n输入示例：\n\n公司名称：NVIDIA\n或域名：nvidia.com\n补充信息：NVIDIA\
+            \ 是一家专注于 GPU 加速计算和 AI 技术的公司，总部位于美国加州。成立于 1993 年，员工总数超过 2 万名，年收入达到 60 亿美元。\n\
+            \n\noutput_language为中文输出示例：\n### 公司概览 \n\n- **公司名称**：NVIDIA Corporation\
+            \  \n- **公司网站**：[nvidia.com](https://nvidia.com)  \n- **行业**：信息技术  \n\
+            - **所属部门**：人工智能、图形处理硬件  \n- **公司地点**：2788 San Tomas Expressway, Santa\
+            \ Clara, CA, USA  \n- **员工人数**：26,200  \n- **成立年份**：1993  \n- **公司类型**：上市公司（Public）\
+            \  \n- **市值**：$1241 亿（截至 2024 年）  \n- **年收入**：$60.9 亿（2023 财年）  \n- **LinkedIn\
+            \ 页面**：[LinkedIn - NVIDIA](https://www.linkedin.com/company/nvidia)  \n\
+            - **股票代码**：NASDAQ: NVDA  \n- **公司口号**：\"The way it’s meant to be played\"\
+            \  \n- **公司专长领域**：GPU 加速计算、人工智能、深度学习、虚拟现实、自主驾驶、机器人技术  \n\n\n\n生成要求总结：\n\
+            \n1. 数据必须准确全面，来自可靠信息源。\n2. 所有输出必须排版清晰、结构完整。\n3. 超链接正确且可用。\n4. 如果某些内容无法获取，直接标注“暂无数据”或者“No\
+            \ data available”。\n5. 请检查是否与公司信息一致，不一致的信息则标注“暂无信息”或者“No data available”。\n\
+            6. 输出内容严格按照{{#1733279860341.output_language#}}语言设置，如果输出内容不符，则进行翻译成对应语言\n\
+            7. 不要写**备注，或者注释，note等**其他信息"
+        selected: false
+        title: 1. company-overview
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 174
+      id: '1734924672607'
+      position:
+        x: 629.5044641698546
+        y: -329.30186630871015
+      positionAbsolute:
+        x: 629.5044641698546
+        y: -329.30186630871015
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 根据输入的主域名或者名称，以及补充信息，并使用大模型生成公司的funding信息。如果信息缺失则输出“暂无数据”
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: b4987d01-9b37-4dcb-8c80-c5bc672871e1
+          role: system
+          text: 你是一名企业融资数据分析专家，专注于生成有关公司融资数据的详细报告。
+        - id: 9b2f5f98-853e-4dea-bbb7-7a4453953b67
+          role: user
+          text: '你需要根据用户提供的公司名称或主域名{{#1734678366009.nameordomain#}}和补充信息{{#1734678366009.other_info#}}，通过搜索公开的可信数据源（如
+            Crunchbase、PitchBook、CB Insights、天眼查等）生成一份详细的融资报告。确保所有信息真实可靠，严禁编造或虚构内容。如果某些信息缺失，用“暂无数据”标注。
+
+
+            语言要求：
+
+            根据{{#1733279860341.output_language#}}的语言要求，进行输出内容
+
+
+            需要生成的内容：
+
+
+            1. 融资亮点 (Highlights)：
+
+            总结公司融资的主要亮点，包括：
+
+            • 支持该公司的重要投资机构或组织的名称。
+
+            • 关键融资事件或成就（如大额投资、知名投资人参与等）。
+
+            2. 投资方 (Investors)：
+
+            列出曾经投资该公司的主要投资方的清单。
+
+            3. 融资阶段 (Funding Stages)：
+
+            列出公司每一轮融资的详细数据，包括：
+
+            • 轮次 (Series)：融资轮次类型（如种子轮、A轮、B轮等）。
+
+            • 金额 (Amount)：每轮融资金额（以美元为单位）。
+
+            • 时间 (Date)：融资日期。
+
+
+            排版要求：
+
+
+            1. 使用 条目列表 或 Markdown 表格 表示不同内容：
+
+            • 总览信息用条目列表表示。
+
+            • 融资阶段详情用 Markdown 表格表示。
+
+            2. 表格需包含以下列：轮次 (Series)、金额 (Amount)、时间 (Date)。
+
+            3. 若数据缺失，用“暂无数据”或“No data available“标注，避免空白内容。
+
+            4. 确保格式清晰，数据易于阅读。
+
+
+            输入示例：
+
+
+            公司名称：NVIDIA
+
+            或域名：nvidia.com
+
+
+            英文输出示例
+
+            ### Funding
+
+
+            #### Highlights
+
+            - NVIDIA is backed by a number of leading investment organisations，including
+            Apex Ventures、Austral Capital、GGV Capital U.S.、Techstart Ventures LLP
+            etc.
+
+            - The company successfully completed 15 rounds of financing totalling
+            $4.2B.。
+
+
+            #### Investors
+
+            - QUBIS Ltd
+
+            - Apex Ventures
+
+            - Bain & Company
+
+            - GGV Capital U.S.
+
+            - SoftBank Investment Advisers
+
+            - Techstart Ventures LLP
+
+            - U.S. Department of Energy (DOE)
+
+
+
+            #### Funding Stages
+
+
+            | Series           | Amount  | Date                |
+
+            |------------------|---------|---------------------|
+
+            | GRANT            | $5M     | 2023 - 5 - 9   |
+
+            | POST IPO EQUITY  | $4B     | 2017 - 5 - 24  |
+
+            | SERIES C         | $4B     | 2020 - 9 - 4   |
+
+
+            中文输出示例
+
+            ### 融资情况
+
+
+            #### 亮点
+
+            - NVIDIA 得到了多家知名投资机构的支持，包括 Apex Ventures、Austral Capital、GGV Capital U.S.、Techstart
+            Ventures LLP 等。
+
+            - 公司成功完成了 15 轮融资，总金额达到 42 亿美元。
+
+
+            #### 投资方
+
+            - QUBIS Ltd
+
+            - Apex Ventures
+
+            - Bain & Company
+
+            - GGV Capital U.S.
+
+            - 软银投资顾问公司（SoftBank Investment Advisers）
+
+            - Techstart Ventures LLP
+
+            - 美国能源部（U.S. Department of Energy，DOE）
+
+
+            #### 融资阶段
+
+
+            | 融资轮次           | 金额       | 日期            |
+
+            |--------------------|------------|-----------------|
+
+            | GRANT（政府资助）  | 500 万美元 | 2023 年 5 月 9 日 |
+
+            | POST IPO EQUITY    | 40 亿美元  | 2017 年 5 月 24 日 |
+
+            | SERIES C           | 40 亿美元  | 2020 年 9 月 4 日 |
+
+
+
+            生成要求总结：
+
+
+            1. 完整性：所有数据必须全面覆盖融资亮点、投资方、融资总览和融资阶段。
+
+            2. 结构清晰：按标题分类，条目与表格结合，数据简洁明了。
+
+            3. 准确性：数据应与公开信息一致，若信息缺失需注明。
+
+            4. 可读性：Markdown 格式排版整齐，确保输出适合直接展示或存档。
+
+            5. 语言设置：输出内容严格按照{{#1733279860341.output_language#}}语言设置，如果输出内容不符，则进行翻译成对应语言
+
+            6. 不要写**备注，或者注释，note等其他信息**'
+        selected: false
+        title: 4. funding
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 158
+      id: '1734933530931'
+      position:
+        x: 629.5044641698546
+        y: 287.5938208968778
+      positionAbsolute:
+        x: 629.5044641698546
+        y: 287.5938208968778
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 根据输入的主域名或者名称，以及补充信息，以及检索信息，并使用大模型生成公司的latest news。如果信息缺失则输出“暂无数据”
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: b69f70c9-3ac5-4604-87e2-a39babb7c281
+          role: system
+          text: 你是一名企业新闻分析专家，专注于生成准确、详细的公司新闻信息报告。
+        - id: c768e8f9-4be0-4ab9-8fd6-5601d2dc0f6f
+          role: user
+          text: "提取输入中最新资讯的要求\n从以下输入{{#1734937561942.text#}}中提取最新的 5 条资讯，生成 Markdown\
+            \ 格式文件。\n具体要求如下：\n语言要求：\n根据{{#1733279860341.output_language#}}的语言要求，进行输出内容\n\
+            \n提取要求\n内容筛选：\n仅提取具体且完整的新闻，标题和链接必须对应真实资讯。\n新闻内容必须与输入中的 other_info {{#1734678366009.other_info#}}或\
+            \ nameordomain {{#1734678366009.nameordomain#}}提到的公司一致，不一致则排除。\n仅提取真实的新闻内容，标题和链接必须对应完整的新闻信息。\n\
+            非新闻类内容（如公司简介、财务信息、竞争者信息等）一律排除。\n如果未找到新闻，直接输出“暂无数据”。\n排除无意义或空泛的链接，如果发现无意义或空泛的链接，则不显示标题和链接，用“暂无信息”或者“No\
+            \ data available“补充。\n新闻验证标准：\n必须包含时间敏感性内容，例如“发布、宣布、推出、否认、回应”等。\n新闻内容需与公司相关，例如提到公司产品、活动、决策或行业影响。\n\
+            如果内容仅为静态信息（如公司简介、竞争者列表），则不视为新闻。\n重复检查：\n如果标题相同但链接不同，仅保留一条，优先保留评分高或发布时间最新的。\n\
+            如果链接相同但标题不同，仅保留评分高或发布时间最新的。\n新闻排序：\n根据发布时间降序排列，取最新的 5 条新闻。\n如果发布时间不明确，按输入顺序提取。\n\
+            字段完整性：\n确保标题和链接字段完整，不能出现空白字段。\n标题需准确反映新闻内容。\n输出格式\n生成一个表格，包含以下表头和数据：\n\
+            表头：| News Title | \n每行格式：| [消息标题](链接地址) |\n如果标题或链接无效，则显示 | 暂无数据 |或者| No\
+            \ data available |\n\n英文版本示例输出\n### Recent News\n| News Title        \
+            \                                           |\n|--------------------------------------------------------------|\n\
+            | [TikTok asks Supreme Court to block law that could ban app](https://www.nbcnews.com/politics/supreme-court/tiktok-asks-supreme-court-block-law-ban-popular-app-rcna184355)\
+            \ |\n| [Potential TikTok bidder seeks a CEO, prepares business overhaul](https://www.reuters.com/technology/potential-tiktok-bidder-seeks-ceo-prepares-business-overhaul-2024-12-20/)\
+            \ |\n| [TikTok Faces U.S. Ban After Losing Bid to Overturn New Law](https://www.nytimes.com/2024/12/06/business/media/tiktok-ban-court-decision.html)\
+            \ |\n| [TikTok In The Mix Special To Stream on Disney+ and Hulu Beginning\
+            \ December 15](https://www.example.com/tiktok-in-the-mix-special) |\n\
+            | [Update on Universal Music Publishing Group](https://www.example.com/update-universal-music-group)\
+            \ |\n\n中文版本输出示例\n### 最新资讯\n| 新闻标题   |--------------------------------------------------------------|----------------------------------------------------------|\\\
+            n| [BOC Research Institute Releases 2024Q4 Economic and Financial Outlook](https://www.boc.cn/en/bocinfo/bi1/202411/t20241101_25187531.html)\
+            \ | [中国银行发布2024年第四季度经济金融展望报告](https://www.boc.cn/en/bocinfo/bi1/202411/t20241101_25187531.html)\
+            \ |\\n| [Bank of China reports stable growth in H1, with strong performance](http://www.china.org.cn/china/Off_the_Wire/2024-08/29/content_117395702.htm)\
+            \ | [中国银行报告2024年上半年稳定增长](http://www.china.org.cn/china/Off_the_Wire/2024-08/29/content_117395702.htm)\
+            \ |\\n| [BOC to ramp up Belt and Road efforts](https://global.chinadaily.com.cn/a/202310/19/WS65308b03a31090682a5e971b.html)\
+            \ | [中国银行加强“一带一路”建设](https://global.chinadaily.com.cn/a/202310/19/WS65308b03a31090682a5e971b.html)\
+            \ |\\n| [Bank of China opens new branch in Riyadh](https://www.scmp.com/topics/bank-china)\
+            \ | [中国银行在利雅得开设新分行](https://www.scmp.com/topics/bank-china) |\\n| [Bank\
+            \ of China launches RMB wealth management products](https://www.boc.cn/en/bocinfo/)\
+            \ | [中国银行推出人民币理财产品](https://www.boc.cn/en/bocinfo/) |\n\n特别注意\n新闻内容必须与输入中提到的\
+            \ other_info 或 nameordomain 的公司一致，不一致则排除。\n必须明确是新闻内容，例如涉及时间、事件动态等信息。\n\
+            非新闻内容（如财务数据、公司简介等）一律排除。\n如果没有新闻，则显示“暂无数据”。\n标题需体现新闻核心内容，链接需指向具体新闻页面，避免无效链接或指向首页。\n\
+            输出内容严格按照{{#1733279860341.output_language#}}语言设置，如果输出内容不符，则进行翻译成对应语言\n\
+            不要写备注，或者注释，note等其他信息"
+        selected: false
+        title: 5. news
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 174
+      id: '1734933599165'
+      position:
+        x: 714.0606386414142
+        y: 523.7079976842922
+      positionAbsolute:
+        x: 714.0606386414142
+        y: 523.7079976842922
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 根据输入的主域名或者名称，以及补充信息，并使用大模型生成公司的Competing/Related Companies信息，包括公司名称和差异点。如果信息缺失则输出“暂无数据”
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: 7e43d74d-4a82-4f4b-8719-41b5db718f0f
+          role: system
+          text: 你是一名市场竞争分析专家，专注于研究企业的竞争者和相关公司。
+        - id: ccecf2b4-ee2c-4d02-8153-368a9838d500
+          role: user
+          text: '你是一名市场竞争分析专家，专注于研究企业的竞争者和相关公司。根据用户提供的公司名称或域名{{#1734678366009.nameordomain#}}和补充信息{{#1734678366009.other_info#}}，生成以下内容，并以
+            Markdown 表格格式输出。
+
+
+            语言要求：
+
+            根据{{#1733279860341.output_language#}}的语言要求，进行输出内容
+
+
+            需要生成的内容：
+
+
+            1. 公司名称 (Name)：
+
+            列出主要竞争者和相关公司的名称。若可能，请包含超链接到公司官网或相关页面。
+
+            2. 公司描述 (Description)：
+
+            用简洁准确的语言总结每家公司的主要业务或特征。例如：
+
+            • 该公司所在的行业领域。
+
+            • 核心产品或服务。
+
+            • 市场定位。
+
+            3. 主要区别 (Primary Difference)：
+
+            对比该公司与用户查询的公司，说明它们在市场定位、产品、服务或技术方面的主要区别。例如：
+
+            • 竞争公司的优势。
+
+            • 该公司与用户查询的公司侧重点的不同。
+
+
+            排版要求：
+
+
+            1. 使用 Markdown 表格格式输出，表头为 Name、Description、Primary Difference。
+
+            2. 表格内容清晰简洁，避免过长描述。
+
+            3. 若某些信息未公开，用“暂无数据”标注。
+
+            4. 所有公司名称应包含超链接，使用 [公司名称](链接地址) 的格式。
+
+
+            输入示例：
+
+
+            公司名称：NVIDIA
+
+            或域名：nvidia.com
+
+
+            English示例输出
+
+            ### Competing/Related Companies
+
+
+            | Name       | Description                                                                                       |
+            Primary Difference                                                                                  |
+
+            |------------|---------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------|
+
+            | [AMD](https://www.amd.com)         | AMD (Advanced Micro Devices) is
+            a global semiconductor company that develops computer processors and related
+            technologies for business and consumer markets. | AMD competes with NVIDIA
+            primarily in the GPU market but also offers CPUs, providing a broader
+            range of semiconductor products. |
+
+            | [Intel](https://www.intel.com)     | Intel Corporation is a multinational
+            technology company that is the world’s largest semiconductor chip manufacturer.
+            | Intel is primarily known for its CPUs and integrated graphics, whereas
+            NVIDIA specializes in discrete GPUs. |
+
+            | [Qualcomm](https://www.qualcomm.com) | Qualcomm is a multinational corporation
+            known for designing and marketing wireless telecommunications products
+            and services, including mobile processors and modems. | Qualcomm focuses
+            on mobile and wireless technologies, while NVIDIA is more focused on GPUs
+            and AI computing. |
+
+            | [Apple](https://www.apple.com)     | Apple Inc. is a multinational technology
+            company that designs, manufactures, and markets consumer electronics,
+            software, and online services. | Apple designs its own custom GPUs for
+            its devices, integrating them into its ecosystem, whereas NVIDIA provides
+            discrete GPUs for a wide range of devices. |
+
+            | [Microsoft](https://www.microsoft.com) | Microsoft Corporation is a
+            multinational technology company that develops, licenses, and sells computer
+            software, consumer electronics, and personal computers. | Microsoft competes
+            with NVIDIA in the AI and cloud computing space with its Azure platform,
+            while NVIDIA focuses on GPUs and AI hardware. |
+
+
+            中文示例输出
+
+            ### 竞争/相关公司
+
+
+            | 公司名称         | 公司描述                                                                                     |
+            主要区别                                                                                           |
+
+            |------------------|----------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------|
+
+            | [AMD](https://www.amd.com)         | AMD（超威半导体公司）是一家全球半导体公司，主要开发计算处理器及相关技术，服务于商业和消费市场。                |
+            AMD 主要在 GPU 市场与 NVIDIA 竞争，同时还提供 CPU 产品，覆盖更广泛的半导体产品线。                 |
+
+            | [Intel](https://www.intel.com)     | 英特尔公司是一家跨国科技公司，也是全球最大的半导体芯片制造商。                                                    |
+            英特尔以 CPU 和集成显卡闻名，而 NVIDIA 专注于独立 GPU 产品。                                       |
+
+            | [Qualcomm](https://www.qualcomm.com) | 高通公司是一家跨国公司，专注于设计和销售无线通信产品与服务，包括移动处理器和调制解调器。                          |
+            高通专注于移动和无线技术，而 NVIDIA 更关注 GPU 和 AI 计算领域。                                   |
+
+            | [Apple](https://www.apple.com)     | 苹果公司是一家跨国科技公司，设计、制造和销售消费电子产品、软件以及在线服务。                                       |
+            苹果为其设备设计定制 GPU，并集成到自身的生态系统中，而 NVIDIA 提供适用于多种设备的独立 GPU。        |
+
+            | [Microsoft](https://www.microsoft.com) | 微软公司是一家跨国科技公司，开发、授权和销售计算机软件、消费电子产品及个人计算机。                              |
+            微软通过 Azure 平台在 AI 和云计算领域与 NVIDIA 竞争，而 NVIDIA 更专注于 GPU 和 AI 硬件。          |
+
+
+
+            需要注意：
+
+            ** 选择竞争公司：**
+
+            重点关注行业内与用户公司规模相近、市场定位类似的企业。
+
+            **语言设置**：
+
+            输出内容严格按照{{#1733279860341.output_language#}}语言设置，如果输出内容不符，则进行翻译成对应语言
+
+            **不要写备注，或者注释，note等其他信息**'
+        selected: false
+        title: 6. Competing/Related Companies
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 190
+      id: '1734933656264'
+      position:
+        x: 629.5044641698546
+        y: 871.1602670912217
+      positionAbsolute:
+        x: 629.5044641698546
+        y: 871.1602670912217
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 根据输入的主域名或者名称，以及补充信息，并使用大模型生成公司的founder信息，包括姓名，介绍链接，教育情况，职业经历等。如果信息缺失则输出“暂无数据”
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: f5618125-bea4-4090-8cfd-143f5b0cea50
+          role: system
+          text: 你是一名企业历史与创始人分析专家，专注于生成准确、详细的创始人信息报告
+        - id: 6b543d9d-8107-429b-bc2f-70d0c4b9fc52
+          role: user
+          text: '你的任务是根据用户提供的公司名称或域名 {{#1734678366009.nameordomain#}}补充信息{{#1734678366009.other_info#}}，严格从公开数据中提取信息，生成以下内容。如果信息缺失或无法从公开数据中确认，请标注为“暂无信息”。请不要编造或推测信息。
+
+
+            语言要求：
+
+            根据{{#1733279860341.output_language#}}的语言要求，进行输出内容
+
+
+            搜索方法：
+
+            1. 从公司官网，或about_us等网页找founder信息
+
+            2. 从LinkedIn中查找公司及founder信息
+
+
+            需要生成的内容：
+
+
+            1. 创始人姓名 (Name)：
+
+            列出所有创始人的全名。如果公司未公开创始人信息，请标注“暂无信息”或者“No data available“。给出的链接必须为LinkedIn
+            或 Wikipedia，否则不加链接。
+
+            2. 职位 (Role)：
+
+            提供创始人在公司创立时及目前所担任的职位。例如：CEO、CTO、Chief Scientist 等。
+
+            3. 教育背景 (Education)：
+
+            从公开数据中查找创始人的教育背景，包括学位和毕业院校。例如：“计算机科学硕士，斯坦福大学”。若无相关信息，请标注“暂无信息”或者“No data
+            available“。
+
+            4. 职业经历 (Professional Background)：
+
+            描述创始人在创立公司之前的主要职业经历或创业经历。例如：“曾在 AMD 担任芯片设计工程师”。若无法查找到，请标注“暂无信息”或者“No data
+            available“。
+
+            5. 贡献与影响 (Contributions & Impact)：
+
+            根据公开数据，描述每位创始人对公司的主要贡献，例如技术研发、商业模式创新或市场拓展。若无相关信息，请标注“暂无信息”或者“No data available“。
+
+            6. 相关链接 (Relevant Links)：
+
+            提供与创始人相关的公开链接（如 LinkedIn 个人主页、官网个人介绍页或相关新闻）。如果没有相关链接，请标注“暂无信息”或者“No data
+            available“。
+
+
+            额外规则：
+
+
+            • 信息来源限定：
+
+            所有信息必须来源于公司官网、新闻报道、LinkedIn、Wikipedia 等公开可靠的数据来源。不得编造任何信息。
+
+            • 信息缺失处理：
+
+            若某些字段未在公开信息中找到，直接标注“暂无信息”或者“No data available“，不得通过推测补全。
+
+
+            排版要求：
+
+
+            1. 使用 Markdown 表格输出，表头包含以下列：姓名/Name、角色/Role、教育/Education、职业背景/Professional
+            Background、贡献/Contributions。
+
+            2. 确保表格内容清晰并且准确，若某些信息缺失或不确定，用“暂无信息”或者“No data available“标注。
+
+            3. 提供超链接的字段，用 [显示文本](链接地址) 格式。
+
+
+            输入示例：
+
+
+            公司名称：NVIDIA
+
+            或域名：nvidia.com
+
+            补充信息：NVIDIA 是一家专注于 GPU 加速计算和 AI 技术的公司，总部位于美国加州。成立于 1993 年，员工总数超过 2 万名，年收入达到
+            60 亿美元。
+
+
+
+            中文输出示例：
+
+            ### 创始人
+
+
+            | 姓名              | 职位               | 教育经历                                |
+            职业经历                      | 贡献                                  |
+
+            |-------------------|--------------------|-----------------------------------------|---------------------------------------------|------------------------------------------------|
+
+            | [Jensen Huang](https://en.wikipedia.org/wiki/Jensen_Huang) | CEO                |
+            电气工程硕士，斯坦福大学                  | 曾在 AMD 和 LSI Logic 担任芯片设计工程师        |
+            推动 GPU 技术发展，将 NVIDIA 定位为 AI 硬件领导者  |
+
+            | [Chris Malachowsky](https://www.linkedin.com/in/chris-malachowsky) |
+            CTO                | 计算机科学学士，佛罗里达大学              | 曾在 Sun Microsystems
+            工作                    | 共同创立 NVIDIA，负责早期技术开发与工程设计        |
+
+            | [Curtis Priem](https://en.wikipedia.org/wiki/Curtis_Priem) | Chief Scientist    |
+            电气工程学士，Rensselaer Polytechnic Institute | 曾开发 Sun Microsystems 的图形处理器           |
+            设计 NVIDIA 的第一代 GPU 架构                    |
+
+
+            英文输出示例：
+
+            ### Founders
+
+
+            | Name              | Role               | Education                                |
+            Professional Background                      | Contributions                                   |
+
+            |-------------------|--------------------|-----------------------------------------|---------------------------------------------|------------------------------------------------|
+
+            | [Jensen Huang](https://en.wikipedia.org/wiki/Jensen_Huang) | CEO                |
+            M.S. in Electrical Engineering, Stanford University                  |
+            Worked as a chip design engineer at AMD and LSI Logic.        | Advancing
+            GPU Technology and Positioning NVIDIA as an AI Hardware Leader  |
+
+            | [Chris Malachowsky](https://www.linkedin.com/in/chris-malachowsky) |
+            CTO                | Bachelor of Science in Computer Science, University
+            of Florida| Worked at Sun Microsystems                    | Co-founded
+            NVIDIA and was responsible for early technology development and engineering.       |
+
+            | [Curtis Priem](https://en.wikipedia.org/wiki/Curtis_Priem) | Chief Scientist    |
+            Bachelor of Electrical Engineering，Rensselaer Polytechnic Institute |
+            Developed graphics processors for Sun Microsystems.          | Designing
+            NVIDIA''s First Generation GPU Architecture                |
+
+
+            生成要求总结：
+
+
+            1. 信息准确性：
+
+            • 所有信息必须来源于公开数据（如公司官网、新闻、LinkedIn 或 Wikipedia）以及补充信息。
+
+            • 姓名后的链接必须为LinkedIn 或 Wikipedia，如果不是则忽略链接
+
+            • 若无法找到公开数据，必须明确标注“暂无信息”或者“No data available“。
+
+            • 严禁编造、推测或使用不可靠来源的数据。
+
+            2. 结构清晰：
+
+            • 使用 Markdown 表格排版，确保各字段对齐，输出整齐有序。
+
+            • 所有链接字段使用 [显示文本](链接地址) 格式，确保链接有效。
+
+            3. 字段完整性：
+
+            • 所有字段必须有内容或标注“暂无信息”或者“No data available“，不得出现空白或无意义占位。
+
+            4. 语言设置：
+
+            •  输出内容严格按照{{#1733279860341.output_language#}}语言设置，如果输出内容不符，则进行翻译成对应语言
+
+            5. 不要写备注，或者注释，note等其他信息'
+        selected: false
+        title: 2. founder
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 190
+      id: '1734936735586'
+      position:
+        x: 629.5044641698546
+        y: -123.8229241063058
+      positionAbsolute:
+        x: 629.5044641698546
+        y: -123.8229241063058
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: 对7个部分进行独立输出
+        outputs:
+        - value_selector:
+          - '1734924672607'
+          - text
+          variable: overview
+        - value_selector:
+          - '1734936735586'
+          - text
+          variable: founder
+        - value_selector:
+          - '1734937628896'
+          - text
+          variable: product
+        - value_selector:
+          - '1734933530931'
+          - text
+          variable: funding
+        - value_selector:
+          - '1734933599165'
+          - text
+          variable: news
+        - value_selector:
+          - '1734933656264'
+          - text
+          variable: cr_company
+        - value_selector:
+          - '1733298413203'
+          - text
+          variable: research_q
+        selected: true
+        title: 分区输出
+        type: end
+      height: 274
+      id: '1734937368759'
+      position:
+        x: 1178.4357683513442
+        y: 293.38410256894775
+      positionAbsolute:
+        x: 1178.4357683513442
+        y: 293.38410256894775
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: 通过域名或名称在搜索引擎中查询最新的新闻资讯，并规定为近30天内的新闻资讯。
+        provider_id: tavily
+        provider_name: tavily
+        provider_type: builtin
+        selected: false
+        title: news Search
+        tool_configurations:
+          days: 30
+          exclude_domains: null
+          include_answer: 0
+          include_domains: null
+          include_image_descriptions: 0
+          include_images: 0
+          include_raw_content: 0
+          max_results: 10
+          search_depth: basic
+          topic: general
+        tool_label: Tavily Search
+        tool_name: tavily_search
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#1734678366009.nameordomain#}} news'
+        type: tool
+      height: 384
+      id: '1734937561942'
+      position:
+        x: 443.7475771590026
+        y: 457.71293468209933
+      positionAbsolute:
+        x: 443.7475771590026
+        y: 457.71293468209933
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 根据输入的主域名或者名称，以及补充信息，并使用大模型生成公司的products信息，包括名称和特点。如果信息缺失则输出“暂无数据”
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: 1339af41-465c-46fc-b40a-0c804cc324f4
+          role: system
+          text: 你是一名产品分析专家，专注于查找公司产品，以及特色总结。
+        - id: b933842b-f934-4e18-81a1-30b8aee3c478
+          role: user
+          text: "# 企业产品分析提示词\n\n你是一名企业产品分析专家，专注于生成准确、详细的产品信息报告。你的任务是根据用户提供的公司名称或域名\
+            \ {{#1734678366009.nameordomain#}}和{{#1734678366009.other_info#}}，严格从公开数据中提取信息，生成以下内容。如果信息缺失或无法从公开数据中确认，请标注为“暂无信息”。请不要编造或推测信息。\n\
+            \n语言要求：\n根据{{#1733279860341.output_language#}}的语言要求，进行输出内容\n\n## 需要生成的内容：\n\
+            \n1. **产品名称 (Product Name)**：\n   列出公司旗下主要产品的名称。如果公司未公开产品信息，请标注“暂无信息”或者“No\
+            \ data available”。\n2. **产品特色 (Key Features)**：\n   描述每个产品的主要功能或特色，例如“支持\
+            \ 4K 视频录制”、“基于云计算的协作平台”。若无相关信息，请标注“暂无信息”或者“No data available”。\n\n---\n\
+            \n## 额外规则\n\n- **信息来源限定**：\n  所有信息必须来源于公司官网、公司的产品页面、新闻报道或其他公开可靠的数据来源。不得编造任何信息。\n\
+            - **信息缺失处理**：\n  若某些字段未在公开信息中找到，直接标注“暂无信息”，不得通过推测补全。\n\n---\n\n## 排版要求\n\
+            \n1. 使用 Markdown 表格输出，表头包含以下列：Product Name、Key Features。\n2. 确保表格内容清晰并且准确，若某些信息缺失或不确定，用“暂无信息”标注。\n\
+            3. 如果产品有相关页面链接，请将产品名称设置为超链接，格式为 [显示文本](链接地址)。\n\n---\n\n### 输入示例\n\n公司名称：Microsoft\
+            \  \n或域名：microsoft.com  \n\n---\n\n### output_language为中文输出示例\n\n### Products\
+            \  \n\n| 产品名称                         | 主要功能                         \
+            \            |\n|------------------------------------------|--------------------------------------------------|\n\
+            | [Microsoft Word](https://www.microsoft.com/en-us/microsoft-365/word)\
+            \ | 文本编辑和排版工具，支持多种文件格式，包含智能校正功能  |\n| [Azure](https://azure.microsoft.com)\
+            \     | 基于云计算的服务平台，支持 AI、数据分析和存储         |\n| [Xbox Series X](https://www.xbox.com)\
+            \   | 次世代游戏主机，支持 4K 分辨率和 120FPS 游戏体验     |\n| [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams)\
+            \ | 在线协作平台，支持视频会议、实时聊天和文档共享        |\n| [Visual Studio](https://visualstudio.microsoft.com)\
+            \ | 开发者工具，支持多种编程语言和调试功能             |\n\n\n### output_language为English输出示例\n\
+            \n### Products  \n\n| Product Name                             | Key Features\
+            \                                      |\n|------------------------------------------|--------------------------------------------------|\n\
+            | [Microsoft Word](https://www.microsoft.com/en-us/microsoft-365/word)\
+            \ | Text editing and layout tools, support for multiple file formats,\
+            \ including intelligent correction features |\n| [Azure](https://azure.microsoft.com)\
+            \     |  Cloud-based service platform supporting AI, data analytics and\
+            \ storage      |\n| [Xbox Series X](https://www.xbox.com)   | Next-generation\
+            \ gaming console with 4K resolution and 120FPS gaming experience    |\n\
+            | [Microsoft Teams](https://www.microsoft.com/en-us/microsoft-teams) |\
+            \ Online collaboration platform with support for video conferencing, real-time\
+            \ chat and document sharing         |\n| [Visual Studio](https://visualstudio.microsoft.com)\
+            \ | Developer tools with support for multiple programming languages and\
+            \ debugging capabilities            |\n\n---\n\n### 生成要求总结\n\n1. **信息准确性**：\n\
+            \   - 所有信息必须来源于公开数据（如官网、新闻报道或 Wikipedia）。\n   - 若无法找到公开数据，必须明确标注“暂无信息”。\n\
+            \   - 严禁编造、推测或使用不可靠来源的数据。\n2. **结构清晰**：\n   - 使用 Markdown 表格排版，确保各字段对齐，输出整齐有序。\n\
+            \   - 所有链接字段使用 [显示文本](链接地址) 格式，确保链接有效。\n3. **字段完整性**：\n   - 所有字段必须有内容或标注“暂无信息”，不得出现空白或无意义占位。\n\
+            4. ** 语言设置**：\n   - 输出内容严格按照{{#1733279860341.output_language#}}语言设置，如果输出内容不符，则进行翻译成对应语言\n\
+            5. 不要写备注，或者注释，note等其他信息"
+        selected: false
+        title: 3. product
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 174
+      id: '1734937628896'
+      position:
+        x: 629.5044641698546
+        y: 93.9682926549537
+      positionAbsolute:
+        x: 629.5044641698546
+        y: 93.9682926549537
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 175
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Usage：用户输入公司的域名或者公司的名称","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Example1：nvdia","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Example2:
+          nvdia.com","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 471
+      height: 175
+      id: '1735008965392'
+      position:
+        x: -816.767818240297
+        y: 699.465010342584
+      positionAbsolute:
+        x: -816.767818240297
+        y: 699.465010342584
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 471
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 124
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"通过用户输入的公司名称或者域名，先检索到准确的公司官网信息。之后分别对公司的overview，
+          founder， products， funding， latest news， competing or related companies，
+          and research questions进行分析输出。","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"其中比较特别的是latest
+          news，通过搜索引擎查找近30天内的最新资讯并输出，包括第三方的新闻报道。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 813
+      height: 124
+      id: '1735009080035'
+      position:
+        x: -627.2295146324441
+        y: -123.8229241063058
+      positionAbsolute:
+        x: -627.2295146324441
+        y: -123.8229241063058
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 813
+    viewport:
+      x: 400.452939173844
+      y: 94.82645724886254
+      zoom: 0.48289396220507885

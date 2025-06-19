@@ -1,0 +1,510 @@
+app:
+  description: '【By Brianna】
+
+    视频转为优质小红书笔记AI爆款工具'
+  icon: writing_hand
+  icon_background: '#FCE7F6'
+  mode: workflow
+  name: XHS Video Note Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: 94722609-4c79-4fd5-a937-83d1aaeac9e4
+    name: base_url
+    selector:
+    - env
+    - base_url
+    value: https://iagent.cc/video-analysis-api
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 60
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1734675428907-source-1735113774259-target
+      source: '1734675428907'
+      sourceHandle: source
+      target: '1735113774259'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: http-request
+      id: 1735113774259-source-1734680679452-target
+      selected: false
+      source: '1735113774259'
+      sourceHandle: source
+      target: '1734680679452'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: llm
+      id: 1734680679452-source-1734675552932-target
+      source: '1734680679452'
+      sourceHandle: source
+      target: '1734675552932'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: llm
+      id: 1734675552932-source-1736476844006-target
+      source: '1734675552932'
+      sourceHandle: source
+      target: '1736476844006'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: tool
+      id: 1736476844006-source-1736476956893-target
+      source: '1736476844006'
+      sourceHandle: source
+      target: '1736476956893'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: end
+      id: 1736476956893-source-1736331474670-target
+      source: '1736476956893'
+      sourceHandle: source
+      target: '1736331474670'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 小红书分享链接
+          max_length: 5120
+          options: []
+          required: true
+          type: paragraph
+          variable: text
+        - label: language
+          max_length: 1000
+          options: []
+          required: false
+          type: paragraph
+          variable: language
+      height: 116
+      id: '1734675428907'
+      position:
+        x: 27.72784737034027
+        y: 284
+      positionAbsolute:
+        x: 27.72784737034027
+        y: 284
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 将获取到的文本生成小红书风格的文案
+        model:
+          completion_params:
+            frequency_penalty: 0.1
+            max_tokens: 16384
+            presence_penalty: 0.1
+            temperature: 0.8
+            top_p: 0.9
+          mode: chat
+          name: ea01-eus01-gpt-4o-mini-2024-07-18
+          provider: azure_openai
+        prompt_template:
+        - id: a20b25ed-8756-4e52-ace4-0c3568d10a4a
+          role: system
+          text: "你是一位专业的小红书爆款文案写作大师，擅长将普通内容转换为刷屏级爆款笔记。  \n请将输入的内容转换为小红书风格的笔记，并确保满足以下要求：\
+            \  \n\n\n**1. 语言设置（重要‼️）**  \n- 如果有语言设定，则所有输出文本都应翻译为{{#1734675428907.language#}}。\
+            \  \n\n\n**2. 标题创作（至关重要\U0001F525）**  \n- **二极管标题法**（吸引眼球，激发好奇）：\n  -\
+            \ **追求快乐型**：产品/方法 + 只需N秒 + 逆天效果  \n  - **逃避痛苦型**：不采取行动 + 巨大损失 + 紧迫感  \n\
+            - **爆款关键词（至少选1-2个）**：\n  - **高转化词**：好用到哭、宝藏、神器、压箱底、隐藏干货、高级感  \n  - **情感词**：绝绝子、破防了、治愈、万万没想到、爆款、永远可以相信\
+            \  \n  - **身份词**：小白必看、手残党必备、打工人、普通女生  \n  - **程度词**：疯狂点赞、超有料、无敌、一百分、良心推荐\
+            \  \n- **标题规则**：\n  - **字数**：20字以内  \n  - **emoji**：2-4个相关表情  \n  - **标点**：感叹号、省略号增强表达\
+            \  \n  - **风格**：口语化、制造悬念  \n\n\n**3. 正文创作（高完播率\U0001F525）**  \n- **开篇抓痛点（沉浸感强）**：\n\
+            \  - **共情开场**：描述读者痛点  \n  - **悬念引导**：埋下解决方案伏笔  \n  - **场景还原**：具体描述生活场景\
+            \  \n- **内容结构（清晰有层次）**：\n  - **每段开头用emoji** 强调  \n  - **重点内容加粗**，提升可读性\
+            \  \n  - **适当空行** 增加舒适感  \n  - **步骤说明** 逻辑清晰  \n- **写作风格（像朋友聊天一样）**：\n\
+            \  - **热情亲切**，拒绝冷漠  \n  - **口语化表达**，自然流畅  \n  - **插入互动性问句**，增强参与感  \n\
+            \  - **加入个人经验分享**，增强信任感  \n- **高级技巧（让人读到最后）**：\n  - **使用平台热梗**（增强代入感）\
+            \  \n  - **加入流行口头禅**（更有趣味性）  \n  - **设置悬念+爆点**（制造强记忆点）  \n  - **情感共鸣描写**（加深印象）\
+            \  \n\n\n**4. 标签优化（提升曝光量\U0001F525）**  \n- **每类标签至少1-2个**：\n  - **核心关键词**：与主题强相关\
+            \  \n  - **关联关键词**：长尾词，提高搜索匹配  \n  - **高转化词**：增强购买/行动意愿  \n  - **热搜词**：符合行业热点趋势\
+            \  \n\n\n**5. 整体要求**  \n- **自动调整内容体量**，确保信息充足但不过载  \n- **结构清晰**，适当分点 \
+            \ \n- **情感真实**，避免过度营销感  \n- **互动引导**，设置2-3处互动点  \n- **AI友好**，避免机器味，让内容更有温度\
+            \  \n\n\n⚠️ **请始终牢记**：**标题决定打开率，内容决定完播率，互动决定涨粉率！**  "
+        - id: 429d125b-2c67-4f40-9be9-31e9333dbf35
+          role: user
+          text: "请将以下内容转换为爆款小红书笔记。  \n\n\n\U0001F4CC **语言设定**：如果有规定的语言为{{#1734675428907.language#}}，请翻译所有输出文本为{{#1734675428907.language#}}。\
+            \  \n\n\n\U0001F4CD **内容如下**：  \n{{#1734680679452.body#}}  \n\n\n**请按照以下格式返回**：\
+            \  \n\n\n**1. 第一行**：爆款标题（遵循二极管标题法，必须有emoji）  \n\n\n**2. 空一行**  \n\n\n\
+            **3. 正文内容**（注意结构、风格、技巧的运用，控制在600-800字之间）  \n\n\n**4. 空一行**  \n\n\n**5.\
+            \ 标签列表**（每类标签都要有，用#号开头，但不要展示标签类名，只输出标签）  \n\n\n**创作要求**：  \n✅ **标题要让人忍不住点进来看**\
+            \  \n✅ **内容要有干货，但表达要轻松**  \n✅ **每段都要用emoji装饰**  \n✅ **标签要覆盖核心词、关联词、转化词、热搜词**\
+            \  \n✅ **设置2-3处互动引导**  \n✅ **通篇要有感情和温度**  \n✅ **正文控制在600-800字之间**  \n\n\
+            \n⚠️ **如果有语言设定，务必翻译所有文本！**"
+        selected: false
+        title: 生成小红书文案
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 126
+      id: '1734675552932'
+      position:
+        x: 980.416116155046
+        y: 284
+      positionAbsolute:
+        x: 980.416116155046
+        y: 284
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - type: text
+            value: "{\n    \"text\": \"{{#1735113774259.result#}}\"\n}"
+          type: raw-text
+        desc: video to text
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          connect: 10
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+          read: 600
+          write: 600
+        title: 调用接口获取对话文本
+        type: http-request
+        url: '{{#env.base_url#}}/get_xhs_video_transcript'
+        variables: []
+      height: 166
+      id: '1734680679452'
+      position:
+        x: 659.7355508139296
+        y: 284
+      positionAbsolute:
+        x: 659.7355508139296
+        y: 284
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "\ndef main(arg1: str) -> dict:\n    return {\n        \"result\": arg1.replace(\"\
+          \\n\", \"\")\n    }\n"
+        code_language: python3
+        desc: 去掉一些可能导致报错的特殊字符
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 输入文本特殊字符处理
+        type: code
+        variables:
+        - value_selector:
+          - '1734675428907'
+          - text
+          variable: arg1
+      height: 82
+      id: '1735113774259'
+      position:
+        x: 334
+        y: 284
+      positionAbsolute:
+        x: 334
+        y: 284
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1734675552932'
+          - text
+          variable: text
+        - value_selector:
+          - '1736476956893'
+          - json
+          variable: files
+        selected: false
+        title: 结束
+        type: end
+      height: 116
+      id: '1736331474670'
+      position:
+        x: 1947.6839722410107
+        y: 284
+      positionAbsolute:
+        x: 1947.6839722410107
+        y: 284
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 转换为主体、背景、环境、色彩四个主要部分，并生成英文的总结
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-mini-2024-07-18
+          provider: azure_openai
+        prompt_template:
+        - id: fc5d4fd7-4e81-4967-880a-66199ecb79ea
+          role: system
+          text: 'Your task is to extract key information from the{{#1734675552932.text#}}
+            and convert it into a concise, clear, and unambiguous image generation
+            prompt. The output description should be structured and include the following
+            four sections:
+
+
+            Extraction Steps:
+
+
+            1. Subject: Clearly describe the main object(s) in the image, such as
+            people, animals, objects, etc.
+
+            2. Action/State: Describe the behavior, state, or emotion of the subject
+            (e.g., stationary, jumping, thinking, etc.).
+
+            3. Environment/Background: Extract the main visual elements of the background,
+            including location, time, weather, or decor.
+
+            4. Colors and Lighting: Summarize the dominant color tones and lighting
+            conditions of the scene (e.g., bright, dim, soft, shadowed, etc.).
+
+
+            Output Requirements:
+
+
+            • Retain all core information from the user’s input while removing redundant
+            or ambiguous details.
+
+            • Use a structured format for clarity, ensuring it is easily understandable
+            by image generation tools.
+
+            • Avoid subjective assumptions and strictly base the description on the
+            provided input.
+
+            • If information is insufficient, do not add extra content.
+
+
+            Output Format (strictly follow this structure):
+
+
+            • Subject: {Description of the subject}
+
+            • Action/State: {Description of the action or state}
+
+            • Environment/Background: {Description of the background}
+
+            • Colors and Lighting: {Description of the colors and lighting}
+
+
+            Additional Note:
+
+            If the user’s input is in a language other than English, translate the
+            output into English before presenting it.'
+        selected: false
+        title: 总结文生图文字
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 142
+      id: '1736476844006'
+      position:
+        x: 1305.5553090496546
+        y: 284
+      positionAbsolute:
+        x: 1305.5553090496546
+        y: 284
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: 根据总结英文版的文生图文字，生成和内容相符的图片
+        provider_id: siliconflow
+        provider_name: siliconflow
+        provider_type: builtin
+        selected: false
+        title: 根据小红书内容生成图片
+        tool_configurations:
+          image_size: 768x1024
+          model: schnell
+          num_inference_steps: 20
+          seed: null
+        tool_label: Flux
+        tool_name: flux
+        tool_parameters:
+          prompt:
+            type: mixed
+            value: '{{#1736476844006.text#}}'
+        type: tool
+      height: 212
+      id: '1736476956893'
+      position:
+        x: 1612.367875894107
+        y: 284
+      positionAbsolute:
+        x: 1612.367875894107
+        y: 284
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 140
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"example：
+          ","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"19
+          玩游戏的阿舔发布了一篇小红书笔记，快来看吧！ 😆 arvxpiifNI4Mgt2 😆 http://xhslink.com/a/lP7Wmh7zUTh3，复制本条信息，打开【小红书】App查看精彩内容！","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 539
+      height: 140
+      id: '1736494282168'
+      position:
+        x: -93.76399147163369
+        y: 406.66106135015616
+      positionAbsolute:
+        x: -93.76399147163369
+        y: 406.66106135015616
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 539
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 370
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"1.
+          用户可以将小红书的分享链接中的文字输入到输入框","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"2.
+          进行特殊字符处理，去除一些可能导致报错的特殊字符","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"3.
+          调用接口解析小红书链接，找到真实的video_id，并转录文字","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"4.
+          根据转录的文字生成小红书文案","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"5.
+          根据生成内容总结文生图文字，并翻译为英文","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"6.
+          使用Flux生成图片","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"7.
+          输出","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 661
+      height: 370
+      id: '1736494475957'
+      position:
+        x: 647.5934211554097
+        y: -126.26007107106398
+      positionAbsolute:
+        x: 647.5934211554097
+        y: -126.26007107106398
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 661
+    viewport:
+      x: 442.00366583642835
+      y: 259.86314769163
+      zoom: 0.5807543659628611

@@ -1,0 +1,478 @@
+app:
+  description: '【By Brianna】
+
+    上传一个短视频或URL，输入Instruction，生成一个新的二创的脚本。'
+  icon: female-mechanic
+  icon_background: '#E6F4D7'
+  mode: workflow
+  name: Short Video Creator Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables:
+  - description: ''
+    id: bc7b7d44-fb74-4c73-8d33-29aef9722732
+    name: base_url
+    selector:
+    - env
+    - base_url
+    value: https://iagent.cc/video-analysis-api
+    value_type: string
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 60
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: if-else
+      id: 1737355521568-source-1737355658947-target
+      source: '1737355521568'
+      sourceHandle: source
+      target: '1737355658947'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1737355658947-true-1737355893882-target
+      source: '1737355658947'
+      sourceHandle: 'true'
+      target: '1737355893882'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: http-request
+      id: 1737355658947-b51d787a-32c0-44c0-aa1a-71efc3b0e782-1737357386337-target
+      source: '1737355658947'
+      sourceHandle: b51d787a-32c0-44c0-aa1a-71efc3b0e782
+      target: '1737357386337'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: variable-aggregator
+      id: 1737355893882-source-1737357540475-target
+      source: '1737355893882'
+      sourceHandle: source
+      target: '1737357540475'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: variable-aggregator
+      id: 1737357386337-source-1737357540475-target
+      source: '1737357386337'
+      sourceHandle: source
+      target: '1737357540475'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: variable-aggregator
+        targetType: llm
+      id: 1737357540475-source-1737357564699-target
+      source: '1737357540475'
+      sourceHandle: source
+      target: '1737357564699'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1737357564699-source-1737357826441-target
+      source: '1737357564699'
+      sourceHandle: source
+      target: '1737357826441'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: user instruction
+          max_length: 10000
+          options: []
+          required: true
+          type: paragraph
+          variable: instruction
+        - label: video url
+          max_length: 10000
+          options: []
+          required: true
+          type: paragraph
+          variable: url
+        - label: language
+          max_length: 1000
+          options: []
+          required: false
+          type: paragraph
+          variable: language
+      height: 142
+      id: '1737355521568'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: contains
+            id: a2e6c523-9177-4f3c-b4ab-3038252e091a
+            value: douyin
+            varType: string
+            variable_selector:
+            - '1737355521568'
+            - url
+          id: 'true'
+          logical_operator: and
+        - case_id: b51d787a-32c0-44c0-aa1a-71efc3b0e782
+          conditions:
+          - comparison_operator: contains
+            id: 78638548-34dd-43d1-a549-c7f276b9e6b2
+            value: xiaohongshu
+            varType: string
+            variable_selector:
+            - '1737355521568'
+            - url
+          - comparison_operator: contains
+            id: db6c1f8d-214f-4cb1-aaf3-e9dc45daffd9
+            value: xhslink
+            varType: string
+            variable_selector:
+            - '1737355521568'
+            - url
+          id: b51d787a-32c0-44c0-aa1a-71efc3b0e782
+          logical_operator: or
+        desc: ''
+        selected: false
+        title: 判断是抖音还是小红书的链接
+        type: if-else
+      height: 200
+      id: '1737355658947'
+      position:
+        x: 382.25798269511625
+        y: 282
+      positionAbsolute:
+        x: 382.25798269511625
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1
+            key: ''
+            type: text
+            value: '{
+
+              "text": "{{#1737355521568.url#}}"
+
+              }'
+          type: raw-text
+        desc: ''
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求抖音
+        type: http-request
+        url: '{{#env.base_url#}}/get_video_transcript'
+        variables: []
+      height: 138
+      id: '1737355893882'
+      position:
+        x: 688
+        y: 282
+      positionAbsolute:
+        x: 688
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1
+            key: ''
+            type: text
+            value: '{
+
+              "text": "{{#1737355521568.url#}}"
+
+              }'
+          type: raw-text
+        desc: ''
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求小红书
+        type: http-request
+        url: '{{#env.base_url#}}/get_xhs_video_transcript'
+        variables: []
+      height: 138
+      id: '1737357386337'
+      position:
+        x: 688
+        y: 415
+      positionAbsolute:
+        x: 688
+        y: 415
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        output_type: string
+        selected: true
+        title: 变量聚合器
+        type: variable-aggregator
+        variables:
+        - - '1737357386337'
+          - body
+        - - '1737355893882'
+          - body
+      height: 131
+      id: '1737357540475'
+      position:
+        x: 1077.358847939304
+        y: 336.00253645139645
+      positionAbsolute:
+        x: 1077.358847939304
+        y: 336.00253645139645
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.6
+          mode: chat
+          name: openai/gpt-4o
+          provider: openrouter
+        prompt_template:
+        - id: 01031639-dd4a-47d4-9af2-80588dbf7a0e
+          role: system
+          text: "### 任务说明\n根据用户提供的字幕内容，为视频脚本进行二次创作。需要根据用户的指示，重组和改写视频脚本，使其更加生动、有趣或符合特定的需求。\n\
+            \n\n### 目标\n1. **分析字幕内容**：理解原字幕的主题、角色、情节等基本信息。\n2. **二次创作**：在保留主要信息的基础上，添加创意元素，提升脚本的吸引力。\n\
+            3. **生成完整脚本**：提供详细的视频脚本，包括场景设置、对话和叙述。\n\n\n### 语言要求\n- **如果用户有规定语言**，则最终输出内容**全部**按照该语言类型输出，包括所有场景描述、对话、旁白等。\n\
+            - **如果用户未指定语言**，默认使用与原字幕相同的语言进行创作。\n\n\n### 步骤\n1. **阅读并分析原字幕**：\n   -\
+            \ 确定字幕内容的核心主题和信息。\n   - 分析角色之间的关系和故事情节。\n\n\n2. **设定创作方向**：\n   - 根据用户的指示，决定新的创作方向（如增加幽默元素、调整情节结构等）。\n\
+            \   - 确定需要额外添加或修改的具体元素。\n\n\n3. **撰写新的视频脚本**：\n   - 重写对话，确保符合新的创作方向。\n\
+            \   - 增加或修改场景描述，提供更丰富的视觉和情感体验。\n   - 确保整个脚本逻辑连贯，角色符合性格设定。\n\n\n4. **审阅和调整**：\n\
+            \   - 检查脚本是否符合用户需求和语言表达是否自然。\n   - 根据反馈进行调整和优化。\n\n\n### 输出格式\n- **场景描述**：详细描述每个场景的背景、气氛和角色活动。\n\
+            - **角色对话**：\n  - 对话内容应清晰明了，符合角色的性格和情境。\n- **旁白与叙述**：如有必要，提供旁白以帮助观众理解故事背景或角色内心活动。\n\
+            \n\n### 示例\n#### 原字幕片段：\n```\n角色A：你看，那边有一只猫。\n角色B：真的吗？我怎么没看到？\n角色A：它刚刚跳到树上了。\n\
+            ```\n\n\n#### 二次创作脚本：\n```\n场景：公园的黄昏，微风拂面，树叶沙沙作响。\n\n\n角色A（兴奋地指向远处）：快看，那边有一只可爱的小猫，正在树下打盹。\n\
+            角色B（疑惑地眯起眼）：真的？我怎么看到的只是风吹的影子。\n角色A（笑着）：哈哈，它可比影子有趣多了，刚才还翻了个跟头呢！\n```\n\n\
+            \n通过这种结构化的方法，可以确保二次创作的视频脚本更加生动、有趣，并符合用户的特定需求，同时严格按照用户指定的语言进行输出。"
+        - id: 7b96cf39-4d38-4b19-9987-4a14b364ae59
+          role: user
+          text: '字幕内容：{{#1737357540475.output#}}
+
+            用户的指示：{{#1737355521568.instruction#}}
+
+            语言：{{#1737355521568.language#}}'
+        selected: false
+        title: 生成新的脚本
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1737357564699'
+      position:
+        x: 1379.6168306344202
+        y: 336.00253645139645
+      positionAbsolute:
+        x: 1379.6168306344202
+        y: 336.00253645139645
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1737357564699'
+          - text
+          variable: output
+        selected: false
+        title: 输出
+        type: end
+      height: 90
+      id: '1737357826441'
+      position:
+        x: 1683.6168306344202
+        y: 336.00253645139645
+      positionAbsolute:
+        x: 1683.6168306344202
+        y: 336.00253645139645
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 340
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"user
+          instruction：用户输入希望获得的脚本类型或者内容","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"url：输入抖音或者小红书的分享链接","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"language（可选）：选择输出语言类型","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"小红书example：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"URL：19
+          玩游戏的阿舔发布了一篇小红书笔记，快来看吧！ 😆 arvxpiifNI4Mgt2 😆 http://xhslink.com/a/lP7Wmh7zUTh3，复制本条信息，打开【小红书】App查看精彩内容！","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"user
+          instruction：请你帮我生成消极的脚本","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"抖音example：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"URL：5.10
+          02/16 ban:/ A@G.vF 小时候过年才能吃到的手工花生麻枣，花生香混合着米香，一点也不甜腻，一口接一口根本停不下来！ # 花生麻枣
+          # 零食推荐  https://v.douyin.com/iUnxpPFE/ 复制此链接，打开Dou音搜索，直接观看视频！","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"user
+          instruction：请你帮我生成积极的脚本","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 843
+      height: 340
+      id: '1737378476506'
+      position:
+        x: 102.90360176583727
+        y: -88.70325500075467
+      positionAbsolute:
+        x: 102.90360176583727
+        y: -88.70325500075467
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 843
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 93
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"判断链接是来自抖音分享还是小红书分享，分别对应相应的http接口进行获取字幕","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 570
+      height: 93
+      id: '1737378687448'
+      position:
+        x: 455.5534193495104
+        y: 602.2387341716334
+      positionAbsolute:
+        x: 455.5534193495104
+        y: 602.2387341716334
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 570
+    viewport:
+      x: 249.66477809379285
+      y: 263.4681386281353
+      zoom: 0.827154916643469

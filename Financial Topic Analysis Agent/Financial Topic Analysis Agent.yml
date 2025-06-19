@@ -1,0 +1,493 @@
+app:
+  description: 根据客户给定的金融话题，由平台生成分析评论
+  icon: space_invader
+  icon_background: '#E4FBCC'
+  mode: workflow
+  name: 金融话题分析 Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 60
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1741762128189-source-1742122392428-target
+      source: '1741762128189'
+      sourceHandle: source
+      target: '1742122392428'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: llm
+      id: 1742122392428-source-1742122501876-target
+      source: '1742122392428'
+      sourceHandle: source
+      target: '1742122501876'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: llm
+      id: 1742122501876-source-1742255484318-target
+      source: '1742122501876'
+      sourceHandle: source
+      target: '1742255484318'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1742255484318-source-1742255780094-target
+      source: '1742255484318'
+      sourceHandle: source
+      target: '1742255780094'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: tool
+      id: 1742255780094-source-1742255851808-target
+      source: '1742255780094'
+      sourceHandle: source
+      target: '1742255851808'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: end
+      id: 1742255851808-source-1742122554414-target
+      source: '1742255851808'
+      sourceHandle: source
+      target: '1742122554414'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1742254729280-source-1742122554414-target
+      source: '1742254729280'
+      sourceHandle: source
+      target: '1742122554414'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: llm
+      id: 1742122501876-source-1742254729280-target
+      source: '1742122501876'
+      sourceHandle: source
+      target: '1742254729280'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: user_input
+          max_length: 10000
+          options: []
+          required: true
+          type: paragraph
+          variable: user_input
+        - label: language
+          max_length: 48
+          options: []
+          required: false
+          type: text-input
+          variable: language
+      height: 116
+      id: '1741762128189'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: tavily
+        provider_name: tavily
+        provider_type: builtin
+        selected: false
+        title: Tavily Search
+        tool_configurations:
+          days: 30
+          exclude_domains: null
+          include_answer: 0
+          include_domains: null
+          include_image_descriptions: 0
+          include_images: 0
+          include_raw_content: 0
+          max_results: 10
+          search_depth: advanced
+          topic: general
+        tool_label: Tavily Search
+        tool_name: tavily_search
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#1741762128189.user_input#}}'
+        type: tool
+      height: 324
+      id: '1742122392428'
+      position:
+        x: 384
+        y: 282
+      positionAbsolute:
+        x: 384
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-11-20
+          provider: azure_openai
+        prompt_template:
+        - id: e8724232-07dd-438b-98d5-fd946058627d
+          role: system
+          text: "### 任务描述\n针对用户提供的金融话题和搜索结果，生成一份分析评论报告。报告分为两个主要部分：“事件回顾”和“分析师观察”。此外，报告需将搜索结果中的数据整理成表格，并使用Markdown格式输出。如果language变量设定了语言类型，则翻译所有的输出为该语言类型，如果没有设定language则输出输入语言的语言类型。\n\
+            \n### 目标\n1. **事件回顾**：综述相关金融事件的背景、发展及影响。\n2. **分析师观察**：提供对金融事件的专业分析和未来趋势的预测。\n\
+            3. **数据整理**：将搜索结果中的数据以表格或图表形式呈现，以增强可读性和理解度。\n\n### 步骤说明\n1. **事件回顾**：\n\
+            \   - 描述金融事件的背景信息。\n   - 详细介绍事件的发展过程。\n   - 分析事件对市场、投资者及相关方的影响。\n\n2.\
+            \ **分析师观察**：\n   - 引用分析师或专家的观点。\n   - 提供对当前事件的深入分析。\n   - 预测事件可能的未来走向及其对市场的潜在影响。\n\
+            \n3. **数据整理**：\n   - 从搜索结果中提取可量化的数据。\n   - 使用Markdown表格展示数据。\n\n### 输出格式\n\
+            使用Markdown格式将报告组织如下：\n\n#### 事件回顾\n- **背景信息**：\n  - 描述事件的起因及相关情况。\n  \n\
+            - **发展过程**：\n  - 详细介绍事件的进展及重要时间节点。\n  \n- **影响分析**：\n  - 讨论事件对市场和相关方的影响。\n\
+            \n#### 分析师观察\n- **专家观点**：\n  - 引用分析师的分析和评论。\n  \n- **深入分析**：\n  - 针对事件的详细分析和评估。\n\
+            \  \n- **未来预测**：\n  - 预测事件的长期影响及市场趋势。\n\n#### 数据整理\n- **表格展示**：\n  ```markdown\n\
+            \  | 数据项     | 数值       |\n  | ---------- | ---------- |\n  | 示例数据1  |\
+            \ 12345      |\n  | 示例数据2  | 67890      |\n  ```\n\n### 示例\n假设搜索结果包含以下数据：\n\
+            \n| 日期       | 股价（美元） | 交易量（百万股） |\n| ---------- | ------------ | ----------------\
+            \ |\n| 2023-08-01 | 150          | 30               |\n| 2023-08-02 |\
+            \ 152          | 28               |\n| 2023-08-03 | 148          | 35\
+            \               |\n\n在报告中可展示上述数据并对其进行分析。\n\n```markdown\n### 事件回顾\n- **背景信息**：\n\
+            \  - 本次事件起源于公司发布的季度财报。\n\n- **发展过程**：\n  - 股价在财报发布后出现波动，具体表现如下：8月1日股价为150美元，交易量为30百万股；8月2日股价上涨至152美元，交易量减少至28百万股。\n\
+            \n- **影响分析**：\n  - 财报发布后，市场对公司表现反应积极，但交易量的减少显示出投资者的观望情绪。\n\n### 分析师观察\n\
+            - **专家观点**：\n  - 分析师指出财报中的某些关键数字超出市场预期，可能推动股价短期上涨。\n\n- **深入分析**：\n  -\
+            \ 结合市场整体表现，当前股价波动符合预期，长期来看公司仍需提升某些业务指标以维持增长。\n\n- **未来预测**：\n  - 预计股价在未来几周可能维持波动态势，因市场对后续业绩的期待较高。\n\
+            \n### 数据整理\n- **表格展示**：\n  ```markdown\n  | 日期       | 股价（美元） | 交易量（百万股）\
+            \ |\n  | ---------- | ------------ | ---------------- |\n  | 2023-08-01\
+            \ | 150          | 30               |\n  | 2023-08-02 | 152          |\
+            \ 28               |\n  | 2023-08-03 | 148          | 35             \
+            \  |\n  ```\n"
+        - id: e81d444a-ddd9-4759-9c71-63993c92391e
+          role: user
+          text: '用户提供的金融话题：{{#1741762128189.user_input#}}
+
+            搜索结果：{{#1742122392428.text#}}
+
+            language：{{#1741762128189.language#}}'
+        selected: false
+        title: 分析搜索结果
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1742122501876'
+      position:
+        x: 688
+        y: 282
+      positionAbsolute:
+        x: 688
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1742122501876'
+          - text
+          variable: text
+        - value_selector:
+          - '1742255851808'
+          - files
+          variable: files
+        - value_selector:
+          - '1742254729280'
+          - text
+          variable: text2
+        selected: false
+        title: 结束
+        type: end
+      height: 142
+      id: '1742122554414'
+      position:
+        x: 1910.4501264285839
+        y: 282
+      positionAbsolute:
+        x: 1910.4501264285839
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: 730a577f-746f-4aeb-934c-fb5ee29f01d1
+          role: system
+          text: "**将输入的格式和语言风格按照以下格式进行输出，如果 language 变量设定了语言类型，则翻译所有的输出为该语言类型，如果没有设定\
+            \ language 则输出输入语言的语言类型。**\n\n\n---\n\n\n# **[事件标题]**  \n## **事件回顾：**\
+            \ 简要概述核心事件及时间节点，涉及的主要机构/企业名称（例：2024年X月，XX公司因XX原因调整XX业务）。  \n\n\n**| 关键字段1（如日期/区域）\
+            \ | 关键字段2（如机构名称） | 关键字段3（如批复单位/影响范围） |**  \n**|---|---|**  \n| 数据1 | 数据1对应内容\
+            \ | 数据1补充信息 |  \n| 数据2 | 数据2对应内容 | 数据2补充信息 |  \n\n\n**图表 1：事件相关数据统计**（来源：从哪里消息渠道整理）\
+            \  \n\n\n## **分析师观察：**  \n当前数据表现出明显的结构性特征，例如，总量达到XX，占比XX%，其中不同区域的分布存在显著差异。某些领域的增长速度明显高于行业平均水平，主要受到政策激励、市场需求上升等因素的推动。从层级来看，核心企业占比XX%，而中小企业贡献的增量达到XX%，反映出行业格局的进一步演变。\
+            \  \n\n\n从行业背景来看，技术进步和政策调整正共同影响市场格局。例如，近年来**人力成本年均增长XX%**，直接推动了企业对自动化、数字化的需求。此外，相关法规的调整也在重塑竞争环境，如**国家金融监督管理总局**的最新政策对资本要求提出更严格的标准，导致部分企业调整业务模式。根据**XX机构XX职务的XX专家**的观点：**“当前市场的变化主要受政策红利和全球供应链调整影响，预计未来3-5年仍将保持稳健增长。”**\
+            \  \n\n\n综合来看，当前行业的主要趋势受降本增效、数字化转型等动因推动。企业在应对挑战的同时，也在加大对新兴技术的投入。例如，近年AI、云计算在行业应用中的渗透率持续提升，未来或将在XX年内达到XX%。同时，市场集中度有望进一步提高，龙头企业的竞争优势将更加明显。\
+            \  \n\n\n---\n\n \n\n示例：\n# 中国人寿、新华人寿等险企持续“瘦身”\n\n## 事件回顾\n年末，又有多家保险公司裁撤了分支机构。根据国家金融监督管理总局官网，2024\
+            \ 年最后一周就有中国人寿、新华人寿、平安人寿、泰康人寿收到了撤销分支机构的批复。\n\n### 图表 15：近一周被撤销的保险分支机构 \
+            \ \n*（来源：中国金融信息中心整理）*\n\n## 分析师观察\n相关数据显示，截至 2024 年 12 月 31 日，2024 年已有\
+            \ **1987 家分支机构** 被裁撤，其中 **人身险公司占据绝大部分**。  \n从撤销机构级别来看：\n- **营销部及营销服务部**\
+            \ 占 **61.08%**\n- **支公司** 占 **29.19%**\n\n从撤销的区域来看：\n- **三、四线及以下城市和部分乡镇的保险分支机构**\
+            \ 成为调整的重点。\n\n### 图表 16：2020 年-2024 年保险公司裁撤分支机构数量（个）  \n*（来源：中国金融信息中心整理）*\n\
+            \n近年来，面对 **行业利差损** 和 **保费压力**，保险公司不得不在**业绩目标**和**成本控制**之间寻找平衡。因此，在**降本增效**的大旗下，保险公司对分支机构的裁撤力度显著增强。\n\
+            \n北京排排网保险代理有限公司总经理 **杨帆** 表示，大幅裁撤网点的主要原因包括：\n1. **市场竞争加剧** 和 **运营成本上升**。\n\
+            2. **互联网技术发展**，线上保险业务逐渐兴起，对传统分支机构造成冲击。\n3. **人力、租金等成本逐年提高**，导致分支机构运营压力增大。\n\
+            \n一个分支机构的成本大致包括：\n- **人力成本**\n- **租金**\n- **水电费**\n- **办公设备折旧**等  \n具体数额因**地区、规模**等因素而异，一般来说，一个中等规模的分支机构年运营成本可能在**数百万元左右**。\n\
+            \n此外，**暨南大学医学北美高级寿险管理师孙晓四** 补充：\n> **数字化转型** 也是部分分支机构退出的原因之一。  \n> 现在消费者投保、业务办理越来越方便，很多业务**不再需要去营业网点办理**，完全可以通过**线上小程序**或者**险企自有\
+            \ App** 完成。\n\n## 未来展望\n保险公司分支机构伴着 **粗放式扩张** 的脚步铺展开来，如今裁撤机构、挤除水分，也顺理成章。\n\
+            \n分析人士认为，保险分支机构此前的 **“大进大出”** 现象正在逐步改变。但随着：\n1. **互联网金融的普及**\n2. **代理人渠道\
+            \ “清虚” 改革的深化**\n\n保险分支机构 **“瘦身”** 还将进一步延续。\n\n"
+        - id: c5e894c3-604b-4192-8ba6-9df39955a453
+          role: user
+          text: '输入；{{#1742122501876.text#}}
+
+            language：{{#1741762128189.language#}}'
+        selected: true
+        title: 调整格式输出
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1742254729280'
+      position:
+        x: 1261.2459821936202
+        y: 386.1881338893834
+      positionAbsolute:
+        x: 1261.2459821936202
+        y: 386.1881338893834
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: 681579d9-33d8-4598-aa75-d9481899a7d3
+          role: system
+          text: "**任务描述：**  \n请从 **Travily 搜索结果** 和 **输入数据分析结果** 中提取并整合 **适用于柱状图的数据**，生成\
+            \ **单个** `xychart-beta` 格式的 Mermaid 代码。只输出mermaid代码，不输出任何其他语句  \n\n\n\
+            ### **Mermaid 代码格式要求：**  \n```\nxychart-beta\ntitle \"<填写合适的英文标题>\"\n\
+            x-axis [<整合后的 X 轴数据（英文），例如: Jan, Feb, Mar>]\ny-axis \"<整合后的 Y 轴标题（英文）和范围>\"\
+            \nbar [<整合后的 Y 轴数据，例如: 5000, 6000, 7500>]\n```\n\n\n### **要求：**  \n1.\
+            \ **数据整合：**  \n   - **提取** Travily 搜索结果和输入数据分析中的 **柱状图数据**。  \n   - **X\
+            \ 轴数据** 应该基于 **时间（如年月、季度）或分类数据（如产品类别、地区等）**，并去重、排序。  \n   - **Y 轴数据**\
+            \ 应该是 **数值型数据（如销售额、访问量、增长率等）**，并进行适当的 **数据合并（求和、平均值、最值等）**。  \n\n\n2.\
+            \ **Mermaid 代码生成：**  \n   - **title、x-axis、y-axis、bar 内的所有文本必须为英文**，不得包含中文。\
+            \  \n   - **title 需要准确概括数据主题**。  \n   - **x-axis 需要包含整合后的关键类别，并按合理顺序排列**。\
+            \  \n   - **y-axis 需要描述数据的单位及范围**。  \n   - **bar 需要匹配 x-axis 数据，并按照对应顺序填充数据值**。\
+            \  \n\n\n3. **格式要求：**  \n   - **Mermaid 代码开头不能包含 `mermaid\\n`，直接从 `xychart-beta`\
+            \ 开始**。  \n   - **代码必须符合 Mermaid `xychart-beta` 语法标准**，确保数据能够正确渲染柱状图。\
+            \  \n   - **所有文本内容必须为英文**，不得包含中文。  \n2. **构建 Mermaid 代码**：\n   - 适当总结并提取出\
+            \ **title**（标题），使其与数据主题匹配。\n   - 解析 **x-axis** 数据，确保其符合 Mermaid 语法格式。\n\
+            \   - 解析 **y-axis** 数据，并给出合适的标签（如单位、数值范围）。\n   - 提取并格式化 **bar** 数据，确保其顺序正确。\n\
+            \n\n3. **确保格式正确**：\n   - Mermaid 代码需符合 `xychart-beta` 语法规范。\n   - 数据准确匹配，并且能够正确渲染柱状图。"
+        - id: 057e97f3-ae63-4ebc-bec3-a44ea6598395
+          role: user
+          text: 'Travily 搜索结果：{{#1742122392428.text#}}
+
+            数据的分析结果：{{#1742122501876.text#}}'
+        selected: false
+        title: 提取柱状图数据
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1742255484318'
+      position:
+        x: 1062.5000318719265
+        y: 123.80480653128683
+      positionAbsolute:
+        x: 1062.5000318719265
+        y: 123.80480653128683
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "def main(arg1: str) -> dict:\n    # 移除开头和结尾的反引号或换行符\n    sanitized_arg1\
+          \ = arg1.strip('`\\n')\n\n    # 处理特定符号格式\n    sanitized_arg1 = sanitized_arg1.replace(\"\
+          [\", \"[ \").replace(\">|\", \"> |\")\n    sanitized_arg1 = sanitized_arg1.replace(\"\
+          (\", \"\").replace(\")\", \"\").replace(\"（\", \"\").replace(\"）\", \"\"\
+          )\n\n    # 保留换行和缩进，转换 <br/> 为换行符\n    sanitized_arg1 = sanitized_arg1.replace(\"\
+          <br/>\", \"\\n\")\n\n    return {\n        \"result\": sanitized_arg1,\n\
+          \    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 去除影响符号
+        type: code
+        variables:
+        - value_selector:
+          - '1742255484318'
+          - text
+          variable: arg1
+      height: 54
+      id: '1742255780094'
+      position:
+        x: 1333.8292853946923
+        y: 123.80480653128683
+      positionAbsolute:
+        x: 1333.8292853946923
+        y: 123.80480653128683
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: kofe
+        provider_name: kofe
+        provider_type: builtin
+        selected: false
+        title: Mermaid图生成柱状图
+        tool_configurations: {}
+        tool_label: Mermaid图生成
+        tool_name: GenerateMermaidDiagram
+        tool_parameters:
+          mermaid_code:
+            type: mixed
+            value: '{{#1742255780094.result#}}'
+        type: tool
+      height: 54
+      id: '1742255851808'
+      position:
+        x: 1603.439025944972
+        y: 123.80480653128683
+      positionAbsolute:
+        x: 1603.439025944972
+        y: 123.80480653128683
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 563.3454621644014
+      y: 181.2799948103039
+      zoom: 0.8656006736848998

@@ -1,0 +1,718 @@
+app:
+  description: 支持含有“摘要”列的数据输入和多标签体系
+  icon: '+1'
+  icon_background: '#D5D9EB'
+  mode: workflow
+  name: 通用VoC Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: 1748989274480-source-1748990337900-target
+      source: '1748989274480'
+      sourceHandle: source
+      target: '1748990337900'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: code
+      id: 1748989274480-source-1749257278384-target
+      source: '1748989274480'
+      sourceHandle: source
+      target: '1749257278384'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: iteration
+      id: 1749257278384-source-1749257341734-target
+      source: '1749257278384'
+      sourceHandle: source
+      target: '1749257341734'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1749257341734'
+        sourceType: iteration-start
+        targetType: llm
+      id: 1749257341734start-source-1749257356384-target
+      source: 1749257341734start
+      sourceHandle: source
+      target: '1749257356384'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: code
+      id: 1749257341734-source-1749277373767-target
+      source: '1749257341734'
+      sourceHandle: source
+      target: '1749277373767'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: end
+      id: 1749277373767-source-1748991121251-target
+      source: '1749277373767'
+      sourceHandle: source
+      target: '1748991121251'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1749257341734'
+        sourceType: llm
+        targetType: llm
+      id: 1749257356384-source-1749349560762-target
+      source: '1749257356384'
+      sourceHandle: source
+      target: '1749349560762'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1749257341734'
+        sourceType: llm
+        targetType: llm
+      id: 1749349560762-source-1749257417685-target
+      source: '1749349560762'
+      sourceHandle: source
+      target: '1749257417685'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: llm
+      id: 1748990337900-source-1749595065666-target
+      source: '1748990337900'
+      sourceHandle: source
+      target: '1749595065666'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: iteration
+      id: 1749595065666-source-1749257341734-target
+      source: '1749595065666'
+      sourceHandle: source
+      target: '1749257341734'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1748990337900--1750115959904-target
+      source: '1748990337900'
+      sourceHandle: source
+      target: '1750115959904'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: iteration
+      id: 1750115959904-source-1749257341734-target
+      source: '1750115959904'
+      sourceHandle: source
+      target: '1749257341734'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: 用户指令输入
+          max_length: 1000
+          options: []
+          required: true
+          type: paragraph
+          variable: user_instruction
+        - label: 输出语言选择
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: language
+        - label: row_grouped
+          max_length: 100000000
+          options: []
+          required: true
+          type: paragraph
+          variable: row_grouped
+      height: 142
+      id: '1748989274480'
+      position:
+        x: 208.8168559432765
+        y: 249.64262552481648
+      positionAbsolute:
+        x: 208.8168559432765
+        y: 249.64262552481648
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            response_format: json_object
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-11-20
+          provider: azure_openai
+        prompt_template:
+        - id: 10d23dfb-58ab-4ad8-8f6d-3bf067816fbc
+          role: system
+          text: "# 角色\n你是一名“标签体系生成器”，需要把用户的文字指令解析成机器可读的 JSON。\nJSON 键：一级标签名称（string）\n\
+            JSON 值：可选标签列表（array<string>），顺序保持与用户描述一致。\n\n# 输出要求\n1. **仅**输出 *一段* 完整、合法、最小缩进的\
+            \ JSON；禁止加入任何多余说明。\n2. 保证 JSON 可被 json.loads 成功解析；不允许使用中文引号或注释。\n3. 如果用户没有给出任何指令，请返回空对象：`{}`。\n\
+            \n# 解析规则\n- 用户指令可能含编号、顿号、逗号、斜杠、空格或换行，均需识别。\n- 同一行内遇到「标签名称」后紧跟冒号/顿号/破折号/空格等视为分隔符。\n\
+            \  示例：  \n    - `1. 产品口味评价：好评、中评、差评`  \n    - `环境和服务评价 - 好评/中评/差评`\n-\
+            \ 遇到重复标签值时去重，保留第一次出现的顺序。\n- 遇到空行或无法识别的行则忽略。\n\n# 示例\n**输入**  \n按照四个方面进行打标签，\n\
+            产品口味评价：好评、中评、差评\n环境和服务评价：好评、中评、差评\n品牌及股票资讯：是、否\n品牌营销宣传：是、否\n**输出**  \n\
+            ```json\n{\n  \"产品口味评价\": [\"好评\", \"中评\", \"差评\"],\n  \"环境和服务评价\": [\"\
+            好评\", \"中评\", \"差评\"],\n  \"品牌及股票资讯\": [\"是\", \"否\"],\n  \"品牌营销宣传\":\
+            \ [\"是\", \"否\"]\n}"
+        - id: a74ec9d1-951f-49d4-8458-edd772a4cd88
+          role: user
+          text: 输入：{{#1748989274480.user_instruction#}}
+        selected: false
+        title: 分析用户提示词输入内容
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1748990337900'
+      position:
+        x: 640.6770659113077
+        y: 249.64262552481648
+      positionAbsolute:
+        x: 640.6770659113077
+        y: 249.64262552481648
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1749277373767'
+          - result
+          variable: text
+        selected: false
+        title: 输出markdown
+        type: end
+      height: 90
+      id: '1748991121251'
+      position:
+        x: 3293.9068132388556
+        y: 405.1925338252608
+      positionAbsolute:
+        x: 3293.9068132388556
+        y: 405.1925338252608
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: str) -> dict:\n    # 1. 解析 JSON 字符串，拿到一个\
+          \ Python 列表\n    parsed = json.loads(arg1)\n\n    # 2. 无论 parsed 里每项是不是列表，都把它转换为字符串\n\
+          \    #    这样确保返回的 result[0], result[1] … 全部都是 str\n    result_strings =\
+          \ [str(item) for item in parsed]\n\n    # 3. 返回给 Kofei，输出 result 是 Array[String]\n\
+          \    return {\n        \"result\": result_strings\n    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        selected: false
+        title: 转换成迭代输入
+        type: code
+        variables:
+        - value_selector:
+          - '1748989274480'
+          - row_grouped
+          variable: arg1
+      height: 54
+      id: '1749257278384'
+      position:
+        x: 640.6770659113077
+        y: 464.67696130673926
+      positionAbsolute:
+        x: 640.6770659113077
+        y: 464.67696130673926
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 314
+        is_parallel: true
+        iterator_selector:
+        - '1749257278384'
+        - result
+        output_selector:
+        - '1749257417685'
+        - text
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1749257341734start
+        title: 迭代
+        type: iteration
+        width: 1219.4422612748476
+      height: 314
+      id: '1749257341734'
+      position:
+        x: 1527.549830044316
+        y: 366.17536593429946
+      positionAbsolute:
+        x: 1527.549830044316
+        y: 366.17536593429946
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 1219
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1749257341734start
+      parentId: '1749257341734'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1551.549830044316
+        y: 434.17536593429946
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        isInIteration: true
+        iteration_id: '1749257341734'
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: google/gemini-pro-1.5
+          provider: openrouter
+        prompt_template:
+        - id: eb330076-8c36-4670-a946-c017a7d12936
+          role: system
+          text: "下面给出一个包含 5 条示例的 Markdown 小表，演示“摘要”对应四列标签的标准格式：\n\n| 摘要          \
+            \                                                                    \
+            \                                            | 产品口味评价 | 环境和服务评价 | 品牌及股票资讯\
+            \ | 品牌营销宣传 |\n| -----------------------------------------------------------------------------------------------------------------------------\
+            \ | ----------- | -------------- | -------------- | ------------ |\n|\
+            \ 海底捞麻辣烫[干饭人]                                                        \
+            \                                                  | 中评        | 中评  \
+            \         | 否             | 否           |\n| 去海底捞吃饭，遇见过生日的气氛超级嗨跟小姐妹一起唱生日歌，然后吃蛋糕，那一瞬间真的快乐会传递\U0001F604\
+            \                                 | 中评        | 好评           | 否     \
+            \        | 否           |\n| # 考研人必看！太原学府考研值得推荐\U0001F44D\U0001F3FB<br>考研的宝子们，还在为选考研机构愁眉苦脸吗？…\
+            \                                                   | 中评        | 中评 \
+            \          | 否             | 否           |\n| 抽卡这么非可能是在海底捞偷了太多漱口水和纸巾老天惩罚我\
+            \                                                                    \
+            \     | 中评        | 中评           | 否             | 否           |\n| 暑假工还能管吃管住，真不错\
+            \ #服务员能有什么坏心眼 #海底捞 #这店环境太好了                                          \
+            \                 | 中评        | 中评           | 否             | 否     \
+            \      |\n\n下面给出一个示例 `label_schema` 和对应的标签释义，供参考：\n\n```json\nlabel_schema\
+            \ = {\n  \"产品口味评价\": [\"好评\", \"中评\", \"差评\"],\n  \"环境和服务评价\": [\"好评\"\
+            , \"中评\", \"差评\"],\n  \"品牌及股票资讯\": [\"是\", \"否\"],\n  \"品牌营销宣传\": [\"\
+            是\", \"否\"]\n}\n```\n```json\nlabel_schema = {\n  \"产品口味评价\": {\n    \"\
+            好评\": [\n      \"好吃\", \"鲜美\", \"味道赞\", \"可口\", \"香浓\", \"入口即化\", \"回味无穷\"\
+            , \"风味绝佳\"\n    ],\n    \"中评\": [\n      \"一般\", \"还行\", \"尚可\", \"中等\"\
+            , \"差强人意\", \"不咸不淡\", \"勉强合格\"\n    ],\n    \"差评\": [\n      \"难吃\", \"\
+            腥\", \"油腻\", \"过咸\", \"清淡无味\", \"糊掉\", \"口感差\", \"味道怪\"\n    ]\n  },\n\
+            \  \"环境和服务评价\": {\n    \"好评\": [\n      \"热情\", \"贴心\", \"干净\", \"舒适\"\
+            , \"上菜快\", \"氛围好\", \"环境优雅\", \"服务周到\"\n    ],\n    \"中评\": [\n      \"\
+            还行\", \"中性\", \"一般\", \"人多嘈杂\", \"略显拥挤\", \"服务普通\", \"环境中规中矩\"\n    ],\n\
+            \    \"差评\": [\n      \"服务慢\", \"态度差\", \"环境差\", \"脏乱\", \"噪音大\", \"上菜慢\"\
+            , \"不卫生\"\n    ]\n  },\n  \"品牌及股票资讯\": {\n    \"是\": [\n      \"股价\",\
+            \ \"上市\", \"融资\", \"财报\", \"证券\", \"IPO\", \"投融资\", \"市值\", \"投资者\"\n\
+            \    ],\n    \"否\": []\n  },\n  \"品牌营销宣传\": {\n    \"是\": [\n      \"\
+            活动\", \"推广\", \"广告\", \"促销\", \"代言\", \"品牌故事\", \"新品发布\", \"优惠券\"\n  \
+            \  ],\n    \"否\": []\n  }\n}\n```\n\n———以上为示例———\n\n# 角色  \n你是一名结构化文本助手，根据用户提供的\
+            \ `label_schema`（JSON 格式的标签列名及其可选值列表）和对应的“标签释义”，对给定记录的“摘要”列进行打标签，并输出一张完整的\
+            \ Markdown 表格。\n\n# 输入  \n- `label_schema`：JSON 对象，键为标签列名，值为该列的可选标签列表。\
+            \  \n- `records`：若干条记录，每条包含 “摘要” 字段。  \n- `标签释义`：对每个标签列及其取值的含义说明。\n\n\
+            # 输出要求  \n1. 只输出一张表（表头 + 分隔行 + 所有记录行），**不**要序号或其他多余列。  \n2. 表头由“摘要”列开始，后续按\
+            \ `label_schema` 中的键顺序追加各标签列。例如：\n\n   ```markdown\n   | 摘要 | 产品口味评价 |\
+            \ 环境和服务评价 | 品牌及股票资讯 | 品牌营销宣传 |\n   | --- | --- | --- | --- | --- |\n\n\
+            3. 每行只填“摘要”原文和基于 label_schema 的标签值；\n仅根据“摘要”文本和“标签释义”匹配关键词／含义来选一个值；\n\
+            若无关键词匹配，则选该列中的默认值（如 “否” 或 “中评”）；\n绝不允许遗漏或多余任何行。\n4. 单元格内 | 用全角 ｜，换行用 <br>。\n\
+            5. 除表格外禁止输出任何文字或空行。\n\n请严格按照上述规则，通用处理任意提供的 label_schema，并返回完整 Markdown\
+            \ 表格。```\n"
+        - id: 5da1b08d-567f-463a-8339-dbcb90da9da8
+          role: user
+          text: 'records:{{#1749257341734.item#}}
+
+
+            label_schema:{{#1748990337900.text#}}
+
+
+            标签含义：{{#1749595065666.text#}}'
+        selected: false
+        title: 加标签
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1749257356384'
+      parentId: '1749257341734'
+      position:
+        x: 128
+        y: 68
+      positionAbsolute:
+        x: 1655.549830044316
+        y: 434.17536593429946
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        isInIteration: true
+        iteration_id: '1749257341734'
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-11-20
+          provider: azure_openai
+        prompt_template:
+        - id: 2ef5f06d-7a69-4b9f-9351-a1590aab464e
+          role: system
+          text: "# 角色\n你是一名“条件翻译”助手，唯一职责是根据变量 language 决定是否翻译输入文本 content。\n\n# 规则\n\
+            1. **若 language 为空或未提供**  \n   → 原样输出 content；不做任何改动、解释或附加文本。  \n\n2.\
+            \ **若 language 非空**  \n   → 将 content 中的“可翻译文本”完整译为 language 指定的语言，保持所有排版与标记符号（Markdown、HTML、代码块、表格分隔符等）原样；\
+            \  \n   → 保留数字、日期、货币符号等非翻译元素；  \n   → 不要添加说明、元数据或空行——只返回翻译后的文本本身。  \n\n\
+            3. **可翻译文本** 指自然语言词句，包括所有表头、段落、列表项、表格单元格内容等。排版符号 (`|`, `-`, `#`, `**`,\
+            \ `<br>` …) 必须保持不变。  \n\n4. 输出前后不得有额外空行或注释。  \n\n# 示例\nlanguage = \"\"\
+            \            ➔ 原样输出 content  \nlanguage = \"English\"      ➔ 输出内容全部翻译成英文（内容格式与排版保持不变）\
+            \  \n\n开始处理。"
+        - id: 7fb8aaba-e84b-49bb-8042-7337a0b7661b
+          role: user
+          text: 'language:{{#1748989274480.language#}}
+
+
+            content:{{#1749349560762.text#}}'
+        selected: false
+        title: 多语言支持
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1749257417685'
+      parentId: '1749257341734'
+      position:
+        x: 826.5998785833435
+        y: 70.01276337411366
+      positionAbsolute:
+        x: 2354.1497086276595
+        y: 436.1881293084131
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import re\nfrom typing import List, Dict, Any\n\ndef main(arg1: List[str],\
+          \ arg2: str) -> Dict[str, str]:\n    \"\"\"\n    arg1: 已解析的 Python 列表，每个元素是一段小\
+          \ Markdown 表的字符串\n    arg2: 逗号分隔的标签列表字符串（来自第一段的 result）\n    返回: {\"result\"\
+          : \"<完整 Markdown 表>\"}\n    \"\"\"\n    md_tables = arg1               \
+          \ # 直接使用传进来的列表\n    labels = arg2.split(\",\")        # 拆分标签\n\n    all_rows:\
+          \ List[List[str]] = []\n    for md in md_tables:\n        lines = md.strip().splitlines()\n\
+          \        if len(lines) < 3:\n            continue\n        for row in lines[2:]:\n\
+          \            if re.match(r'^\\s*\\|\\s*$', row) or '|' not in row:\n   \
+          \             continue\n            cells = [c.strip() for c in row.strip().strip('|').split('|')]\n\
+          \            # 保证有 摘要 + len(labels) + 信心值 共计 len(labels)+2 列\n         \
+          \   required = len(labels) + 2\n            while len(cells) < required:\n\
+          \                cells.append('')\n            all_rows.append(cells[:required])\n\
+          \n    # 构建表头\n    header = [\"摘要\"] + labels + [\"信心值\"]\n    md_lines =\
+          \ [\n        \"| \" + \" | \".join(header) + \" |\",\n        \"| \" + \"\
+          \ | \".join(\"---\" for _ in header) + \" |\"\n    ]\n    # 拼接数据行\n    for\
+          \ cells in all_rows:\n        safe = [c.replace(\"|\", \"｜\").replace(\"\
+          \\n\", \"<br>\") for c in cells]\n        md_lines.append(\"| \" + \" |\
+          \ \".join(safe) + \" |\")\n\n    full_md = \"\\n\".join(md_lines)\n    return\
+          \ {\"result\": full_md}\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: true
+        title: 拼接为一个markdown输出
+        type: code
+        variables:
+        - value_selector:
+          - '1749257341734'
+          - output
+          variable: arg1
+        - value_selector:
+          - '1750115959904'
+          - result
+          variable: arg2
+      height: 54
+      id: '1749277373767'
+      position:
+        x: 2945.1972583547195
+        y: 416.8976841925492
+      positionAbsolute:
+        x: 2945.1972583547195
+        y: 416.8976841925492
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        isInIteration: true
+        iteration_id: '1749257341734'
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: google/gemini-pro-1.5
+          provider: openrouter
+        prompt_template:
+        - id: f2202922-dfdb-4684-b71f-446982950f82
+          role: system
+          text: "# 角色\n你是一名结构化文本助手，需要对给定的多列结果，评估每一行模型打标的“信心值”（0–100 之间的整数）。  \n\n\
+            # 输入\n- 每行输入由 5 列组成，依次是：\n  1. 摘要（文本）\n  2. 产品口味评价（好评/中评/差评）\n  3. 环境和服务评价（好评/中评/差评）\n\
+            \  4. 品牌及股票资讯（是/否）\n  5. 品牌营销宣传（是/否）\n\n# 输出要求\n- 输出一个 6 列的 Markdown 表格。\
+            \  \n- 新增第 6 列 “信心值”，取值 0–100 的整数，表征对该行标签判断的置信度。  \n- 表头和顺序如下：\n摘要 产品口味评价\
+            \ 环境和服务评价 品牌及股票资讯 品牌营销宣传 信心值\n- 每行只输出对应的 6 个单元格，用 `|` 分隔；单元格内 `|` 用全角\
+            \ `｜`，换行用 `<br>`。  \n- 不要输出额外文字、序号或空行。\n\n# 评分原则（模型内部思考，不输出）\n- 若摘要与标签高度吻合（关键词匹配、情感明显），给出\
+            \ ≥80  \n- 若匹配度一般，给出 50–79  \n- 若判断存在不确定或歧义，给出 20–49  \n- 若几乎不匹配（摘要与标签冲突或空白），给出\
+            \ 0–19\n\n请严格按照以上规则，在同一个 Markdown 表中追加 “信心值” 列，并返回完整表格。  \n"
+        - id: 384a2533-e231-4eaf-acfe-6785e187bb6a
+          role: user
+          text: 输入：{{#1749257356384.text#}}
+        selected: false
+        title: 信心值
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1749349560762'
+      parentId: '1749257341734'
+      position:
+        x: 488.35737447518363
+        y: 68
+      positionAbsolute:
+        x: 2015.9072045194996
+        y: 434.17536593429946
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            response_format: JSON
+            temperature: 0.7
+          mode: chat
+          name: google/gemini-pro-1.5
+          provider: openrouter
+        prompt_template:
+        - id: 80fd21a0-8263-424d-961c-dc4306b8d8a4
+          role: system
+          text: "**任务描述**  \n下面这个节点负责“解析用户指令 → 生成丰富的 `label_schema`”，将用户在指令中给出的打标签维度和取值，转换成一个\
+            \ JSON 格式的 `label_schema`，其中每个标签值都要列出代表该标签含义的关键词或短语。\n\n---\n\n**示例输入（instruction）**\
+            \  \n按照四个方面对摘要打标签：\n产品口味评价：好评、中评、差评\n环境和服务评价：好评、中评、差评\n品牌及股票资讯：是、否\n品牌营销宣传：是、否\n\
+            \n\n**示例输出（label_schema）**  \n```json\nlabel_schema = {\n  \"产品口味评价\"\
+            : {\n    \"好评\": [\n      \"好吃\", \"鲜美\", \"味道赞\", \"可口\", \"香浓\", \"\
+            入口即化\", \"回味无穷\", \"风味绝佳\"\n    ],\n    \"中评\": [\n      \"一般\", \"还行\"\
+            , \"尚可\", \"中等\", \"差强人意\", \"不咸不淡\", \"勉强合格\"\n    ],\n    \"差评\": [\n\
+            \      \"难吃\", \"腥\", \"油腻\", \"过咸\", \"清淡无味\", \"糊掉\", \"口感差\", \"味道怪\"\
+            \n    ]\n  },\n  \"环境和服务评价\": {\n    \"好评\": [\n      \"热情\", \"贴心\",\
+            \ \"干净\", \"舒适\", \"上菜快\", \"氛围好\", \"环境优雅\", \"服务周到\"\n    ],\n    \"\
+            中评\": [\n      \"还行\", \"中性\", \"一般\", \"人多嘈杂\", \"略显拥挤\", \"服务普通\", \"\
+            环境中规中矩\"\n    ],\n    \"差评\": [\n      \"服务慢\", \"态度差\", \"环境差\", \"脏乱\"\
+            , \"噪音大\", \"上菜慢\", \"不卫生\"\n    ]\n  },\n  \"品牌及股票资讯\": {\n    \"是\"\
+            : [\n      \"股价\", \"上市\", \"融资\", \"财报\", \"证券\", \"IPO\", \"投融资\", \"\
+            市值\", \"投资者\"\n    ],\n    \"否\": []\n  },\n  \"品牌营销宣传\": {\n    \"是\"\
+            : [\n      \"活动\", \"推广\", \"广告\", \"促销\", \"代言\", \"品牌故事\", \"新品发布\"\
+            , \"优惠券\"\n    ],\n    \"否\": []\n  }\n}\n'''\n请根据“示例输入”中的打标签维度和取值，生成一个同样结构但关键词更丰富的\
+            \ label_schema JSON**。\n每个标签值下至少列出 5–10 个能代表该含义的关键词或短语\n关键词覆盖同义词、常见表达、行业术语等\n\
+            JSON 格式必须合法，可直接传给下一个打标签节点\n不要输出解释文字，仅输出 label_schema = {...}\n\n\n"
+        - id: 0f94f7d1-4e7f-4afb-bd7f-a4abb91629ef
+          role: user
+          text: 输入：{{#1748990337900.text#}}
+        selected: false
+        title: 分析标签内容
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1749595065666'
+      position:
+        x: 1016.8571234331246
+        y: 249.64262552481648
+      positionAbsolute:
+        x: 1016.8571234331246
+        y: 249.64262552481648
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: str) -> dict:\n    \"\"\"\n    arg1:\
+          \ 输入的 JSON 字符串\n    arg2: 未使用，占位\n    返回: {\"result\": \"标签1,标签2,标签3,...\"\
+          }\n    \"\"\"\n    data = json.loads(arg1)\n    labels = list(data.keys())\n\
+          \    return {\"result\": \",\".join(labels)}\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 提取标签
+        type: code
+        variables:
+        - value_selector:
+          - '1748990337900'
+          - text
+          variable: arg1
+      height: 54
+      id: '1750115959904'
+      position:
+        x: 1001.25025627674
+        y: 371.03575836843197
+      positionAbsolute:
+        x: 1001.25025627674
+        y: 371.03575836843197
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 115.39711023002576
+      y: 189.59464623994296
+      zoom: 0.25629743368217595

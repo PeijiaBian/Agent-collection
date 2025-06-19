@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  video-analysis-backend:
+    image: harbor.emotibot.com/arkagent/video-analysis-backend:db2943d-20250117-1652
+    ports:
+      - "8081:8081"
+    volumes:
+      - ..:/app
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Asia/Shanghai
+    container_name: video-analysis-backend
+    networks:
+      - ark-website
+networks:
+  ark-website:
+    name: ark-website  # 设置网络的全局名称

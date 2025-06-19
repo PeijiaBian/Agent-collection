@@ -1,0 +1,350 @@
+app:
+  description: 分析销售流程，识别瓶颈、趋势和绩效指标，优化销售效率。
+  icon: male-office-worker
+  icon_background: '#E0EAFF'
+  mode: workflow
+  name: Pipeline 分析Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 60
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1745628400639-source-1745628434163-target
+      selected: false
+      source: '1745628400639'
+      sourceHandle: source
+      target: '1745628434163'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1745628434163-source-1745628450488-target
+      selected: false
+      source: '1745628434163'
+      sourceHandle: source
+      target: '1745628450488'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1745628450488-source-1745628460840-target
+      selected: false
+      source: '1745628450488'
+      sourceHandle: source
+      target: '1745628460840'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 请选择需要分析的Excel
+          max_length: 48
+          options: []
+          required: true
+          type: file
+          variable: excel_input
+        - label: 输出语言
+          max_length: 99
+          options: []
+          required: false
+          type: text-input
+          variable: output_language
+        - label: 分析要求（可选）
+          max_length: 10000
+          options: []
+          required: false
+          type: paragraph
+          variable: user_instruction
+      height: 142
+      id: '1745628400639'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_array_file: false
+        selected: false
+        title: 提取excel中的内容
+        type: document-extractor
+        variable_selector:
+        - '1745628400639'
+        - excel_input
+      height: 92
+      id: '1745628434163'
+      position:
+        x: 385.4668807346937
+        y: 282
+      positionAbsolute:
+        x: 385.4668807346937
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-11-20
+          provider: azure_openai
+        prompt_template:
+        - id: f358105c-6793-47ad-aac6-7045c47be0a5
+          role: system
+          text: '你是一位经验丰富的销售流程分析专家，擅长根据CRM销售数据识别流程瓶颈、绩效问题和趋势，并提出有建设性的优化建议。
+
+
+            用户上传了一份销售流程的Excel文件，文件中包含如下典型字段（字段名称可能略有不同）：
+
+            - Lead ID / 客户编号
+
+            - Company / 客户公司
+
+            - Owner / 负责人
+
+            - Product / 产品
+
+            - Source / 线索来源
+
+            - Current Stage / 当前阶段
+
+            - Deal Amount / 金额
+
+            - Created Date / 创建时间
+
+            - Last Updated / 最近更新时间
+
+            - Days in Stage / 在当前阶段停留时间
+
+            - Is Won / 是否成交
+
+            - Is Lost / 是否流失
+
+
+            请你自动分析该Excel文件的数据结构和内容，提取关键维度和指标，生成一份标准销售流程分析报告。
+
+
+            ---
+
+
+            ## 📌 报告结构要求
+
+
+            根据以下逻辑判断生成报告内容：
+
+
+            1. 如果 `user_instruction` 有填写（例如“请重点关注销售人员绩效”或“只分析趋势与瓶颈”），请严格按照用户填写的说明定制分析报告结构和内容。
+
+
+            2. 如果 `user_instruction` 未填写，则默认采用以下标准结构撰写报告：
+
+
+            ---
+
+
+            ## 📊 销售流程分析报告
+
+
+            ### 🧾 1. 销售流程总览
+
+            - 总体线索数量与阶段分布
+
+            - 当前最拥挤或最频繁的阶段
+
+            - 成交与流失比例与整体表现判断
+
+
+            ### 🧱 2. 流程瓶颈识别
+
+            - 停留时间最长的阶段
+
+            - 转化率最低的阶段
+
+            - 是否存在推进异常或流程冗余
+
+
+            ### 📈 3. 销售趋势分析
+
+            - 时间维度下的线索与成交趋势（如月度、季度变化）
+
+            - 来源与产品的转化表现趋势
+
+
+            ### 👥 4. 销售团队绩效比较
+
+            - 各销售人员成交数量与转化率
+
+            - 成交周期与平均响应时长
+
+            - 哪些销售表现优异，哪些存在待提升空间
+
+
+            ### 🛠️ 5. 优化建议
+
+            - 提出至少三条基于上述分析的优化建议，涵盖流程、团队管理、策略等维度
+
+
+            ---
+
+
+            ## 🌐 多语言输出规则
+
+
+            当前语言设定为：`{{ language }}`。请根据以下规则处理输出语言：
+
+
+            - 如果 `language` 被设置，请将整个 Markdown 报告翻译为对应语言（例如 "zh" 表示中文，"en" 表示英文，"fr"
+            表示法语）。
+
+            - 如果 `language` 未设置，则默认使用Excel文件原始字段的语言输出。
+
+
+            ---
+
+
+            ## ⛔ 输出格式要求
+
+
+            - 最终输出必须为 **纯Markdown格式**
+
+            - 严禁输出任何解释性文字、附加说明或非Markdown结构内容
+
+            - 严格以分析报告形式输出，内容应具备专业性、总结性、结构性、可读性
+
+
+            请现在根据以上规则，开始生成完整的分析报告。
+
+            '
+        - id: 216ee223-558a-451a-859e-e52c53a03461
+          role: user
+          text: 'Excel文件：{{#1745628434163.text#}}
+
+            user_instruction：{{#1745628400639.user_instruction#}}
+
+            language：{{#1745628400639.output_language#}}'
+        selected: false
+        title: 分析报告
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1745628450488'
+      position:
+        x: 688
+        y: 282
+      positionAbsolute:
+        x: 688
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1745628450488'
+          - text
+          variable: output
+        selected: true
+        title: 输出
+        type: end
+      height: 90
+      id: '1745628460840'
+      position:
+        x: 992
+        y: 282
+      positionAbsolute:
+        x: 992
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 436.5653890923859
+      y: 213.07799123268424
+      zoom: 0.681718681245614

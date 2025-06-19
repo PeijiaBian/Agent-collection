@@ -1,0 +1,326 @@
+app:
+  description: Bring your ideas to life with Text2Image! Just type in a prompt and
+    let Text2Image do the magic. It understands your input and creates stunning visuals
+    in no time！
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: Image Generator
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 60
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: 1732084386482-source-1732099836845-target
+      source: '1732084386482'
+      sourceHandle: source
+      target: '1732099836845'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: tool
+      id: 1732099836845-source-1733120409457-target
+      source: '1732099836845'
+      sourceHandle: source
+      target: '1733120409457'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: end
+      id: 1733120409457-source-1732099792544-target
+      source: '1733120409457'
+      sourceHandle: source
+      target: '1732099792544'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables:
+        - label: img_description
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: prompt
+      height: 90
+      id: '1732084386482'
+      position:
+        x: 75.89208830397808
+        y: 278
+      positionAbsolute:
+        x: 75.89208830397808
+        y: 278
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1733120409457'
+          - files
+          variable: Text2Img_files
+        selected: false
+        title: End
+        type: end
+      height: 90
+      id: '1732099792544'
+      position:
+        x: 985
+        y: 278
+      positionAbsolute:
+        x: 985
+        y: 278
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 优化用户输入的Prompt，使其更加清晰、详细，并符合AI图像生成模型的要求。因为Flux对绘图prompt有英文要求，所以当使用中文输入时，prompt自动转化为英文。
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: c29b8258-8b49-4d33-97d7-4e2d9cf80b8c
+          role: system
+          text: 'Your task is to extract key information from the user’s input and
+            convert it into a concise, clear, and unambiguous image generation prompt.
+            The output description should be structured and include the following
+            four sections:
+
+
+            Extraction Steps:
+
+
+            1. Subject: Clearly describe the main object(s) in the image, such as
+            people, animals, objects, etc.
+
+            2. Action/State: Describe the behavior, state, or emotion of the subject
+            (e.g., stationary, jumping, thinking, etc.).
+
+            3. Environment/Background: Extract the main visual elements of the background,
+            including location, time, weather, or decor.
+
+            4. Colors and Lighting: Summarize the dominant color tones and lighting
+            conditions of the scene (e.g., bright, dim, soft, shadowed, etc.).
+
+
+            Output Requirements:
+
+
+            • Retain all core information from the user’s input while removing redundant
+            or ambiguous details.
+
+            • Use a structured format for clarity, ensuring it is easily understandable
+            by image generation tools.
+
+            • Avoid subjective assumptions and strictly base the description on the
+            provided input.
+
+            • If information is insufficient, do not add extra content.
+
+
+            Output Format (strictly follow this structure):
+
+
+            • Subject: {Description of the subject}
+
+            • Action/State: {Description of the action or state}
+
+            • Environment/Background: {Description of the background}
+
+            • Colors and Lighting: {Description of the colors and lighting}
+
+
+            Additional Note:
+
+            If the user’s input is in a language other than English, translate the
+            output into English before presenting it.'
+        - id: a0d52af1-a2cd-43cc-82eb-7d8ce0f12a32
+          role: user
+          text: 'Here is the raw prompt provided by the user: 
+
+            {{#1732084386482.prompt#}}
+
+            Please refine this prompt to ensure it is accurate, clear, and focused.
+            Highlight key details such as specific numbers, actions, and relationships.
+            Avoid adding extra information or leaving room for misinterpretation.'
+        selected: false
+        title: ' Prompt优化助手'
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 190
+      id: '1732099836845'
+      position:
+        x: 381
+        y: 278
+      positionAbsolute:
+        x: 381
+        y: 278
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 221
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"1.
+          ","type":"text","version":1},{"detail":0,"format":1,"mode":"normal","style":"","text":"Prompt优化助手：","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"
+          提供优化后的Prompt，确保与图像生成模型的输入要求高度匹配，提升生成图像的质量和精准度。输入prompt--进行优化--输出优化后prompt。因为Flux要求英文prompt输入，所以当用户输入为中文时，优化助手将prompt转化为英文输出。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"2.
+          ","type":"text","version":1},{"detail":0,"format":1,"mode":"normal","style":"","text":"IMG
+          GENERATION：","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"
+          使用Flux的图片生成模型，根据优化后的Prompt生成图像，支持多样化风格与细节呈现。优化后prompt--进行使用模型文生图（无参数调整，所以优化prompt）","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":1},{"children":[{"detail":0,"format":1,"mode":"normal","style":"","text":"整体流程：","type":"text","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"
+          用户只需输入简单描述，系统将自动优化并生成高质量图像，简化操作流程并提升效率","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 640
+      height: 221
+      id: '1732179361497'
+      position:
+        x: 381
+        y: 559.7841907478149
+      positionAbsolute:
+        x: 381
+        y: 559.7841907478149
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 640
+    - data:
+        desc: 使用flux进行对优化后的prompt进行ai生图。
+        provider_id: siliconflow
+        provider_name: siliconflow
+        provider_type: builtin
+        selected: false
+        title: Flux
+        tool_configurations:
+          image_size: 1024x1024
+          model: schnell
+          num_inference_steps: 20
+          seed: null
+        tool_label: Flux
+        tool_name: flux
+        tool_parameters:
+          prompt:
+            type: mixed
+            value: '{{#1732099836845.text#}}'
+        type: tool
+      height: 212
+      id: '1733120409457'
+      position:
+        x: 678.0360956362235
+        y: 278
+      positionAbsolute:
+        x: 678.0360956362235
+        y: 278
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 148
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Usage：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"prompt：用户输入对图片的描述","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Example：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"prompt：数学老师在黑板上演算数学公式","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 318
+      height: 148
+      id: '1734674942248'
+      position:
+        x: 57.58431083299638
+        y: 416.97752440301525
+      positionAbsolute:
+        x: 57.58431083299638
+        y: 416.97752440301525
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 318
+    viewport:
+      x: 403.52937294636286
+      y: 129.29267160042934
+      zoom: 0.8938307380791662

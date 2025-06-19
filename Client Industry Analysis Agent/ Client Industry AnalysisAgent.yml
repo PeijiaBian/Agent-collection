@@ -1,0 +1,486 @@
+app:
+  description: 在企业授信客户经理需要对企业进行尽调，收集客户信息，形成尽调报告，其中尽调报告中包含企业所在行业的分析，分析的内容主要包括行业现状、特点、趋势，主营业务及产品，经营情况，公司核心竞争优势，风险因素等，最后形成一份总结性的说明，当前客户经理在做行业分析时需要了解行业相关知识，收集信息资料，整理分析资料，形成报告，耗时较长，希望通过智能体来提升工作效率
+  icon: man-tipping-hand
+  icon_background: '#D1E9FF'
+  mode: workflow
+  name: 客户行业分析Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 60
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1743488559142-source-1743488992256-target
+      source: '1743488559142'
+      sourceHandle: source
+      target: '1743488992256'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: tool
+      id: 1743488559142-source-1743488976541-target
+      source: '1743488559142'
+      sourceHandle: source
+      target: '1743488976541'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: llm
+      id: 1743488976541-source-1743491074169-target
+      selected: false
+      source: '1743488976541'
+      sourceHandle: source
+      target: '1743491074169'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: llm
+      id: 1743488992256-source-1743491114003-target
+      source: '1743488992256'
+      sourceHandle: source
+      target: '1743491114003'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: llm
+      id: 1743491074169-source-1743492845794-target
+      source: '1743491074169'
+      sourceHandle: source
+      target: '1743492845794'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1743492845794-source-1743489781688-target
+      source: '1743492845794'
+      sourceHandle: source
+      target: '1743489781688'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: llm
+      id: 1743491114003-source-1743492845794-target
+      source: '1743491114003'
+      sourceHandle: source
+      target: '1743492845794'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: company_name
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: company_name
+        - label: industry_name
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: industry_name
+        - label: user_instruction
+          max_length: 10000
+          options: []
+          required: false
+          type: paragraph
+          variable: user_instruction
+        - label: language
+          max_length: 100
+          options: []
+          required: false
+          type: text-input
+          variable: language
+      height: 168
+      id: '1743488559142'
+      position:
+        x: 94.42713067506523
+        y: 274.3259943217738
+      positionAbsolute:
+        x: 94.42713067506523
+        y: 274.3259943217738
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: tavily
+        provider_name: tavily
+        provider_type: builtin
+        selected: false
+        title: campany Search
+        tool_configurations:
+          days: 3
+          exclude_domains: null
+          include_answer: 0
+          include_domains: null
+          include_image_descriptions: 0
+          include_images: 0
+          include_raw_content: 0
+          max_results: 10
+          search_depth: basic
+          topic: general
+        tool_label: Tavily Search
+        tool_name: tavily_search
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#1743488559142.company_name#}}'
+        type: tool
+      height: 324
+      id: '1743488976541'
+      position:
+        x: 693
+        y: 121
+      positionAbsolute:
+        x: 693
+        y: 121
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: tavily
+        provider_name: tavily
+        provider_type: builtin
+        selected: false
+        title: industry Search
+        tool_configurations:
+          days: 3
+          exclude_domains: null
+          include_answer: 0
+          include_domains: null
+          include_image_descriptions: 0
+          include_images: 0
+          include_raw_content: 0
+          max_results: 10
+          search_depth: basic
+          topic: general
+        tool_label: Tavily Search
+        tool_name: tavily_search
+        tool_parameters:
+          query:
+            type: mixed
+            value: '{{#1743488559142.industry_name#}}'
+        type: tool
+      height: 324
+      id: '1743488992256'
+      position:
+        x: 693
+        y: 501
+      positionAbsolute:
+        x: 693
+        y: 501
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1743492845794'
+          - text
+          variable: text
+        selected: false
+        title: 输出报告
+        type: end
+      height: 90
+      id: '1743489781688'
+      position:
+        x: 1932.7833808204696
+        y: 302.0475852366119
+      positionAbsolute:
+        x: 1932.7833808204696
+        y: 302.0475852366119
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: openai/gpt-4o
+          provider: openrouter
+        prompt_template:
+        - id: 1ab8232b-5dca-4f7c-b55d-e80fcfb282c1
+          role: system
+          text: "你是一位专业的尽职调查报告分析师，请根据以下提供的公司信息与行业背景，生成一份聚焦于“公司分析”的尽调报告内容。请使用**Markdown格式**输出，结构清晰、语言正式，适合用于授信或投资分析使用。只输出markdown部分，其余解释型语言不输出\n\
+            \n---\n\n## 公司名称\n{{{{#1743488559142.company_name#}}}}\n## 公司信息\n{{{#1743488976541.text#}}}}\n\
+            \n\n---\n\n## ✍️ 用户撰写要求\n根据以下用户说明，调整报告的内容类别、风格、深度等：\n\n**说明：**{{{{#1743488559142.user_instruction#}}}}\n\
+            \n---\n\n## \U0001F30D 输出语言设置\n- 如果设置了 `language`，请使用指定语言撰写报告；\n- 如果未指定语言，请自动根据用户输入语言进行输出。\n\
+            \n**language：**{{{{#1743488559142.language#}}}}\n\n---\n\n## \U0001F4CB\
+            \ 报告内容要求\n\n请撰写公司分析部分的尽调报告，**使用 Markdown 标题格式**输出，格式如下：\n\n## 公司分析\n\n\
+            ### 主营业务及产品  \n- 简要介绍该公司核心业务方向  \n- 主要产品/服务内容及市场定位  \n- 是否存在多元化业务，及其占比情况\
+            \  \n\n### 经营情况  \n- 公司近年来的营收表现（如有）  \n- 盈利能力、成本控制、主要客户/渠道等  \n- 成长性或潜在运营问题\
+            \  \n\n### 公司核心竞争优势  \n- 公司相较于同行的优势  \n- 如技术壁垒、品牌影响力、资源整合能力等  \n\n###\
+            \ 公司面临的风险因素  \n- 公司面临的主要外部或内部风险  \n- 如政策变动、市场波动、客户集中、治理结构等\n\n---\n\n\
+            请严格按照上述结构生成内容，语言保持专业、清晰，适合用于正式尽调报告。只输出markdown部分，其余解释型语言不输出\n\n"
+        selected: false
+        title: 公司分析报告
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1743491074169'
+      position:
+        x: 1066.5490058046648
+        y: 121
+      positionAbsolute:
+        x: 1066.5490058046648
+        y: 121
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: openai/gpt-4o
+          provider: openrouter
+        prompt_template:
+        - id: 6ff99dee-b796-4620-8a2d-26957f71dbbe
+          role: system
+          text: "你是一位专业的行业研究分析师，请根据以下提供的行业信息与公司背景，生成一份**行业分析部分的尽调报告**。请使用 **Markdown\
+            \ 格式** 输出，语言风格正式、结构清晰，适合用于企业授信或投资分析报告中。只输出markdown部分，其余解释型语言不输出\n\n---\n\
+            \n## 行业名称\n{{{{#1743488559142.industry_name#}}}}\n## 行业信息\n{{{{#1743488992256.text#}}}}\n\
+            \n---\n\n## ✍️ 用户撰写要求\n请根据以下用户说明，调整报告的风格、结构或深度：\n\n**说明：**{{{{#1743488559142.user_instruction#}}}}\n\
+            \n---\n\n## \U0001F30D 输出语言设置\n- 如果设置了 `language`，请使用指定语言撰写报告；\n- 如果未指定语言，请根据用户输入语言自动判断输出语言。\n\
+            \n**language：**{{{{#1743488559142.language#}}}}\n\n---\n\n## \U0001F4CB\
+            \ 报告内容要求\n\n请撰写行业分析部分的尽调报告，采用以下 Markdown 结构格式输出：\n\n## 行业分析\n\n### 行业现状\
+            \  \n- 当前市场发展阶段（成熟/成长期等）  \n- 市场规模、增长率、主要参与者  \n- 政策支持/监管情况等宏观环境要素  \n\
+            \n### 行业特点  \n- 产品/服务特性、客户结构、产业链分布  \n- 技术门槛、进入壁垒、竞争格局等  \n- 供需关系、价格敏感度等\
+            \  \n\n### 行业发展趋势  \n- 增长驱动力（政策、需求、技术）  \n- 新兴技术/商业模式的影响  \n- 市场未来预期与潜力\
+            \  \n- 行业内正在发生的结构性变化\n\n---\n\n请务必根据输入的行业背景信息，结合分析师视角生成内容，保持条理清晰、专业可信。只输出markdown部分，其余解释型语言不输出\n\
+            \n"
+        selected: false
+        title: 行业分析报告
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1743491114003'
+      position:
+        x: 1072.6882103472458
+        y: 501
+      positionAbsolute:
+        x: 1072.6882103472458
+        y: 501
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: openai/gpt-4o
+          provider: openrouter
+        prompt_template:
+        - id: 972c9ab5-7a97-41ed-a3b2-6212b590b66c
+          role: system
+          text: "你是一位专业尽调报告整合分析师，请根据以下生成好的行业分析内容和公司分析内容，整理输出一份完整的尽调报告，格式为 **标准的 Markdown\
+            \ 格式**，结构清晰、专业正式，适合用于企业授信或投资评估场景。\n\n---\n\n## \U0001F3AF 报告标题要求：\n请将最终报告的主标题设置为：\n\
+            \n# {{{{#1743488559142.industry_name#}}}} - {{{{#1743488559142.company_name#}}}}\
+            \ 分析报告\n\n---\n\n## \U0001F4D1 输入内容如下：\n\n**行业分析部分：**  \n{{{{#1743491114003.text#}}}}\n\
+            \n**公司分析部分：**  \n{{{{#1743491074169.text#}}}}\n\n---\n\n## \U0001F4CB\
+            \ 输出结构要求：\n\n请严格按照以下顺序组织内容，保持 Markdown 原有层级不变：\n\n1. 主标题（# 行业名称 - 公司名称\
+            \ 分析报告）  \n2. `## 行业分析`（内容为 `行业分析部分` 中已有的 Markdown）  \n3. `## 公司分析`（内容为\
+            \ `公司分析部分` 中已有的 Markdown）\n\n不要重新生成分析内容，只需按照结构要求拼接、整理语言一致性，并确保格式统一。\n\n\
+            ---\n\n## ✍️ 用户说明（用于微调格式或风格）：\n{{{{#1743488559142.user_instruction#}}}}\n\
+            \n---\n\n## \U0001F30D 语言要求：\n- 如果 `language` 有值，请使用指定语言输出（如 中文、English\
+            \ 等），将所有输出内容翻译为指定语言输出\n- 如果为空，则自动使用用户输入内容中的语言\n\n**language：**{{{{#1743488559142.language#}}}}\n\
+            \n---\n\n请输出完整的 Markdown 报告文本，并保持所有标题、段落、空行格式正确。\n"
+        selected: true
+        title: 整合输出
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1743492845794'
+      position:
+        x: 1553.7497863156204
+        y: 302.0475852366119
+      positionAbsolute:
+        x: 1553.7497863156204
+        y: 302.0475852366119
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 141
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"campany_name：输入希望进行分析的公司名称","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"industry_name：输入希望进行分析的行业名称","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"user_instruction：可选填，如果有侧重点，比如财务情况，可以进行填写","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"language：可选填，输出的语言类型","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 499
+      height: 141
+      id: '1743493492465'
+      position:
+        x: 49.70875904518056
+        y: 36.40573168075443
+      positionAbsolute:
+        x: 49.70875904518056
+        y: 36.40573168075443
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 499
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 88
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"对公司进行分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"对行业进行分析","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 240
+      height: 88
+      id: '1743493629217'
+      position:
+        x: 744.5410905305512
+        y: -98.20362377229362
+      positionAbsolute:
+        x: 744.5410905305512
+        y: -98.20362377229362
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 240
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 88
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"再进行整合，输出","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 240
+      height: 88
+      id: '1743493641167'
+      position:
+        x: 1507.8722605676576
+        y: 104.68614255565184
+      positionAbsolute:
+        x: 1507.8722605676576
+        y: 104.68614255565184
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 240
+    viewport:
+      x: 249.43461394253245
+      y: 297.3162099539819
+      zoom: 0.6013117477931467

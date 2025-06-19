@@ -1,0 +1,1341 @@
+app:
+  description: 测试-群发agent
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 测试-Email Group Sender Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1745743755437-source-1745792283875-target
+      source: '1745743755437'
+      sourceHandle: source
+      target: '1745792283875'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1745792352378-source-1745797493357-target
+      source: '1745792352378'
+      sourceHandle: source
+      target: '1745797493357'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1745795460547'
+        sourceType: iteration-start
+        targetType: tool
+      id: 1745795460547start-source-1746586719772-target
+      source: 1745795460547start
+      sourceHandle: source
+      target: '1746586719772'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1746686554628'
+        sourceType: iteration-start
+        targetType: tool
+      id: 1746686554628start-source-1746686564528-target
+      source: 1746686554628start
+      sourceHandle: source
+      target: '1746686564528'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: variable-aggregator
+      id: 1745795460547-source-1746686972740-target
+      source: '1745795460547'
+      sourceHandle: source
+      target: '1746686972740'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: variable-aggregator
+      id: 1746686554628-source-1746686972740-target
+      source: '1746686554628'
+      sourceHandle: source
+      target: '1746686972740'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1746686554628'
+        sourceType: tool
+        targetType: code
+      id: 1746686564528-source-1746758574429-target
+      source: '1746686564528'
+      sourceHandle: source
+      target: '1746758574429'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: http-request
+        targetType: code
+      id: 1747004852216-source-1747008777242-target
+      source: '1747004852216'
+      sourceHandle: source
+      target: '1747008777242'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: if-else
+      id: 1747008777242-source-1746686703695-target
+      source: '1747008777242'
+      sourceHandle: source
+      target: '1746686703695'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: variable-aggregator
+        targetType: end
+      id: 1746686972740-source-1746587315681-target
+      source: '1746686972740'
+      sourceHandle: source
+      target: '1746587315681'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: document-extractor
+        targetType: http-request
+      id: 1745792283875-source-1747004852216-target
+      source: '1745792283875'
+      sourceHandle: source
+      target: '1747004852216'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: iteration
+      id: 1746686703695-true-1746686554628-target
+      source: '1746686703695'
+      sourceHandle: 'true'
+      target: '1746686554628'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: iteration
+      id: 1746686703695-false-1745795460547-target
+      source: '1746686703695'
+      sourceHandle: 'false'
+      target: '1745795460547'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1746686554628'
+        sourceType: tool
+        targetType: code
+      id: 1746686564528-source-1746759185770-target
+      source: '1746686564528'
+      sourceHandle: source
+      target: '1746759185770'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1746686554628'
+        sourceType: code
+        targetType: http-request
+      id: 1746758574429-source-1747532748286-target
+      source: '1746758574429'
+      sourceHandle: source
+      target: '1747532748286'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1746686554628'
+        sourceType: code
+        targetType: http-request
+      id: 1746759185770-source-1747532748286-target
+      source: '1746759185770'
+      sourceHandle: source
+      target: '1747532748286'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1745795460547'
+        sourceType: tool
+        targetType: code
+      id: 1746586719772-source-1747534596297-target
+      source: '1746586719772'
+      sourceHandle: source
+      target: '1747534596297'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1745795460547'
+        sourceType: tool
+        targetType: code
+      id: 1746586719772-source-1747534622663-target
+      source: '1746586719772'
+      sourceHandle: source
+      target: '1747534622663'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1745795460547'
+        sourceType: code
+        targetType: http-request
+      id: 1747534596297-source-1747534639131-target
+      source: '1747534596297'
+      sourceHandle: source
+      target: '1747534639131'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: true
+        iteration_id: '1745795460547'
+        sourceType: code
+        targetType: http-request
+      id: 1747534622663-source-1747534639131-target
+      source: '1747534622663'
+      sourceHandle: source
+      target: '1747534639131'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 密送收件人清单
+          max_length: 5
+          options: []
+          required: true
+          type: file
+          variable: excel_input
+        - label: 邮件主题
+          max_length: 10000
+          options: []
+          required: true
+          type: paragraph
+          variable: subject
+        - label: 邮件正文
+          max_length: 10000000
+          options: []
+          required: true
+          type: paragraph
+          variable: body
+        - label: SMTP 服务地址
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: SMTP_IP
+        - label: SMTP 服务端口
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: SMTP_PORT
+        - label: SMTP 账户
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: sender
+        - label: SMTP 账户密码
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: password
+        - label: 收件人地址（默认与发件人一致）
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: recipient
+      height: 272
+      id: '1745743755437'
+      position:
+        x: 76.0233560309417
+        y: 252.66037378545752
+      positionAbsolute:
+        x: 76.0233560309417
+        y: 252.66037378545752
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_array_file: false
+        selected: false
+        title: 提取出excel中的内容
+        type: document-extractor
+        variable_selector:
+        - '1745743755437'
+        - excel_input
+      height: 92
+      id: '1745792283875'
+      position:
+        x: 430.20854593801374
+        y: 252.66037378545752
+      positionAbsolute:
+        x: 430.20854593801374
+        y: 252.66037378545752
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            response_format: json_object
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-11-20
+          provider: azure_openai
+        prompt_template:
+        - id: 6dfd915a-e5b2-4ec5-8cc3-08bb70ba3d56
+          role: system
+          text: "你将接收到一个包含“姓名/公司名”和“邮箱地址”的 Markdown 表格字符串。请从中提取所有邮箱地址，并将其每50个一组，分组输出为\
+            \ JSON 格式，\n\n输出格式示例：\n{\n  \"groups\": [\n    [\"email1@example.com\"\
+            , \"email2@example.com\", ..., \"email50@example.com\"],\n    [\"email51@example.com\"\
+            , ..., \"email100@example.com\"],\n    ...\n  ]\n}\n\n请注意：\n- 每组最多50个邮箱\n\
+            - 不要输出多余解释内容\n- 保留邮箱的原始顺序"
+        - id: 25c7bb85-5202-485e-91fa-2a7571718ce1
+          role: user
+          text: 输入：{{#1745792283875.text#}}
+        selected: false
+        title: 分组每50个一组
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1745792352378'
+      position:
+        x: 722.968208430857
+        y: -484.7009513755716
+      positionAbsolute:
+        x: 722.968208430857
+        y: -484.7009513755716
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 703
+        is_parallel: false
+        iterator_selector:
+        - '1747008777242'
+        - result
+        output_selector:
+        - '1747534639131'
+        - body
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1745795460547start
+        title: 自定义发送
+        type: iteration
+        width: 1548
+      height: 703
+      id: '1745795460547'
+      position:
+        x: 2098.0078744798734
+        y: 456.4183955226206
+      positionAbsolute:
+        x: 2098.0078744798734
+        y: 456.4183955226206
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 1548
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1745795460547start
+      parentId: '1745795460547'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 2122.0078744798734
+        y: 524.4183955226206
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "def main(arg1: str) -> dict:\n    # 解析 JSON 字符串\n    parsed = json.loads(arg1)\n\
+          \    groups = parsed[\"groups\"]  # 二维数组\n\n    # 每组邮箱拼接成用逗号连接的字符串\n   \
+          \ result = [\", \".join(group) for group in groups]\n\n    return {\n  \
+          \      \"result\": result  # Array[String]\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        selected: false
+        title: 转换为json
+        type: code
+        variables:
+        - value_selector:
+          - '1745792352378'
+          - text
+          variable: arg1
+      height: 54
+      id: '1745797493357'
+      position:
+        x: 1065.607427512722
+        y: -499.00507360272775
+      positionAbsolute:
+        x: 1065.607427512722
+        y: -499.00507360272775
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1745795460547'
+        provider_id: kofe
+        provider_name: kofe
+        provider_type: builtin
+        selected: false
+        title: 群发邮件工具
+        tool_configurations: {}
+        tool_label: 群发邮件工具
+        tool_name: email_group_sender
+        tool_parameters:
+          SMTP_HOST:
+            type: mixed
+            value: '{{#1745743755437.SMTP_IP#}}'
+          SMTP_PORT:
+            type: mixed
+            value: '{{#1745743755437.SMTP_PORT#}}'
+          bcc_list:
+            type: mixed
+            value: '{{#1745795460547.item#}}'
+          cc_list:
+            type: mixed
+            value: ''
+          password:
+            type: mixed
+            value: '{{#1745743755437.password#}}'
+          receiver_email:
+            type: mixed
+            value: '{{#1745743755437.recipient#}}'
+          sender_email:
+            type: mixed
+            value: '{{#1745743755437.sender#}}'
+          subject:
+            type: mixed
+            value: '{{#1745743755437.subject#}}'
+          text:
+            type: mixed
+            value: '{{#1745743755437.body#}}'
+        type: tool
+      height: 54
+      id: '1746586719772'
+      parentId: '1745795460547'
+      position:
+        x: 168.28580203486354
+        y: 65.9420376725127
+      positionAbsolute:
+        x: 2266.293676514737
+        y: 522.3604331951333
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1746686972740'
+          - output
+          variable: result
+        selected: true
+        title: 结束
+        type: end
+      height: 90
+      id: '1746587315681'
+      position:
+        x: 4589.416875262278
+        y: 318.85770926472037
+      positionAbsolute:
+        x: 4589.416875262278
+        y: 318.85770926472037
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-mini-2024-07-18
+          provider: azure_openai
+        prompt_template:
+        - id: d4babc41-feee-48c6-a6ab-92dec6ec5a87
+          role: system
+          text: "\n你是一个擅长数据分析和报告撰写的智能助手。  \n你的任务是：  \n根据多组邮件发送结果，生成一份结构清晰、内容详实的统计报告，格式为\
+            \ Markdown。\n\n**输入（Input）**  \n多组邮件发送结果，每组数据为一个 JSON 对象，包含以下字段：\n\n-\
+            \ `code`：字符串，表示发送结果状态码（例如：'1' 表示成功，'0' 表示失败）。\n- `to`：数组，主送收件人邮箱地址列表。\n\
+            - `cc`：数组，抄送收件人邮箱地址列表。\n- `bcc`：数组，密送收件人邮箱地址列表。\n\n示例输入：\n\n```json\n\
+            [\n  {\"code\": \"1\", \"to\": [\"agent@iagent.cc\"], \"cc\": [], \"bcc\"\
+            : [\"bianpj18@163.com\", \"bianpj2023@163.com\", \"peijiabian@gmail.com\"\
+            ]},\n  {\"code\": \"0\", \"to\": [\"user@example.com\"], \"cc\": [\"manager@example.com\"\
+            ], \"bcc\": []}\n]\n```\n\n**输出（Output）**  \n一份 Markdown 格式的邮件发送统计报告，包含以下内容：\n\
+            \n1. **摘要（Summary）**\n   - 总发送尝试次数\n   - 成功发送次数\n   - 失败发送次数\n   - 成功率（以百分比表示，保留两位小数）\n\
+            \n2. **详细统计（Detailed Statistics）**\n   - 按状态码分类的发送次数统计\n   - 每个状态码对应的发送比例（以百分比表示，保留两位小数）\n\
+            \n3. **收件人统计（Recipient Statistics）**\n   - 唯一主送（To）地址数量\n   - 唯一抄送（CC）地址数量\n\
+            \   - 唯一密送（BCC）地址数量\n   - 所有唯一收件人地址总数\n\n4. **失败详情（Failure Details）**\n\
+            \   - 列出所有发送失败的记录，包含以下信息：\n     - 主送（To）地址列表\n     - 抄送（CC）地址列表\n    \
+            \ - 密送（BCC）地址列表\n     - 状态码（code）\n\n5. **格式要求（Formatting Requirements）**\n\
+            \   - 使用二级标题（`##`）划分各部分\n   - 使用表格展示统计数据，表头使用粗体\n   - 使用无序列表（`-`）列出失败详情中的地址列表\n\
+            \n**注意事项（Notes）**\n- 严格按照 Markdown 语法输出，不包含任何额外的 HTML 或其他标记。\n- 保证统计数据的准确性，避免重复计数。\n\
+            - 若输入数据为空，输出提示“暂无邮件发送记录”。"
+        - id: d7cbf92a-edb9-4913-acae-bc2d98828da6
+          role: user
+          text: '{{#1746686972740.output#}}'
+        selected: false
+        title: LLM 2
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1746610301806'
+      position:
+        x: 3246.677893776952
+        y: -758.7379789908948
+      positionAbsolute:
+        x: 3246.677893776952
+        y: -758.7379789908948
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 532
+        is_parallel: false
+        iterator_selector:
+        - '1747008777242'
+        - result
+        output_selector:
+        - '1747532748286'
+        - body
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1746686554628start
+        title: 默认发送
+        type: iteration
+        width: 1623
+      height: 532
+      id: '1746686554628'
+      position:
+        x: 2098.0078744798734
+        y: -284.2940544711326
+      positionAbsolute:
+        x: 2098.0078744798734
+        y: -284.2940544711326
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 1623
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1746686554628start
+      parentId: '1746686554628'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 2122.0078744798734
+        y: -216.2940544711326
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1746686554628'
+        provider_id: kofe
+        provider_name: kofe
+        provider_type: builtin
+        selected: false
+        title: 群发邮件工具
+        tool_configurations: {}
+        tool_label: 群发邮件工具
+        tool_name: email_group_sender
+        tool_parameters:
+          SMTP_HOST:
+            type: mixed
+            value: 101.89.86.84
+          SMTP_PORT:
+            type: mixed
+            value: '465'
+          bcc_list:
+            type: mixed
+            value: '{{#1746686554628.item#}}'
+          cc_list:
+            type: mixed
+            value: ''
+          password:
+            type: mixed
+            value: uB?Zw6ZbW3
+          receiver_email:
+            type: mixed
+            value: '{{#1745743755437.recipient#}}'
+          sender_email:
+            type: mixed
+            value: agent@iagent.cc
+          subject:
+            type: mixed
+            value: '{{#1745743755437.subject#}}'
+          text:
+            type: mixed
+            value: '{{#1745743755437.body#}}'
+        type: tool
+      height: 54
+      id: '1746686564528'
+      parentId: '1746686554628'
+      position:
+        x: 139.67527378687782
+        y: 73.72164889086253
+      positionAbsolute:
+        x: 2237.6831482667512
+        y: -210.57240558027007
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: empty
+            id: f2aa3002-54b9-4757-af5c-c3554935e3bb
+            value: ''
+            varType: string
+            variable_selector:
+            - '1745743755437'
+            - SMTP_IP
+          - comparison_operator: empty
+            id: a9bb2f25-1efe-423e-a995-5d64718f2931
+            value: ''
+            varType: string
+            variable_selector:
+            - '1745743755437'
+            - SMTP_PORT
+          - comparison_operator: empty
+            id: 188c4818-8a1f-4801-a336-6c49da590636
+            value: ''
+            varType: string
+            variable_selector:
+            - '1745743755437'
+            - sender
+          - comparison_operator: empty
+            id: 6ed877b3-5905-4360-a6cd-d1575deeea11
+            value: ''
+            varType: string
+            variable_selector:
+            - '1745743755437'
+            - password
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断smtp是否使用默认
+        type: if-else
+      height: 204
+      id: '1746686703695'
+      position:
+        x: 1447.5936879898522
+        y: 252.66037378545752
+      positionAbsolute:
+        x: 1447.5936879898522
+        y: 252.66037378545752
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        output_type: array[string]
+        selected: false
+        title: 变量聚合器
+        type: variable-aggregator
+        variables:
+        - - '1745795460547'
+          - output
+        - - '1746686554628'
+          - output
+      height: 131
+      id: '1746686972740'
+      position:
+        x: 4199.3467688477795
+        y: 318.85770926472037
+      positionAbsolute:
+        x: 4199.3467688477795
+        y: 318.85770926472037
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-41
+            key: ''
+            type: text
+            value: "{\n  \"message_id\": \"{{#1746758574429.result#}}\"\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        isInIteration: true
+        iteration_id: '1746686554628'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求
+        type: http-request
+        url: https://www.iagent.cc/email-status
+        variables: []
+      height: 135
+      id: '1746758454413'
+      parentId: '1746686554628'
+      position:
+        x: 741.7621573792385
+        y: 365.4235190138761
+      positionAbsolute:
+        x: 2839.770031859112
+        y: 81.1294645427435
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\n\ndef main(arg1: str) -> dict:\n    # 直接解析传入的 JSON 字符串\n\
+          \    data = json.loads(arg1)\n\n    # 提取并清洗 message_id\n    raw_message_id\
+          \ = data.get(\"message_id\", \"\")\n    clean_message_id = raw_message_id.strip(\"\
+          <>\")\n\n    return {\n        \"result\": clean_message_id\n    }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1746686554628'
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 提取message_id
+        type: code
+        variables:
+        - value_selector:
+          - '1746686564528'
+          - text
+          variable: arg1
+      height: 54
+      id: '1746758574429'
+      parentId: '1746686554628'
+      position:
+        x: 460.96371849428033
+        y: 85.82092612560865
+      positionAbsolute:
+        x: 2558.9715929741537
+        y: -198.47312834552395
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\nimport time\nimport requests\n\ndef main(message_id: str,\
+          \ expected_total: int) -> dict:\n    url = \"https://www.iagent.cc/email-status\"\
+          \n    headers = {\"Content-Type\": \"application/json\"}\n    payload =\
+          \ {\"message_id\": message_id}\n    \n    max_retries = 10\n    retry_delay\
+          \ = 180  # 3分钟\n\n    last_result = {}\n\n    for attempt in range(max_retries):\n\
+          \        response = requests.post(url, headers=headers, json=payload)\n\n\
+          \        if response.status_code == 200:\n            try:\n           \
+          \     result = response.json()\n                last_result = result  #\
+          \ 保存最新结果\n\n                current_total = int(result.get(\"total_sent\"\
+          , 0))  # 根据返回结构调整 key\n\n                if current_total == expected_total:\n\
+          \                    return {\n                        \"status\": \"completed\"\
+          ,\n                        \"sent\": current_total,\n                  \
+          \      \"response\": result\n                    }\n            except Exception\
+          \ as e:\n                return {\"error\": f\"解析响应失败: {str(e)}\"}\n   \
+          \     \n        time.sleep(retry_delay)\n\n    return {\n        \"status\"\
+          : \"timeout\",\n        \"message\": f\"超过最大尝试次数，实际发送数未达到 {expected_total}\"\
+          ,\n        \"last_response\": last_result\n    }\n\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1746686554628'
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 服务器获取result
+        type: code
+        variables:
+        - value_selector:
+          - '1746758574429'
+          - result
+          variable: message_id
+        - value_selector:
+          - '1746759185770'
+          - result
+          variable: expected_total
+      height: 54
+      id: '1746759105853'
+      parentId: '1746686554628'
+      position:
+        x: 1011.2593982209892
+        y: 458
+      positionAbsolute:
+        x: 3109.2672727008626
+        y: 173.7059455288674
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "def main(arg1: str) -> dict:\n    # 拆分字符串并移除空格\n    items = [item.strip()\
+          \ for item in arg1.split(\",\") if item.strip()]\n    \n    return {\n \
+          \       \"result\": len(items)\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1746686554628'
+        outputs:
+          result:
+            children: null
+            type: number
+        selected: false
+        title: 提取item个数
+        type: code
+        variables:
+        - value_selector:
+          - '1746686554628'
+          - item
+          variable: arg1
+      height: 54
+      id: '1746759185770'
+      parentId: '1746686554628'
+      position:
+        x: 467.69825439802753
+        y: 211.72382234405507
+      positionAbsolute:
+        x: 2565.706128877901
+        y: -72.57023212707753
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "\ndef main(arg1: str, arg2: int) -> dict:\n    return {\n        \"\
+          result\": arg1 + arg2,\n    }\n"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1746686554628'
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行 5
+        type: code
+        variables:
+        - value_selector: []
+          variable: arg1
+        - value_selector:
+          - '1746759185770'
+          - result
+          variable: arg2
+      height: 54
+      id: '1747003435139'
+      parentId: '1746686554628'
+      position:
+        x: 1179.20886915842
+        y: 308.17007786165516
+      positionAbsolute:
+        x: 3277.2167436382933
+        y: 23.876023390522562
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-2
+            key: ''
+            type: text
+            value: "{\n  \"text\": \"{{{{#1745792283875.text#}}}}\"\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: 处理excel
+        type: http-request
+        url: https://dc37-202-36-244-18.ngrok-free.app/extract-emails
+        variables: []
+      height: 151
+      id: '1747004852216'
+      position:
+        x: 760.958208107277
+        y: 252.66037378545752
+      positionAbsolute:
+        x: 760.958208107277
+        y: 252.66037378545752
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: str) -> dict:\n    json_ready = json.dumps({\"\
+          text\": arg1}, ensure_ascii=False)\n    return {\n        \"result\": json_ready\n\
+          \    }"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行 6
+        type: code
+        variables:
+        - value_selector:
+          - '1745792283875'
+          - text
+          variable: arg1
+      height: 54
+      id: '1747005672293'
+      position:
+        x: 706.5421826602038
+        y: -98.44563385539549
+      positionAbsolute:
+        x: 706.5421826602038
+        y: -98.44563385539549
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: str) -> dict:\n    array = json.loads(arg1)\
+          \  # 将字符串形式的 JSON 列表转为 Python 列表\n    return {\"result\": array}\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        selected: false
+        title: 转换为json-array
+        type: code
+        variables:
+        - value_selector:
+          - '1747004852216'
+          - body
+          variable: arg1
+      height: 54
+      id: '1747008777242'
+      position:
+        x: 1114.5311661686342
+        y: 252.66037378545752
+      positionAbsolute:
+        x: 1114.5311661686342
+        y: 252.66037378545752
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data: []
+          type: none
+        desc: ''
+        headers: ''
+        method: get
+        params: ''
+        retry_config:
+          max_retries: 10
+          retry_enabled: true
+          retry_interval: 5000
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求 3
+        type: http-request
+        url: ''
+        variables: []
+      height: 79
+      id: '1747036177274'
+      position:
+        x: 2219.459035207413
+        y: -657.555223458018
+      positionAbsolute:
+        x: 2219.459035207413
+        y: -657.555223458018
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-1
+            key: ''
+            type: text
+            value: "{\n  \"user_id\": \"{{#sys.user_id#}}\",\n  \"messages\": [\n\
+              \    {\n      \"message_id\": \"{{#1746758574429.result#}}\",\n    \
+              \  \"item\": {{#1746759185770.result#}}\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        isInIteration: true
+        iteration_id: '1746686554628'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求 4
+        type: http-request
+        url: https://dc37-202-36-244-18.ngrok-free.app/task/create
+        variables: []
+      height: 151
+      id: '1747532748286'
+      parentId: '1746686554628'
+      position:
+        x: 846.2547666762662
+        y: 65
+      positionAbsolute:
+        x: 2944.2626411561396
+        y: -219.2940544711326
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "import json\n\ndef main(arg1: str) -> dict:\n    # 直接解析传入的 JSON 字符串\n\
+          \    data = json.loads(arg1)\n\n    # 提取并清洗 message_id\n    raw_message_id\
+          \ = data.get(\"message_id\", \"\")\n    clean_message_id = raw_message_id.strip(\"\
+          <>\")\n\n    return {\n        \"result\": clean_message_id\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1745795460547'
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 代码执行 8
+        type: code
+        variables:
+        - value_selector:
+          - '1746586719772'
+          - text
+          variable: arg1
+      height: 54
+      id: '1747534596297'
+      parentId: '1745795460547'
+      position:
+        x: 472.28580203486354
+        y: 65.9420376725127
+      positionAbsolute:
+        x: 2570.293676514737
+        y: 522.3604331951333
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        code: "def main(arg1: str) -> dict:\n    # 拆分字符串并移除空格\n    items = [item.strip()\
+          \ for item in arg1.split(\",\") if item.strip()]\n    \n    return {\n \
+          \       \"result\": len(items)\n    }"
+        code_language: python3
+        desc: ''
+        isInIteration: true
+        iteration_id: '1745795460547'
+        outputs:
+          result:
+            children: null
+            type: number
+        selected: false
+        title: 代码执行 9
+        type: code
+        variables:
+        - value_selector:
+          - '1745795460547'
+          - item
+          variable: arg1
+      height: 54
+      id: '1747534622663'
+      parentId: '1745795460547'
+      position:
+        x: 472.28580203486354
+        y: 158.9420376725127
+      positionAbsolute:
+        x: 2570.293676514737
+        y: 615.3604331951333
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        authorization:
+          config: null
+          type: no-auth
+        body:
+          data:
+          - id: key-value-2
+            key: ''
+            type: text
+            value: "{\n  \"user_id\": \"{{#sys.user_id#}}\",\n  \"messages\": [\n\
+              \    {\n      \"message_id\": \"{{#1747534596297.result#}}\",\n    \
+              \  \"item\": {{#1747534622663.result#}}\n    }\n  ]\n}"
+          type: json
+        desc: ''
+        headers: Content-Type:application/json
+        isInIteration: true
+        iteration_id: '1745795460547'
+        method: post
+        params: ''
+        retry_config:
+          max_retries: 3
+          retry_enabled: true
+          retry_interval: 100
+        selected: false
+        timeout:
+          max_connect_timeout: 0
+          max_read_timeout: 0
+          max_write_timeout: 0
+        title: HTTP 请求 5
+        type: http-request
+        url: https://dc37-202-36-244-18.ngrok-free.app/task/create
+        variables: []
+      height: 151
+      id: '1747534639131'
+      parentId: '1745795460547'
+      position:
+        x: 833.819517131325
+        y: 65.9420376725127
+      positionAbsolute:
+        x: 2931.8273916111984
+        y: 522.3604331951333
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    viewport:
+      x: -577.0140387690146
+      y: 219.1634650954814
+      zoom: 0.312860032935837

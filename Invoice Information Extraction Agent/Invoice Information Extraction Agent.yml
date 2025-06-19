@@ -1,0 +1,498 @@
+app:
+  description: 【By Brianna】识别PDF或Image格式的发票
+  icon: bookmark_tabs
+  icon_background: '#FEF7C3'
+  mode: workflow
+  name: Invoice Information Extraction Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 60
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: if-else
+      id: 1741213438513-source-1741229821707-target
+      selected: false
+      source: '1741213438513'
+      sourceHandle: source
+      target: '1741229821707'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: document-extractor
+      id: 1741229821707-true-1741229644771-target
+      selected: false
+      source: '1741229821707'
+      sourceHandle: 'true'
+      target: '1741229644771'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: llm
+      id: 1741229821707-333323dc-78e5-40f0-995a-3132474f2f50-1741229884805-target
+      selected: false
+      source: '1741229821707'
+      sourceHandle: 333323dc-78e5-40f0-995a-3132474f2f50
+      target: '1741229884805'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: document-extractor
+        targetType: variable-aggregator
+      id: 1741229644771-source-1741230038595-target
+      selected: false
+      source: '1741229644771'
+      sourceHandle: source
+      target: '1741230038595'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: variable-aggregator
+      id: 1741229884805-source-1741230038595-target
+      selected: false
+      source: '1741229884805'
+      sourceHandle: source
+      target: '1741230038595'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: variable-aggregator
+        targetType: llm
+      id: 1741230038595-source-1741230085698-target
+      selected: false
+      source: '1741230038595'
+      sourceHandle: source
+      target: '1741230085698'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1741230085698-source-1741244961102-target
+      source: '1741230085698'
+      sourceHandle: source
+      target: '1741244961102'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: input_pdf
+          max_length: 48
+          options: []
+          required: false
+          type: file
+          variable: input_pdf
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - image
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: input_png
+          max_length: 48
+          options: []
+          required: false
+          type: file
+          variable: input_png
+        - label: language
+          max_length: 48
+          options: []
+          required: false
+          type: text-input
+          variable: language
+      height: 142
+      id: '1741213438513'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_array_file: false
+        selected: false
+        title: 提取pdf中的文字
+        type: document-extractor
+        variable_selector:
+        - '1741213438513'
+        - input_pdf
+      height: 92
+      id: '1741229644771'
+      position:
+        x: 794
+        y: 282
+      positionAbsolute:
+        x: 794
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: exists
+            id: 07d3091a-be87-433e-af61-5410a433c8e5
+            value: ''
+            varType: file
+            variable_selector:
+            - '1741213438513'
+            - input_pdf
+          id: 'true'
+          logical_operator: and
+        - case_id: 333323dc-78e5-40f0-995a-3132474f2f50
+          conditions:
+          - comparison_operator: exists
+            id: 4d773bf9-ee42-474e-bde9-94fabaaa351e
+            value: ''
+            varType: file
+            variable_selector:
+            - '1741213438513'
+            - input_png
+          id: 333323dc-78e5-40f0-995a-3132474f2f50
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断输入源类型
+        type: if-else
+      height: 174
+      id: '1741229821707'
+      position:
+        x: 413
+        y: 282
+      positionAbsolute:
+        x: 413
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: openai/gpt-4o
+          provider: openrouter
+        prompt_template:
+        - id: d9732c49-5d87-4cb2-8502-a9a31566e4e6
+          role: system
+          text: '任务是识别图片中的文字。请按照以下步骤完成任务：
+
+
+            1. 接收输入的图片文件。确保图片格式支持文字识别，例如JPEG、PNG等常见格式。
+
+
+            2. 使用光学字符识别（OCR）技术分析图片。OCR技术可以自动识别图片中的文字并将其转换为可编辑的文本。
+
+
+            3. 确保识别的文字准确无误。检查识别结果，确保没有错字或遗漏的文字。如果可能，使用多种OCR工具进行交叉验证以提高准确性。
+
+
+            4. 输出识别的文字。请注意，输出结果不应包含任何XML标签或其他格式化标记，只需提供纯文本。
+
+
+            5. 如果图片中包含多种语言的文字，请确保所有语言的文字都被正确识别并输出。
+
+
+            6. 如果图片中包含复杂的布局（例如表格或多栏文本），请尽量保持原有的布局结构，以便于理解。
+
+
+            7. 如果图片质量较差或文字难以识别，请提供适当的反馈，说明可能的识别困难和建议的解决方案。
+
+
+            8.仅输出图片中原有的文字，不对其进行解释、总结等
+
+
+            请确保输出的文字清晰、准确，并且易于阅读。'
+        - id: 3b189eea-cce6-4a0d-89bc-2ebd573ea879
+          role: user
+          text: 输入：{{#1741213438513.input_png#}}
+        selected: false
+        title: 提取png中的文字
+        type: llm
+        variables: []
+        vision:
+          configs:
+            detail: high
+            variable_selector:
+            - '1741213438513'
+            - input_png
+          enabled: true
+      height: 98
+      id: '1741229884805'
+      position:
+        x: 794
+        y: 418.9579352182227
+      positionAbsolute:
+        x: 794
+        y: 418.9579352182227
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        output_type: string
+        selected: true
+        title: 变量合并
+        type: variable-aggregator
+        variables:
+        - - '1741229644771'
+          - text
+        - - '1741229884805'
+          - text
+      height: 131
+      id: '1741230038595'
+      position:
+        x: 1125.8634808586096
+        y: 337.5460765655618
+      positionAbsolute:
+        x: 1125.8634808586096
+        y: 337.5460765655618
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-11-20
+          provider: azure_openai
+        prompt_template:
+        - id: 4cd31922-30dd-4c30-97a1-310923e55a77
+          role: system
+          text: "### 提示词（Markdown 格式输出，支持语言翻译）\n\n\n请从输入的文本内容中提取以下字段的信息（仅输出输入中存在的字段）：\
+            \  \n\n\n- **机器编号**  \n- **发票代码**  \n- **发票号码**  \n- **开票日期**  \n- **校验码**\
+            \  \n- **购买方名称**  \n- **购买方纳税人识别号**  \n- **购买方地址、电话**  \n- **购买方开户行及账号**\
+            \  \n- **货物或应税劳务、服务名称**  \n- **规格型号**  \n- **单位**  \n- **数量**  \n- **单价**\
+            \  \n- **金额**  \n- **税率**  \n- **税额**  \n- **价税合计（大写）**  \n- **价税合计（小写）**\
+            \  \n- **销售方名称**  \n- **销售方纳税人识别号**  \n- **销售方地址、电话**  \n- **销售方开户行及账号**\
+            \  \n- **备注**  \n- **收款人**  \n- **复核**  \n- **开票人**  \n\n\n#### **语言要求**\n\
+            - 如果 `language` 参数存在，则将字段名和对应的内容翻译为 `language` 指定的语言。  \n- 如果 `language`\
+            \ 参数未提供，则保持原语言不变。  \n\n\n#### **输出格式**\n仅输出输入文本中存在的字段，并以 **Markdown 格式**\
+            \ 展示，例如：\n```markdown\n**发票代码**: 123456789012  \n**发票号码**: 98765432  \n\
+            **开票日期**: 2025-03-07  \n**购买方名称**: 某某公司  \n**购买方纳税人识别号**: 123456789012345\
+            \  \n...\n```\n如果 `language=\"English\"`，则输出：\n```markdown\n**Invoice\
+            \ Code**: 123456789012  \n**Invoice Number**: 98765432  \n**Invoice Date**:\
+            \ 2025-03-07  \n**Buyer Name**: ABC Company  \n**Buyer Taxpayer Identification\
+            \ Number**: 123456789012345  \n...\n```\n请自动识别输入文本中包含的字段，仅返回有值的内容，并按照\
+            \ `language` 要求进行翻译。"
+        - id: 967197fb-43d2-4549-96cd-399ad9f90d6f
+          role: user
+          text: '输入：{{#1741230038595.output#}}
+
+            language：{{#1741213438513.language#}}'
+        selected: false
+        title: 提取发票内容
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1741230085698'
+      position:
+        x: 1429.8634808586096
+        y: 337.5460765655618
+      positionAbsolute:
+        x: 1429.8634808586096
+        y: 337.5460765655618
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1741230085698'
+          - text
+          variable: output
+        selected: false
+        title: 输出
+        type: end
+      height: 90
+      id: '1741244961102'
+      position:
+        x: 1734.763547040313
+        y: 337.5460765655618
+      positionAbsolute:
+        x: 1734.763547040313
+        y: 337.5460765655618
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 208
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"输入：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"input_pdf：PDF版本发票","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"input_png：图片版本发票","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"language：选择输出语言","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 303
+      height: 208
+      id: '1741339474396'
+      position:
+        x: 83.96842549941117
+        y: 40.70216555435505
+      positionAbsolute:
+        x: 83.96842549941117
+        y: 40.70216555435505
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 303
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 96
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"使用chatgpt中的视觉来提取图片中的文字","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 307
+      height: 96
+      id: '1741339533661'
+      position:
+        x: 727.4996198423021
+        y: 558.1185218112566
+      positionAbsolute:
+        x: 727.4996198423021
+        y: 558.1185218112566
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 307
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 104
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"提取发票中的内容，输出文字中已经存在的信息，输出为markdown格式","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 434
+      height: 104
+      id: '1741339566040'
+      position:
+        x: 1394.3534212284924
+        y: 151.26859894481137
+      positionAbsolute:
+        x: 1394.3534212284924
+        y: 151.26859894481137
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 434
+    viewport:
+      x: -377.0935942106729
+      y: 137.43975455473793
+      zoom: 1.3026725238667312

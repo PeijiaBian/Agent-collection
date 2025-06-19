@@ -1,0 +1,256 @@
+app:
+  description: It'd be great if you could tell the model to create a good prompt based
+    on your task description or improve an existing prompt—workflow version.
+  icon: writing_hand
+  icon_background: '#D5D9EB'
+  mode: workflow
+  name: Meta Prompt Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 60
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: llm
+      id: 1733278394482-source-1733278541064-target
+      source: '1733278394482'
+      sourceHandle: source
+      target: '1733278541064'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1733278541064-source-1733278797666-target
+      source: '1733278541064'
+      sourceHandle: source
+      target: '1733278797666'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: '1. language可以选择优化后的prompt是什么语言，与原始输入raw_prompt语言类型无关
+
+          2. raw_prompt简单的描述/未经处理的prompt
+
+          '
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - label: Output Language
+          max_length: 48
+          options:
+          - English
+          - 简体中文
+          - 繁體中文
+          - 한국어
+          - 日本語
+          - العربية
+          required: true
+          type: select
+          variable: language
+        - label: raw_prompt
+          max_length: 10000
+          options: []
+          required: true
+          type: paragraph
+          variable: raw_prompt
+      height: 208
+      id: '1733278394482'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 对raw_prompt进行优化，使得prompt需求，结构等要素变得清晰。
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea04-us201-gpt-4o-2024-11-20-2
+          provider: azure_openai
+        prompt_template:
+        - id: 2cd014c3-2d74-45f4-aea3-bcbec8e82433
+          role: system
+          text: "输入：{{#1733278394482.raw_prompt#}}\nlanguage：{{#1733278394482.raw_prompt#}}\n\
+            # 系统任务提示：根据用户需求生成多语言高质量提示词\n\n\n## 任务目标\n根据用户提供的需求、要求或初步提示词，生成**规范化的高质量提示词**。提示词需满足用户的\
+            \ `language` 设置要求，支持以下语言输出：\n- **简体中文**\n- **繁体中文**\n- **韩语**\n- **日语**\n\
+            - **阿拉伯语**\n- **其他语言**\n\n\n---\n\n\n## 任务步骤\n\n\n### 1. 分析用户输入\n- 检查用户提供的描述，提取任务的核心目标和需求。\n\
+            - 根据用户的描述，理解需要分析的重点内容，例如任务的主题、关键目标或输出的要求。\n\n\n---\n\n\n### 2. 确定语言设置\n\
+            - 根据用户的 `language` 设置生成相应语言的提示词：\n  - **简体中文**：输出为简体中文。\n  - **繁体中文**：输出为繁体中文。\n\
+            \  - **韩语**：输出为韩语。\n  - **日语**：输出为日语。\n  - **阿拉伯语**：输出为阿拉伯语。\n  - **其他语言**：尝试根据\
+            \ `language` 提供的语言生成符合用户需求的输出。\n\n\n---\n\n\n### 3. 生成规范化提示词\n根据以下标准生成高质量提示词：\n\
+            1. **任务描述**：清晰说明任务的目标，例如分析网站内容并回答用户查询。\n2. **目标定义**：明确列出任务的具体目标，例如总结内容、分析数据、生成结构化报告。\n\
+            3. **步骤说明**：提供详细的分步说明，确保任务逻辑清晰且易于实现。\n4. **输出格式**：定义结果的格式，确保用户可直接使用输出内容。\n\
+            5. **示例**：为复杂任务提供输入输出示例，帮助用户理解任务逻辑。\n\n\n---\n\n\n### 4. 输出格式\n- 直接输出文本格式的提示词，满足以下要求：\n\
+            \  1. 符合用户的 `language` 设置。\n  2. 包含任务描述、目标、步骤说明、输出格式和示例。\n  3. 输出清晰、结构化，易于理解和使用。\n\
+            \n\n---\n\n\n## 示例\n\n\n### 示例输入 1（用户输入为英文，语言设置为简体中文）\n**用户输入**:\n```\n\
+            You are an AI assistant specialized in analyzing website content and user\
+            \ inputs. Your task is to generate a report by analyzing the content of\
+            \ the given website along with the user's query.\n```\n\n\n**语言设置**:\n\
+            ```\nlanguage = \"简体中文\"\n```\n\n\n**输出示例**:\n```\n为了有效地分析网站内容并生成报告，我们需要明确以下任务要求和输出格式。这些要素可以帮助语言模型更准确地完成任务。\n\
+            \n\n### 任务描述\n根据用户提供的查询，分析指定网站的内容，并生成一份详细的报告。报告应包括网站内容的总结与对用户查询的分析。\n\n\
+            \n### 目标\n1. **分析网站内容**：检查网站的结构、主题、语言使用以及信息的完整性。\n2. **回答用户查询**：根据查询对网站内容进行针对性的分析，提供准确的结论和建议。\n\
+            3. **生成报告**：报告应包含网站内容的总结、用户查询的分析结果以及相关建议。\n\n\n### 关键步骤\n1. **分析网站内容**：\n\
+            \   - 识别网站的主要内容和功能。\n   - 评估内容的结构、清晰度以及可读性。\n   - 检查网站是否符合预期的主题和目标用户需求。\n\
+            \n\n2. **处理用户查询**：\n   - 理解用户提出的问题或需求。\n   - 针对性地提取网站中的相关信息。\n   - 根据查询提供具体答案或建议。\n\
+            \n\n3. **生成报告**：\n   - 总结网站的主要内容，特别是与用户查询相关的信息。\n   - 详细解释网站内容如何回应用户的问题。\n\
+            \   - 提供任何相关的改进建议。\n\n\n### 输出格式\n报告应按以下结构组织：\n\n\n- **网站概述**：简要介绍网站的基本信息和目标。\n\
+            - **查询分析**：\n  - 对用户查询的详细解答。\n  - 引用网站内容中的相关部分。\n- **总结与建议**：\n  - 对网站内容的评估。\n\
+            \  - 提供可能的改进意见或优化建议。\n\n\n### 示例\n假设用户询问：“这个网站的导航是否足够清晰？”，分析报告的结构如下：\n\
+            \n\n1. **网站概述**：\n   - 该网站主要提供在线购物服务，面向年轻消费者。\n   - 主页上有多个分类选项，产品页面布局简洁，支持搜索功能。\n\
+            \n\n2. **查询分析**：\n   - 用户提到导航是否清晰。根据网站结构分析，网站提供了简洁的主导航栏，包含了首页、产品分类、购物车、帮助中心等常见链接。\n\
+            \   - 主页也有明显的搜索框，帮助用户快速找到目标商品。\n\n\n3. **总结与建议**：\n   - 网站的导航总体清晰，但在移动端的用户体验方面，某些功能可能需要进一步优化，例如菜单按钮的位置可以稍作调整，提升易用性。\n\
+            ```\n\n\n---\n\n\n### 示例输入 2（用户输入为中文，语言设置为日语）\n**用户输入**:\n```\n生成一个prompt，用于帮助AI根据用户输入的脚本生成代码功能的详细解释。\n\
+            ```\n\n\n**语言设置**:\n```\nlanguage = \"日语\"\n```\n\n\n**输出示例**:\n```\n\
+            ### タスクの説明\nユーザーから提供されたスクリプトをもとに、コードの詳細な機能を説明するプロンプトを生成してください。\n\n\n###\
+            \ ゴール\n1. スクリプトの構造を分析し、機能を理解する。\n2. 各コードセクションについて、機能、ロジック、使用方法を詳しく説明する。\n\
+            3. わかりやすく、具体的な説明を出力する。\n\n\n### 手順\n1. スクリプトを解析する：\n   - スクリプトの全体的な構造を確認し、主要なモジュールを特定します。\n\
+            \   - 各部分の目的と機能を理解します。\n\n\n2. 説明を生成する：\n   - 各コードセクションの機能、ロジック、目的を簡潔かつ詳細に説明します。\n\
+            \   - 必要に応じて、コードの改善点を提案します。\n\n\n3. 一貫性を保つ：\n   - 説明の内容がスクリプトの構造と一致していることを確認します。\n\
+            \n\n### 出力例\n#### 入力スクリプト:\n```python\ndef add(a, b):\n    return a +\
+            \ b\n```\n\n\n#### 出力説明:\n「この関数`add`は2つの引数`a`と`b`を受け取り、それらの合計を返します。この関数は基本的な数学演算（加算）を実行するために設計されています。」\n\
+            ```\n\n\n---\n\n\n## 关键规则\n1. **支持多语言输出**：确保输出符合用户指定的语言设置（简体中文、繁体中文、韩语、日语、阿拉伯语等）。\n\
+            2. **规范化输出**：输出的提示词必须结构化、专业化、清晰易用。\n3. **直接输出**：以文本格式输出最终提示词，无需额外解释。\n\
+            4. 输出内容应在支持 Markdown 的环境下直接渲染为结构化和可视化的内容"
+        - id: b8197153-c4c7-400c-907e-1ee0da8ec855
+          role: user
+          text: '用户输入：{{#1733278394482.raw_prompt#}}
+
+            根据{{#1733278394482.language#}}的设置返回text'
+        selected: true
+        title: prompt优化
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 142
+      id: '1733278541064'
+      position:
+        x: 384
+        y: 282
+      positionAbsolute:
+        x: 384
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: 对优化后的prompt进行输出
+        outputs:
+        - value_selector:
+          - '1733278541064'
+          - text
+          variable: text
+        selected: false
+        title: 优化后输出
+        type: end
+      height: 118
+      id: '1733278797666'
+      position:
+        x: 689
+        y: 282
+      positionAbsolute:
+        x: 689
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 263
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Usage：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"·
+          Language可以支持简体中文、英语、韩语、日语、阿拉伯语。仍可继续添加","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"·
+          language与raw_prompt的语言类型无关。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"·
+          raw_prompt：用户的原始输入","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Example：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"language:
+          下拉选择6种语言中选择","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"raw_prompt：帮我生成一个财务分析报告","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 713
+      height: 263
+      id: '1733279244431'
+      position:
+        x: 80
+        y: 520.3086141453216
+      positionAbsolute:
+        x: 80
+        y: 520.3086141453216
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 713
+    viewport:
+      x: 513.2946782855249
+      y: 136.06761702896387
+      zoom: 1.094167780943051

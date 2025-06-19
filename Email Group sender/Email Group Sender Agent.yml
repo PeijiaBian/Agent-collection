@@ -1,0 +1,736 @@
+app:
+  description: 群发agent
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: Email Group Sender Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1745743755437-source-1745792283875-target
+      source: '1745743755437'
+      sourceHandle: source
+      target: '1745792283875'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1745792283875-source-1745792352378-target
+      source: '1745792283875'
+      sourceHandle: source
+      target: '1745792352378'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1745792352378-source-1745797493357-target
+      source: '1745792352378'
+      sourceHandle: source
+      target: '1745797493357'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '1745795460547'
+        sourceType: iteration-start
+        targetType: tool
+      id: 1745795460547start-source-1746586719772-target
+      source: 1745795460547start
+      sourceHandle: source
+      target: '1746586719772'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1746610301806-source-1746587315681-target
+      source: '1746610301806'
+      sourceHandle: source
+      target: '1746587315681'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: iteration
+      id: 1746771806307-false-1745795460547-target
+      source: '1746771806307'
+      sourceHandle: 'false'
+      target: '1745795460547'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: iteration
+      id: 1746771806307-true-17467718694490-target
+      source: '1746771806307'
+      sourceHandle: 'true'
+      target: '17467718694490'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: variable-aggregator
+      id: 17467718694490-source-1746771933107-target
+      source: '17467718694490'
+      sourceHandle: source
+      target: '1746771933107'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: iteration
+        targetType: variable-aggregator
+      id: 1745795460547-source-1746771933107-target
+      source: '1745795460547'
+      sourceHandle: source
+      target: '1746771933107'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: variable-aggregator
+        targetType: llm
+      id: 1746771933107-source-1746610301806-target
+      source: '1746771933107'
+      sourceHandle: source
+      target: '1746610301806'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: true
+        iteration_id: '17467718694490'
+        sourceType: iteration-start
+        targetType: tool
+      id: 1746771869449start-source-1746771869449017467718694500-target
+      source: 1746771869449start
+      sourceHandle: source
+      target: '1746771869449017467718694500'
+      targetHandle: target
+      type: custom
+      zIndex: 1002
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: if-else
+      id: 1745797493357-source-1746771806307-target
+      source: '1745797493357'
+      sourceHandle: source
+      target: '1746771806307'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: 开始
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 密送收件人清单
+          max_length: 5
+          options: []
+          required: true
+          type: file
+          variable: excel_input
+        - label: 邮件主题
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: subject
+        - label: 邮件正文
+          max_length: 10000000
+          options: []
+          required: true
+          type: paragraph
+          variable: body
+        - label: 收件人地址
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: recipient
+        - label: SMTP 服务地址
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: SMTP_IP
+        - label: SMTP 服务端口
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: SMTP_PORT
+        - label: SMTP 账户
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: sender
+        - label: SMTP 账户密码
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: password
+      height: 272
+      id: '1745743755437'
+      position:
+        x: 78.88418047637296
+        y: 282
+      positionAbsolute:
+        x: 78.88418047637296
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        is_array_file: false
+        selected: false
+        title: 提取出excel中的内容
+        type: document-extractor
+        variable_selector:
+        - '1745743755437'
+        - excel_input
+      height: 92
+      id: '1745792283875'
+      position:
+        x: 391.93019482887627
+        y: 282
+      positionAbsolute:
+        x: 391.93019482887627
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            response_format: json_object
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-mini-2024-07-18
+          provider: azure_openai
+        prompt_template:
+        - id: 6dfd915a-e5b2-4ec5-8cc3-08bb70ba3d56
+          role: system
+          text: "你将接收到一个包含“姓名/公司名”和“邮箱地址”的 Markdown 表格字符串。请从中提取所有邮箱地址，并将其每50个一组，分组输出为\
+            \ JSON 格式，\n\n输出格式示例：\n{\n  \"groups\": [\n    [\"email1@example.com\"\
+            , \"email2@example.com\", ..., \"email50@example.com\"],\n    [\"email51@example.com\"\
+            , ..., \"email100@example.com\"],\n    ...\n  ]\n}\n\n请注意：\n- 每组50个邮箱\n\
+            - 不要输出多余解释内容\n- 保留邮箱的原始顺序"
+        - id: 25c7bb85-5202-485e-91fa-2a7571718ce1
+          role: user
+          text: 输入：{{#1745792283875.text#}}
+        selected: true
+        title: 分组每50个一组
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1745792352378'
+      position:
+        x: 688.6383150856822
+        y: 282
+      positionAbsolute:
+        x: 688.6383150856822
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 227
+        is_parallel: false
+        iterator_selector:
+        - '1745797493357'
+        - result
+        output_selector:
+        - '1746586719772'
+        - text
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1745795460547start
+        title: 迭代
+        type: iteration
+        width: 660
+      height: 227
+      id: '1745795460547'
+      position:
+        x: 1644.9375891231157
+        y: 402.5218429402922
+      positionAbsolute:
+        x: 1644.9375891231157
+        y: 402.5218429402922
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 660
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1745795460547start
+      parentId: '1745795460547'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1668.9375891231157
+        y: 470.5218429402922
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        code: "def main(arg1: str) -> dict:\n    # 解析 JSON 字符串\n    parsed = json.loads(arg1)\n\
+          \    groups = parsed[\"groups\"]  # 二维数组\n\n    # 每组邮箱拼接成用逗号连接的字符串\n   \
+          \ result = [\", \".join(group) for group in groups]\n\n    return {\n  \
+          \      \"result\": result  # Array[String]\n    }\n"
+        code_language: python3
+        desc: ''
+        outputs:
+          result:
+            children: null
+            type: array[string]
+        selected: false
+        title: 转换为json
+        type: code
+        variables:
+        - value_selector:
+          - '1745792352378'
+          - text
+          variable: arg1
+      height: 54
+      id: '1745797493357'
+      position:
+        x: 979.7826941497849
+        y: 282
+      positionAbsolute:
+        x: 979.7826941497849
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '1745795460547'
+        provider_id: kofe
+        provider_name: kofe
+        provider_type: builtin
+        selected: false
+        title: 群发邮件工具
+        tool_configurations: {}
+        tool_label: 群发邮件工具
+        tool_name: email_group_sender
+        tool_parameters:
+          SMTP_HOST:
+            type: mixed
+            value: '{{#1745743755437.SMTP_IP#}}'
+          SMTP_PORT:
+            type: mixed
+            value: '{{#1745743755437.SMTP_PORT#}}'
+          bcc_list:
+            type: mixed
+            value: '{{#1745795460547.item#}}'
+          cc_list:
+            type: mixed
+            value: ''
+          password:
+            type: mixed
+            value: '{{#1745743755437.password#}}'
+          receiver_email:
+            type: mixed
+            value: '{{#1745743755437.recipient#}}'
+          sender_email:
+            type: mixed
+            value: '{{#1745743755437.sender#}}'
+          subject:
+            type: mixed
+            value: '{{#1745743755437.subject#}}'
+          text:
+            type: mixed
+            value: '{{#1745743755437.body#}}'
+        type: tool
+      height: 54
+      id: '1746586719772'
+      parentId: '1745795460547'
+      position:
+        x: 113.59426370758842
+        y: 65.94203767251264
+      positionAbsolute:
+        x: 1758.531852830704
+        y: 468.4638806128048
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1746610301806'
+          - text
+          variable: result
+        selected: false
+        title: 结束
+        type: end
+      height: 90
+      id: '1746587315681'
+      position:
+        x: 3161.5392670071055
+        y: 286.0637838877068
+      positionAbsolute:
+        x: 3161.5392670071055
+        y: 286.0637838877068
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-mini-2024-07-18
+          provider: azure_openai
+        prompt_template:
+        - id: d4babc41-feee-48c6-a6ab-92dec6ec5a87
+          role: system
+          text: "\n你是一个擅长数据分析和报告撰写的智能助手。  \n你的任务是：  \n根据多组邮件发送结果，生成一份结构清晰、内容详实的统计报告，格式为\
+            \ Markdown。\n\n**输入（Input）**  \n多组邮件发送结果，每组数据为一个 JSON 对象，包含以下字段：\n\n-\
+            \ `code`：字符串，表示发送结果状态码（例如：'1' 表示成功，'0' 表示失败）。\n- `to`：数组，主送收件人邮箱地址列表。\n\
+            - `cc`：数组，抄送收件人邮箱地址列表。\n- `bcc`：数组，密送收件人邮箱地址列表。\n\n示例输入：\n\n```json\n\
+            [\n  {\"code\": \"1\", \"to\": [\"agent@iagent.cc\"], \"cc\": [], \"bcc\"\
+            : [\"bianpj18@163.com\", \"bianpj2023@163.com\", \"peijiabian@gmail.com\"\
+            ]},\n  {\"code\": \"0\", \"to\": [\"user@example.com\"], \"cc\": [\"manager@example.com\"\
+            ], \"bcc\": []}\n]\n```\n\n**输出（Output）**  \n一份 Markdown 格式的邮件发送统计报告，包含以下内容：\n\
+            \n1. **摘要（Summary）**\n   - 总发送尝试次数\n   - 成功发送次数\n   - 失败发送次数\n   - 成功率（以百分比表示，保留两位小数）\n\
+            \n2. **详细统计（Detailed Statistics）**\n   - 按状态码分类的发送次数统计\n   - 每个状态码对应的发送比例（以百分比表示，保留两位小数）\n\
+            \n3. **收件人统计（Recipient Statistics）**\n   - 唯一主送（To）地址数量\n   - 唯一抄送（CC）地址数量\n\
+            \   - 唯一密送（BCC）地址数量\n   - 所有唯一收件人地址总数\n\n4. **失败详情（Failure Details）**\n\
+            \   - 列出所有发送失败的记录，包含以下信息：\n     - 主送（To）地址列表\n     - 抄送（CC）地址列表\n    \
+            \ - 密送（BCC）地址列表\n     - 状态码（code）\n\n5. **格式要求（Formatting Requirements）**\n\
+            \   - 使用二级标题（`##`）划分各部分\n   - 使用表格展示统计数据，表头使用粗体\n   - 使用无序列表（`-`）列出失败详情中的地址列表\n\
+            \n**注意事项（Notes）**\n- 严格按照 Markdown 语法输出，不包含任何额外的 HTML 或其他标记。\n- 保证统计数据的准确性，避免重复计数。\n\
+            - 若输入数据为空，输出提示“暂无邮件发送记录”。"
+        - id: d7cbf92a-edb9-4913-acae-bc2d98828da6
+          role: user
+          text: '{{#1746771933107.output#}}'
+        selected: false
+        title: LLM 2
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 98
+      id: '1746610301806'
+      position:
+        x: 2833.092779793158
+        y: 286.0637838877068
+      positionAbsolute:
+        x: 2833.092779793158
+        y: 286.0637838877068
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: empty
+            id: f830c698-e10f-47c8-8738-d22a432d9cf1
+            value: ''
+            varType: string
+            variable_selector:
+            - '1745743755437'
+            - SMTP_IP
+          - comparison_operator: empty
+            id: e74fb631-ed23-4571-bb7e-90b340fd8917
+            value: ''
+            varType: string
+            variable_selector:
+            - '1745743755437'
+            - SMTP_PORT
+          - comparison_operator: empty
+            id: 15263890-ff7d-4192-84e2-d41aeed1cdbb
+            value: ''
+            varType: string
+            variable_selector:
+            - '1745743755437'
+            - sender
+          - comparison_operator: empty
+            id: 152c2d4f-bf96-4f3a-b24d-751f82cba0a1
+            value: ''
+            varType: string
+            variable_selector:
+            - '1745743755437'
+            - password
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 204
+      id: '1746771806307'
+      position:
+        x: 1289.4882674142616
+        y: 257.6172966737592
+      positionAbsolute:
+        x: 1289.4882674142616
+        y: 257.6172966737592
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        error_handle_mode: terminated
+        height: 227
+        is_parallel: false
+        iterator_selector:
+        - '1745797493357'
+        - result
+        output_selector:
+        - '1746771869449017467718694500'
+        - text
+        output_type: array[string]
+        parallel_nums: 10
+        selected: false
+        start_node_id: 1746771869449start
+        title: 迭代 (1)
+        type: iteration
+        width: 660
+      height: 227
+      id: '17467718694490'
+      position:
+        x: 1639.1663684574148
+        y: 63.00214884278569
+      positionAbsolute:
+        x: 1639.1663684574148
+        y: 63.00214884278569
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 660
+      zIndex: 1
+    - data:
+        desc: ''
+        isInIteration: true
+        iteration_id: '17467718694490'
+        provider_id: kofe
+        provider_name: kofe
+        provider_type: builtin
+        selected: false
+        title: 群发邮件
+        tool_configurations: {}
+        tool_label: 群发邮件工具
+        tool_name: email_group_sender
+        tool_parameters:
+          SMTP_HOST:
+            type: mixed
+            value: 101.89.86.84
+          SMTP_PORT:
+            type: mixed
+            value: '465'
+          bcc_list:
+            type: mixed
+            value: '{{#17467718694490.item#}}'
+          cc_list:
+            type: mixed
+            value: ''
+          password:
+            type: mixed
+            value: uB?Zw6ZbW3
+          receiver_email:
+            type: mixed
+            value: '{{#1745743755437.recipient#}}'
+          sender_email:
+            type: mixed
+            value: agent@iagent.cc
+          subject:
+            type: mixed
+            value: '{{#1745743755437.subject#}}'
+          text:
+            type: mixed
+            value: '{{#1745743755437.body#}}'
+        type: tool
+      height: 54
+      id: '1746771869449017467718694500'
+      parentId: '17467718694490'
+      position:
+        x: 113.59426370758842
+        y: 65.94203767251264
+      positionAbsolute:
+        x: 1752.7606321650032
+        y: 128.94418651529833
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+      zIndex: 1002
+    - data:
+        desc: ''
+        isInIteration: true
+        selected: false
+        title: ''
+        type: iteration-start
+      draggable: false
+      height: 48
+      id: 1746771869449start
+      parentId: '17467718694490'
+      position:
+        x: 24
+        y: 68
+      positionAbsolute:
+        x: 1663.1663684574148
+        y: 131.0021488427857
+      selectable: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-iteration-start
+      width: 44
+      zIndex: 1002
+    - data:
+        desc: ''
+        output_type: array[string]
+        selected: false
+        title: 变量聚合器
+        type: variable-aggregator
+        variables:
+        - - '17467718694490'
+          - output
+        - - '1745795460547'
+          - output
+      height: 131
+      id: '1746771933107'
+      position:
+        x: 2487.175560920178
+        y: 272.2870190596856
+      positionAbsolute:
+        x: 2487.175560920178
+        y: 272.2870190596856
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -90.00092807101373
+      y: 212.06624513710193
+      zoom: 0.49215215554403074

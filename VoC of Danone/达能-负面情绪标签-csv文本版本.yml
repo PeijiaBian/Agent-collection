@@ -1,0 +1,1232 @@
+app:
+  description: 从用户的文本内容中，找出包含负面情绪内容，打上负面情绪标签，并做简单介绍。
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: 达能-负面情绪标签-csv文本版本
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.4
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1735114833416-source-1735116518726-target
+      source: '1735114833416'
+      sourceHandle: source
+      target: '1735116518726'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: if-else
+      id: 1735116518726-source-1735116500051-target
+      source: '1735116518726'
+      sourceHandle: source
+      target: '1735116500051'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: if-else
+      id: 1735116518726-source-1735116685211-target
+      source: '1735116518726'
+      sourceHandle: source
+      target: '1735116685211'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: if-else
+      id: 1735116518726-source-1735116707307-target
+      source: '1735116518726'
+      sourceHandle: source
+      target: '1735116707307'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: template-transform
+      id: 1735116500051-true-1735116762683-target
+      source: '1735116500051'
+      sourceHandle: 'true'
+      target: '1735116762683'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: template-transform
+        targetType: llm
+      id: 1735116762683-source-1735108309842-target
+      source: '1735116762683'
+      sourceHandle: source
+      target: '1735108309842'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: template-transform
+      id: 1735116685211-true-1735116816955-target
+      source: '1735116685211'
+      sourceHandle: 'true'
+      target: '1735116816955'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: template-transform
+        targetType: llm
+      id: 1735116816955-source-1735116836760-target
+      source: '1735116816955'
+      sourceHandle: source
+      target: '1735116836760'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: template-transform
+      id: 1735116707307-true-1735118298216-target
+      source: '1735116707307'
+      sourceHandle: 'true'
+      target: '1735118298216'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: code
+      id: 1735111070145-source-1735119930261-target
+      source: '1735111070145'
+      sourceHandle: source
+      target: '1735119930261'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: if-else
+      id: 1735119930261-source-1735120027834-target
+      source: '1735119930261'
+      sourceHandle: source
+      target: '1735120027834'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: template-transform
+      id: 1735120027834-true-1735120037966-target
+      source: '1735120027834'
+      sourceHandle: 'true'
+      target: '1735120037966'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: template-transform
+        targetType: llm
+      id: 1735120037966-source-1735114833416-target
+      source: '1735120037966'
+      sourceHandle: source
+      target: '1735114833416'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: if-else
+      id: 1735119930261-source-1735120083859-target
+      source: '1735119930261'
+      sourceHandle: source
+      target: '1735120083859'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1735108309842-source-1735120552375-target
+      source: '1735108309842'
+      sourceHandle: source
+      target: '1735120552375'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 1735116836760-source-1735120552375-target
+      source: '1735116836760'
+      sourceHandle: source
+      target: '1735120552375'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: template-transform
+        targetType: end
+      id: 1735118298216-source-1735120552375-target
+      source: '1735118298216'
+      sourceHandle: source
+      target: '1735120552375'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: end
+      id: 1735120083859-true-1735120552375-target
+      source: '1735120083859'
+      sourceHandle: 'true'
+      target: '1735120552375'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: document-extractor
+        targetType: llm
+      id: 1735110458065-source-1735187819607-target
+      source: '1735110458065'
+      sourceHandle: source
+      target: '1735187819607'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: llm
+      id: 1735187819607-source-1735111070145-target
+      source: '1735187819607'
+      sourceHandle: source
+      target: '1735111070145'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: document-extractor
+      id: 1735108151060-source-1735110458065-target
+      source: '1735108151060'
+      sourceHandle: source
+      target: '1735110458065'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: '第一列为”文本内容“，第一行标注”文本内容“
+
+          csv文件'
+        selected: false
+        title: 输入“文本内容”csv文件
+        type: start
+        variables:
+        - allowed_file_extensions: []
+          allowed_file_types:
+          - document
+          allowed_file_upload_methods:
+          - local_file
+          - remote_url
+          label: 数据源输入
+          max_length: 48
+          options: []
+          required: false
+          type: file
+          variable: input
+      height: 150
+      id: '1735108151060'
+      position:
+        x: 345.86044371403784
+        y: 264.26906990295805
+      positionAbsolute:
+        x: 345.86044371403784
+        y: 264.26906990295805
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 为negative评分及分析
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: d599dff7-86e2-4606-8b3a-cde524029b5b
+          role: system
+          text: "# 多条文本 - 负面含义综合识别与打分提示词（严格多条输出版）\n\n\n## 任务目标\n\n\n1. **输入**  \n\
+            \   - 输入可能包含多条文本（通常是一个 JSON 数组，或其他可迭代形式）。  \n   - 每条文本可能包含“负面含义的词”或“负面情绪信息”（例如：上火、差、问题、担忧、抱怨、不满、故障、发火、穷、累、压力、价格太高等），也可能没有。\
+            \  \n   - **需要基于整条文本的上下文** 来判断是否存在负面含义，并综合输出整体负面原因，而非只罗列词汇。\n\n\n2. **输出**\
+            \  \n   - 只返回**一个 JSON 数组**（最外层是 `[...]`）。  \n   - 数组中每个元素均为一个 JSON 对象。\
+            \  \n   - **每个对象**对应输入中的**一条文本**，并具有以下字段：  \n     1. `\"text\"`：原文（保留完整，不可拆分或省略）。\
+            \  \n     2. `\"score\"`：负面程度打分（0-100 的整数或数值）。  \n        - 若无负面含义则写 `0`。\
+            \  \n        - 若出现任何明显的负面含义或情绪，则给出 `1-100` 的具体值，并根据对负面情绪程度的主观判断（比如词汇数量、情绪强烈程度、痛点严重度）来赋值。\
+            \  \n     3. `\"reason\"`：简要说明**整体的负面含义或原因**。  \n        - 要求基于整条文本的上下文，总结其主要负面情绪点或负面词含义。\
+            \  \n        - 不要只罗列负面词；应体现文本整体的核心负面原因或倾向；若有多重负面点，可合并简要说明。  \n       \
+            \ - 若没有负面含义，请写 `\"无负面含义\"`。\n\n\n3. **严格要求**  \n   - 不要在输出的 JSON 数组之外添加任何额外文字、标题、说明、示例等；\
+            \  \n   - 对输入中的每条文本都生成一个对应对象；不合并，也不遗漏；  \n   - 最终输出必须是**合法的 JSON**，从 `[`\
+            \ 开始到 `]` 结束；  \n   - 数组中对象的顺序与输入文本的顺序**一致**；  \n   - **仅包含** `\"text\"\
+            `, `\"score\"`, `\"reason\"` 这三个字段，不要额外添加字段。\n\n\n---\n\n\n## 输出格式示例\n\
+            \n\n假设输入是：\n\n\n```json\n[\n  \"穷人喝的进口奶。一罐澳爱208，一个月最少五罐，工资才三千多，还要生活…都说穷人喝进口，我们也算是变相的买对了吧。优时通入的一直喝到现在，天天都好累啊…\"\
+            ,\n  \"也不怎么上火，这款奶粉的口感还不错。\"\n]\n```\n\n\n**理想的输出**（仅供参考）应当是（示例）：\n\n\n\
+            ```json\n[\n  {\n    \"text\": \"穷人喝的进口奶。一罐澳爱208，一个月最少五罐，工资才三千多，还要生活…都说穷人喝进口，我们也算是变相的买对了吧。优时通入的一直喝到现在，天天都好累啊…\"\
+            ,\n    \"score\": 75,\n    \"reason\": \"经济压力与疲惫感：抱怨价格昂贵、收入低、生活负担重，感到身心疲累\"\
+            \n  },\n  {\n    \"text\": \"也不怎么上火，这款奶粉的口感还不错。\",\n    \"score\": 10,\n\
+            \    \"reason\": \"出现潜在负面词“上火”，但整体情绪不强烈\"\n  }\n]\n```\n\n\n> **注意：**\
+            \  \n> - **仅**输出此 JSON 数组；  \n> - 不要在数组前后增加其他文本，如“这里是结果”或“输出如下”；  \n>\
+            \ - 不要在数组内部添加多余字段；  \n> - 每个对象都必须有 `text`, `score`, `reason` 三个字段；  \n\
+            > - `score` 用数字表示，`reason` 用简要文字概括整体负面含义或原因。\n\n\n---\n\n\n## 负面情绪与分值说明（示例）\n\
+            \n\n- `score` 取值范围：**0-100**  \n  - `0` 表示无负面含义  \n  - 1-30：负面程度轻微  \n\
+            \  - 31-60：负面程度一般  \n  - 61-80：负面程度较强  \n  - 81-100：负面程度极强或强烈抱怨\n\n\n\
+            - `reason` 中，可补充以下场景或类型供参考：  \n  - **经济压力**：抱怨价格昂贵、收入低、承担困难  \n  - **使用体验不满**：结块、冲泡不便、口感怪异等\
+            \  \n  - **物流或服务不满**：发货慢、包装破损、服务态度差等  \n  - **健康或品质担忧**：上火、过敏、质量问题、功能故障等\
+            \  \n  - **对未来担忧**：害怕后续会出现更多问题、担心售后  \n  - **用户焦虑或疲惫**：如“累”、“辛苦”、“忙不过来”\
+            \  \n  - 若整条文本**不存在任何**负面场景或词义，则 `score=0`，`reason=\"无负面含义\"`。\n\n\n---\n\
+            \n\n## 注意事项\n\n\n1. **一条输入文本 -> 一个 JSON 对象**  \n   - 不可合并多条文本为一个对象，也不可遗漏任何文本。\
+            \  \n2. **输出必须是纯 JSON 数组**  \n   - 不添加多余文字或示例；  \n   - 保证格式合法，可被 JSON\
+            \ 解析器正确解析。  \n3. **原文不可拆分**  \n   - `\"text\"` 字段必须包含**完整的输入文本**原样复制，包含所有符号、表情、换行等。\
+            \  \n4. 需根据**整体语义**给出 `score` 并撰写 `reason`；若文本整体无负面含义，则 `score=0` 并 `reason=\"\
+            无负面含义\"`."
+        - id: dc611699-fb22-4094-8682-35e140416fcc
+          role: user
+          text: 输入文本：{{#1735116762683.output#}}
+        selected: false
+        title: 负面情绪评分及原因分析
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 126
+      id: '1735108309842'
+      position:
+        x: 4146.632618930353
+        y: 195.68519975204896
+      positionAbsolute:
+        x: 4146.632618930353
+        y: 195.68519975204896
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: 转换成string
+        is_array_file: false
+        selected: false
+        title: 提取“文本内容”
+        type: document-extractor
+        variable_selector:
+        - '1735108151060'
+        - input
+      height: 120
+      id: '1735110458065'
+      position:
+        x: 723.5993464813196
+        y: 264.26906990295805
+      positionAbsolute:
+        x: 723.5993464813196
+        y: 264.26906990295805
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 提取PCD，去除广告等类型
+        model:
+          completion_params:
+            response_format: json_object
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: 39c1e7f3-4112-403e-984a-6ffb331e7ecb
+          role: system
+          text: "**你的任务**  \n从给定的文本数据中，提取并分类两类内容：  \n1. **纯消费者声量 (PCD)** ——明确来源于普通消费者的真实个人体验、意见或疑问，无明显推广/广告/科普倾向。\
+            \  \n2. **非消费者声量 (remove)** ——包含广告、促销、营销、科普、专家/媒体内容、疑似付费推广，或者无法判断是否为普通消费者的内容。\
+            \  \n\n\n\n每条文本内容（**table** 中每个对象的 `content` 字段）**只**能放入 `\"PCD\"` 或 `\"\
+            remove\"` 其中一个列表，且内容须**原样保留**，**不可拆分**、**不可遗漏**。\n\n\n### 一、分类规则与判定逻辑\n\
+            \n1. **纯消费者声量 (PCD)**\n\n   - **语气像消费者**：围绕自己的使用或购买经验、遇到的问题或困扰、价格吐槽、求助或闲聊。\
+            \  \n   - **允许**：  \n     - 讨论价格、对比平台差价；  \n     - 吐槽或抱怨“太贵了”“一罐可换两罐普通奶粉”；\
+            \  \n     - 添加与奶粉、育儿相关的话题标签（如 #婴儿奶粉推荐 #新生儿奶粉推荐）。  \n   - **前提**：无明显营销、推广、科普背书或从业者身份的痕迹，整体看是普通妈妈/消费者的角度。\
+            \  \n   - **示例**：  \n     - “某\U0001F351和某东竟差了一百块，有没有宝妈知道为什么？”  \n   \
+            \  - “这一罐票子挺贵了，我感觉都能买两罐便宜点的了。”   \n\n\n2. **非消费者声量 (remove)**\n\n   1.\
+            \ **广告/推广**  \n      - 促销、活动、满减、折扣券、代理/代理价、合伙人等关键词；  \n      - 明显呼吁他人购买或展示链接、优惠券；\
+            \  \n   2. **科普/专业背书**  \n      - 自称“母婴专业人员”“营养师”“专家团队”；  \n      - 介绍专业成分研究、科研平台成果等；\
+            \  \n      - 鼓励或引导购买某品牌（带官方或专业口吻）；  \n   3. **营销优惠信息**  \n      - 二手交易/转卖、店家招揽客户、明确价格并鼓励下单等；\
+            \  \n   4. **无法确定是否消费者**  \n      - 文本中出现“被顾客喊起来上班”或“我给全国各地宝宝选奶粉”之类从业者倾向；\
+            \  \n      - 过度使用官方语气、品牌背书。  \n\n\n> 若不确定，倾向于 **remove**，以免将商家/从业者信息误判为\
+            \ PCD。\n\n### 二、典型示例\n\n\n1. **PCD**  \n   - *示例 A*：“掌握不好喂食时间，怎么让宝宝后半夜快速喝上奶粉？#新手妈妈\
+            \ #养娃不易”  \n     - 明显是妈妈的个人困扰，没有推广、没有科普卖点；**判定为 PCD**。  \n   - *示例 B*：“有没有姐妹出爱他美卓萃3段的？急求。”\
+            \  \n     - 明显是普通消费者在求购或求助；**判定为 PCD**。  \n\n\n2. **remove**  \n   - *示例\
+            \ A*：  \n     “宝宝的早期1000天是大脑发育关键期……飞鹤在全球范围内与顶.尖科研平台合作……飞鹤星飞帆卓睿，含有5大脑磷脂，帮助宝宝大脑健康成长……作为母婴专业人员，我鼓励每位妈妈科学育儿，给予宝宝zui好的关爱。”\
+            \  \n     - 含大量品牌、科研背书 + 专业人员科普/推广；**判定为 remove**。  \n   - *示例 B*：  \n\
+            \     “5天一罐特配粉，从氨基酸奶粉转到深度水解奶粉……选对了奶粉，敏宝宝也照样可以长得很好 #圣特爱佳特殊配方奶粉”  \n   \
+            \  - 虽然表面看似个人经验，但用词更像给特殊配方奶粉做推荐/背书，且有明显引导购买的倾向；**判定为 remove**。  \n\n\n\
+            ### 三、使用说明\n\n\n1. **逐条处理**：对输入数据中的每个 `content` 进行整体判断，不可拆分。  \n2. **分类**：\
+            \  \n   - 符合“纯消费者声量 (PCD)”的内容放入 `\"PCD\"` 列表；  \n   - 其余都放入 `\"remove\"\
+            ` 列表；  \n   - 若无法判断/可疑，放入 `\"remove\"`。  \n3. **输出格式**：  \n   ```json\n\
+            \   {\n     \"PCD\": [\n       \"...\",\n       \"...\"\n     ],\n   \
+            \  \"remove\": [\n       \"...\",\n       \"...\"\n     ]\n   }\n   ```\
+            \  \n   - 所有输入文本都必须出现于输出的 `PCD` 或 `remove` 中。  \n   - 文本需**原样保留**，不能断行、删除或改动。\
+            \  \n\n"
+        - id: 13bb3b36-d7ce-4b86-b45f-753849d3788e
+          role: user
+          text: 数据：{{#1735187819607.text#}}
+        selected: false
+        title: 提取“纯消费者声量”
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 126
+      id: '1735111070145'
+      position:
+        x: 1411.2419855267815
+        y: 264.26906990295805
+      positionAbsolute:
+        x: 1411.2419855267815
+        y: 264.26906990295805
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 初步判断是否为负面情绪
+        model:
+          completion_params:
+            response_format: json_object
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: fa9e3909-7f70-4bc5-ba6c-f47a4900bb65
+          role: system
+          text: "## 任务描述 \n请分析上传的文件 {{#1735120037966.output#}}\n\n请逐条分析“文本内容”列中的所有内容，初步判断每条文本是否包含\
+            \ **负面情绪**，并按照以下分类进行归类： \n\n1. **负面情绪 (negative)**：包含任何可能的负面情绪，无需具体分类或说明。例如涉及产品问题、不满、抱怨等。\
+            \ \n\n2. **无法判断情绪或无明显情绪 (other)**：文本内容中未能明确判断是否存在情绪，或者内容无明显情绪表达。 \n\n\
+            3. **没有负面情绪 (no_negative)**：明确表达正面情绪或不涉及负面情绪的内容。 \n\n--- \n## 输出要求 \n\n\
+            输出结果为 JSON 格式，按以下规则分类： \n- **negative**：包含负面情绪的文本。 \n- **other**：无法判断情绪或无明显情绪的文本。\
+            \ \n- **no_negative**：明确无负面情绪的文本。 \n\n### 输出格式示例 \n以下是一个示例 JSON 输出：\n\
+            json\n{\n    \"negative\": [\n        {\"text\": \"手机用了不到一个月就出现屏幕故障\"\
+            },\n        {\"text\": \"包裹寄出后十天还没有收到，太慢了\"}\n    ],\n    \"other\": [\n\
+            \        {\"text\": \"最近感觉服务还可以，但没有特别突出的问题\"},\n        {\"text\": \"\
+            不知道这个品牌未来是否会出新款\"}\n    ],\n    \"no_negative\": [\n        {\"text\"\
+            : \"这次购物体验非常好，没有任何问题\"},\n        {\"text\": \"物流很快，包装也很好\"}\n    ]\n\
+            }\n--- \n\n## 注意事项 \n1. **分类规则**： \n- **negative**：内容明确体现负面情绪，无需具体分类。\
+            \ \n- **other**：情绪模糊或内容中无明显情绪表达，例如信息性描述或情绪中立。 \n- **no_negative**：明确表示正面情绪或与情绪无关的内容。\
+            \ \n\n2. **完整输出所有文本内容**，每条文本都需要归类到上述三类之一。 \n3. 如果某条文本同时具备多种可能性，优先归为 negative。\
+            \ \n4. 输出需严格按照 JSON 格式，确保每条文本分类准确。"
+        selected: false
+        title: 区别是否为负面情绪
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 126
+      id: '1735114833416'
+      position:
+        x: 2936.8305937070363
+        y: 294.29965039643736
+      positionAbsolute:
+        x: 2936.8305937070363
+        y: 294.29965039643736
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: c8424c34-c378-4481-87cb-4eaefa531d4b
+            value: ''
+            varType: array[object]
+            variable_selector:
+            - '1735116518726'
+            - negative
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断negative情绪是否为空
+        type: if-else
+      height: 126
+      id: '1735116500051'
+      position:
+        x: 3534.0106137738294
+        y: 161.8749086197683
+      positionAbsolute:
+        x: 3534.0106137738294
+        y: 161.8749086197683
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: str) -> dict:\n    parsed_data = json.loads(arg1)\
+          \  \n    return {\"negative\":parsed_data.get(\"negative\",[]),\"other\"\
+          :parsed_data.get(\"other\",[]),\"no_negative\":parsed_data.get(\"no_negative\"\
+          ,[])}"
+        code_language: python3
+        desc: 将情绪类别转换成为json，并且分类提取出来
+        outputs:
+          negative:
+            children: null
+            type: array[object]
+          no_negative:
+            children: null
+            type: array[object]
+          other:
+            children: null
+            type: array[object]
+        selected: false
+        title: 转换为json并分类提取
+        type: code
+        variables:
+        - value_selector:
+          - '1735114833416'
+          - text
+          variable: arg1
+      height: 98
+      id: '1735116518726'
+      position:
+        x: 3245.9721661175763
+        y: 294.29965039643736
+      positionAbsolute:
+        x: 3245.9721661175763
+        y: 294.29965039643736
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 21d2fa31-9058-445f-9654-21f815b00f4f
+            value: ''
+            varType: array[object]
+            variable_selector:
+            - '1735116518726'
+            - other
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断大模型不确定的情绪是否为空
+        type: if-else
+      height: 126
+      id: '1735116685211'
+      position:
+        x: 3524.727890324865
+        y: 328.614614363405
+      positionAbsolute:
+        x: 3524.727890324865
+        y: 328.614614363405
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 8e6c0812-61c3-4888-b94a-971c90be9c14
+            value: ''
+            varType: array[object]
+            variable_selector:
+            - '1735116518726'
+            - no_negative
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 判断非negative的情绪是否为空
+        type: if-else
+      height: 126
+      id: '1735116707307'
+      position:
+        x: 3524.727890324865
+        y: 509.25042001352136
+      positionAbsolute:
+        x: 3524.727890324865
+        y: 509.25042001352136
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: json转换为string，传入大模型
+        selected: false
+        template: '{{ arg1 }}'
+        title: negative转换为string格式
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1735116518726'
+          - negative
+          variable: arg1
+      height: 82
+      id: '1735116762683'
+      position:
+        x: 3833.4146545200542
+        y: 195.68519975204896
+      positionAbsolute:
+        x: 3833.4146545200542
+        y: 195.68519975204896
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: json转换为string，传入大模型
+        selected: false
+        template: '{{ arg1 }}'
+        title: other转换成string格式
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1735116518726'
+          - other
+          variable: arg1
+      height: 82
+      id: '1735116816955'
+      position:
+        x: 3833.4146545200542
+        y: 361.99514660886626
+      positionAbsolute:
+        x: 3833.4146545200542
+        y: 361.99514660886626
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 为无法确定的情绪类型评分及分析
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-2024-08-06
+          provider: azure_openai
+        prompt_template:
+        - id: 6f5b1d13-a623-4790-9795-56d3a9117093
+          role: system
+          text: "# 多条文本 - 负面含义综合识别与打分提示词（严格多条输出版）\n\n\n## 任务目标\n\n\n1. **输入**  \n\
+            \   - 输入可能包含多条文本（通常是一个 JSON 数组，或其他可迭代形式）。  \n   - 每条文本可能包含“负面含义的词”或“负面情绪信息”（例如：上火、差、问题、担忧、抱怨、不满、故障、发火、穷、累、压力、价格太高等），也可能没有。\
+            \  \n   - **需要基于整条文本的上下文** 来判断是否存在负面含义，并综合输出整体负面原因，而非只罗列词汇。\n\n\n2. **输出**\
+            \  \n   - 只返回**一个 JSON 数组**（最外层是 `[...]`）。  \n   - 数组中每个元素均为一个 JSON 对象。\
+            \  \n   - **每个对象**对应输入中的**一条文本**，并具有以下字段：  \n     1. `\"text\"`：原文（保留完整，不可拆分或省略）。\
+            \  \n     2. `\"score\"`：负面程度打分（0-100 的整数或数值）。  \n        - 若无负面含义则写 `0`。\
+            \  \n        - 若出现任何明显的负面含义或情绪，则给出 `1-100` 的具体值，并根据对负面情绪程度的主观判断（比如词汇数量、情绪强烈程度、痛点严重度）来赋值。\
+            \  \n     3. `\"reason\"`：简要说明**整体的负面含义或原因**。  \n        - 要求基于整条文本的上下文，总结其主要负面情绪点或负面词含义。\
+            \  \n        - 不要只罗列负面词；应体现文本整体的核心负面原因或倾向；若有多重负面点，可合并简要说明。  \n       \
+            \ - 若没有负面含义，请写 `\"无负面含义\"`。\n\n\n3. **严格要求**  \n   - 不要在输出的 JSON 数组之外添加任何额外文字、标题、说明、示例等；\
+            \  \n   - 对输入中的每条文本都生成一个对应对象；不合并，也不遗漏；  \n   - 最终输出必须是**合法的 JSON**，从 `[`\
+            \ 开始到 `]` 结束；  \n   - 数组中对象的顺序与输入文本的顺序**一致**；  \n   - **仅包含** `\"text\"\
+            `, `\"score\"`, `\"reason\"` 这三个字段，不要额外添加字段。\n\n\n---\n\n\n## 输出格式示例\n\
+            \n\n假设输入是：\n\n\n```json\n[\n  \"穷人喝的进口奶。一罐澳爱208，一个月最少五罐，工资才三千多，还要生活…都说穷人喝进口，我们也算是变相的买对了吧。优时通入的一直喝到现在，天天都好累啊…\"\
+            ,\n  \"也不怎么上火，这款奶粉的口感还不错。\"\n]\n```\n\n\n**理想的输出**（仅供参考）应当是（示例）：\n\n\n\
+            ```json\n[\n  {\n    \"text\": \"穷人喝的进口奶。一罐澳爱208，一个月最少五罐，工资才三千多，还要生活…都说穷人喝进口，我们也算是变相的买对了吧。优时通入的一直喝到现在，天天都好累啊…\"\
+            ,\n    \"score\": 75,\n    \"reason\": \"经济压力与疲惫感：抱怨价格昂贵、收入低、生活负担重，感到身心疲累\"\
+            \n  },\n  {\n    \"text\": \"也不怎么上火，这款奶粉的口感还不错。\",\n    \"score\": 10,\n\
+            \    \"reason\": \"出现潜在负面词“上火”，但整体情绪不强烈\"\n  }\n]\n```\n\n\n> **注意：**\
+            \  \n> - **仅**输出此 JSON 数组；  \n> - 不要在数组前后增加其他文本，如“这里是结果”或“输出如下”；  \n>\
+            \ - 不要在数组内部添加多余字段；  \n> - 每个对象都必须有 `text`, `score`, `reason` 三个字段；  \n\
+            > - `score` 用数字表示，`reason` 用简要文字概括整体负面含义或原因。\n\n\n---\n\n\n## 负面情绪与分值说明（示例）\n\
+            \n\n- `score` 取值范围：**0-100**  \n  - `0` 表示无负面含义  \n  - 1-30：负面程度轻微  \n\
+            \  - 31-60：负面程度一般  \n  - 61-80：负面程度较强  \n  - 81-100：负面程度极强或强烈抱怨\n\n\n\
+            - `reason` 中，可补充以下场景或类型供参考：  \n  - **经济压力**：抱怨价格昂贵、收入低、承担困难  \n  - **使用体验不满**：结块、冲泡不便、口感怪异等\
+            \  \n  - **物流或服务不满**：发货慢、包装破损、服务态度差等  \n  - **健康或品质担忧**：上火、过敏、质量问题、功能故障等\
+            \  \n  - **对未来担忧**：害怕后续会出现更多问题、担心售后  \n  - **用户焦虑或疲惫**：如“累”、“辛苦”、“忙不过来”\
+            \  \n  - 若整条文本**不存在任何**负面场景或词义，则 `score=0`，`reason=\"无负面含义\"`。\n\n\n---\n\
+            \n\n## 注意事项\n\n\n1. **一条输入文本 -> 一个 JSON 对象**  \n   - 不可合并多条文本为一个对象，也不可遗漏任何文本。\
+            \  \n2. **输出必须是纯 JSON 数组**  \n   - 不添加多余文字或示例；  \n   - 保证格式合法，可被 JSON\
+            \ 解析器正确解析。  \n3. **原文不可拆分**  \n   - `\"text\"` 字段必须包含**完整的输入文本**原样复制，包含所有符号、表情、换行等。\
+            \  \n4. 需根据**整体语义**给出 `score` 并撰写 `reason`；若文本整体无负面含义，则 `score=0` 并 `reason=\"\
+            无负面含义\"`."
+        - id: 51604bdb-8a04-4a04-a9d2-b9e2943abecd
+          role: user
+          text: 输入内容：{{#1735116816955.output#}}
+        selected: false
+        title: other类型分析
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 126
+      id: '1735116836760'
+      position:
+        x: 4146.632618930353
+        y: 361.99514660886626
+      positionAbsolute:
+        x: 4146.632618930353
+        y: 361.99514660886626
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: json转换为string，最终输出
+        selected: false
+        template: '{{ arg1 }}'
+        title: no-negative转换为string
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1735116518726'
+          - no_negative
+          variable: arg1
+      height: 82
+      id: '1735118298216'
+      position:
+        x: 3838.294867530991
+        y: 540.4741154368304
+      positionAbsolute:
+        x: 3838.294867530991
+        y: 540.4741154368304
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: str) -> dict:\n    parsed_data = json.loads(arg1)\
+          \  \n    return {\"PCD\":parsed_data.get(\"PCD\",[]),\"remove\":parsed_data.get(\"\
+          remove\",[])}"
+        code_language: python3
+        desc: 转换为json用于分支判断
+        outputs:
+          PCD:
+            children: null
+            type: array[string]
+          remove:
+            children: null
+            type: array[string]
+        selected: false
+        title: 转换为json
+        type: code
+        variables:
+        - value_selector:
+          - '1735111070145'
+          - text
+          variable: arg1
+      height: 82
+      id: '1735119930261'
+      position:
+        x: 1750.30000452826
+        y: 264.26906990295805
+      positionAbsolute:
+        x: 1750.30000452826
+        y: 264.26906990295805
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: 432f837c-ba8b-4a7c-a34a-54bdf379386f
+            value: ''
+            varType: array[object]
+            variable_selector:
+            - '1735119930261'
+            - PCD
+          id: 'true'
+          logical_operator: and
+        desc: 如果为PCD则进行后续的负面情绪判断，如果不是PCD，则移除
+        selected: false
+        title: PCD判断分支
+        type: if-else
+      height: 170
+      id: '1735120027834'
+      position:
+        x: 2220.0167779610324
+        y: 264.26906990295805
+      positionAbsolute:
+        x: 2220.0167779610324
+        y: 264.26906990295805
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: json转换为string，传入大模型
+        selected: false
+        template: '{{ arg1 }}'
+        title: PCD转换为string
+        type: template-transform
+        variables:
+        - value_selector:
+          - '1735119930261'
+          - PCD
+          variable: arg1
+      height: 82
+      id: '1735120037966'
+      position:
+        x: 2629.5600458864683
+        y: 294.29965039643736
+      positionAbsolute:
+        x: 2629.5600458864683
+        y: 294.29965039643736
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: not empty
+            id: ad4a370d-d376-41b7-922c-550d60317985
+            value: ''
+            varType: array[object]
+            variable_selector:
+            - '1735119930261'
+            - remove
+          id: 'true'
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 去除内容判断分支
+        type: if-else
+      height: 126
+      id: '1735120083859'
+      position:
+        x: 3470.074952335038
+        y: 739.998915649865
+      positionAbsolute:
+        x: 3470.074952335038
+        y: 739.998915649865
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '1735108309842'
+          - text
+          variable: negative
+        - value_selector:
+          - '1735116836760'
+          - text
+          variable: other
+        - value_selector:
+          - '1735118298216'
+          - output
+          variable: no_negative
+        - value_selector:
+          - '1735119930261'
+          - remove
+          variable: remove
+        selected: false
+        title: 输出
+        type: end
+      height: 168
+      id: '1735120552375'
+      position:
+        x: 4919.855058849413
+        y: 472.79065154269415
+      positionAbsolute:
+        x: 4919.855058849413
+        y: 472.79065154269415
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 未防止流失数据，转换为json格式
+        model:
+          completion_params:
+            response_format: json_object
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-mini-2024-07-18
+          provider: azure_openai
+        prompt_template:
+        - id: 925233c6-1876-4fa6-9a02-b9b96413481c
+          role: system
+          text: "# Markdown表格转换为嵌套JSON的提示词\n\n\n请根据以下要求将Markdown格式的表格转换为嵌套的JSON格式。转换后的JSON应具有清晰的嵌套结构，并为每个内容项添加唯一的编号（`id`）。如果表格只有一列，则将内容作为数组中的项。\n\
+            \n\n## 任务描述\n\n\n将以下Markdown格式的表格转换为嵌套的JSON格式。每一行内容应包含一个唯一的编号（`id`）和内容（`content`）。\n\
+            \n\n## 输入表格\n\n\n```markdown\n| �#宝宝奶粉推荐 #奶粉推荐 #奶粉推荐新生儿 #宝宝奶粉怎么选 #奶粉怎么选\
+            \ #长肉奶粉 |\n| --- |\n| #爱家连锁超市抢购双十二[庆祝][庆祝][庆祝]\n全场低至4.9折起[庆祝][庆祝][庆祝]\n\
+            每周二，周三会员日的上午7：30至10：00水果全部进价销售，即日起早市开始每天早9:30—11:30新鲜蔬菜批发价销售，挑战寿县最低价。欢迎团购[庆祝][庆祝][庆祝][庆祝][烟花][烟花][烟花]每周一到周四晚上6：30至9：00蔬菜全场6.8折[庆祝][庆祝][庆祝]\n\
+            购物\U0001F23568送6\U0001F23598送8\U0001F235188送18\n更多优惠请进店选购[勾引] |\n| #宝宝奶粉\
+            \ #好消化吸收的奶粉 #新国标奶粉 #宝宝奶粉选什么 #新生儿奶粉 #好喂养看得见 #给宝宝最好的 #易吸收好消化 |\n| 爱家连锁超市抢购双十二[庆祝][庆祝][庆祝]\n\
+            全场低至4.9折起[庆祝][庆祝][庆祝]\n每周二，周三会员日的上午7：30至10：00水果全部进价销售，即日起早市开始每天早9:30—11:30新鲜蔬菜批发价销售，挑战寿县最低价。欢迎团购[庆祝][庆祝][庆祝][庆祝][烟花][烟花][烟花]每周一到周四晚上6：30至9：00蔬菜全场6.8折[庆祝][庆祝][庆祝]\n\
+            购物\U0001F23568送6\U0001F23598送8\U0001F235188送18\n更多优惠请进店选购[勾引]# |\n| 姐妹们，宝宝现在7个月了，一直喝的适度特爱敏佳，娃肠胃不适很好，特爱喝了也快四个月了，打算转普奶合生元派星，喝过的宝妈觉得怎么样？对脾胃弱、肠胃差的宝宝友好吗？\
+            \ 另外，寻合生元派星的全网价格，你们都是多少买的？多少克？价格合适，收！ |\n| 张书奶粉大放异彩！～特惠福利来啦，赶紧囤50元代金券母婴用品通用，带上家人和朋友一起选购宝宝所需，实现购物自由，享受愉快的时光。\
+            \ #张书奶粉 各门店来啦 #银方 #张书奶粉值得信赖 #广告 |\n| 许多宝妈在宝宝肠道健康方面都遇到过困扰，细菌滋生，宝宝容易出现肠道不适\U0001F623\
+            。作为一名母婴从业者，我一直在寻找合适的奶粉，帮助宝宝度过这些细菌旺盛期。 在了解了星飞帆卓睿后，我发现它的活性蛋白OPN能够内修保护屏障，助力宝宝肠道健康\U0001F4AA\
+            。飞鹤的“2小时生态圈”从挤奶到加工zui快只需2小时，新鲜看得见，让我对宝宝的口粮更加放心。 我身边的宝妈们也有选择这款奶粉的，她们的宝宝在喝了之后，记忆力一直不错，情绪也很稳定\U0001F60A\
+            。当然，这些都只是个体的经验分享，不能直接说是奶粉的作用，但选择一款合适的奶粉确实能让我们更安心。 如果你也在为宝宝的肠道健康烦恼，不妨试试这款奶粉，或许会有新的发现哦！分享你的育儿心得，一起探索更好的育儿方法吧！\U0001F31F\
+            \ #科学育儿 #母婴育儿 #育儿干货 #宝宝成长#聪明宝宝照书养 #冰雪聪明趣玩雪 |\n| 才43天的女宝，每顿40-70不等，睡前喝的特别多一天总奶量500。喝的德爱PRE段，两小时一次，一天喂10次[笑哭R]\
+            \ |\n| 家里有孩子的，可以备点这个美林水水乐益生菌粉，特别好冲泡，小小一包方便携带，平时给宝宝冲水冲奶粉都可以#美林水水乐益生菌 #母婴好物\
+            \ #宝妈推荐 #益生菌 #益生菌粉 |\n| 很多宝妈在育儿过程中都会遇到一个难题：宝宝刚起床时总是显得没精神，怎么才能快速补充夜晚流失的能量呢？\U0001F31E\
+            其实，选择一款合适的奶粉就能帮你解决这个问题。 飞鹤星飞帆卓睿在这方面表现得非常出色。它含有丰富的脑磷脂，这种物质占宝宝大脑总干物质的四分之一，是神经发育的重要元素。\U0001F4A1\
+            飞鹤特别添加了5种与母源中一致的脑磷脂，含量接近母源，帮助宝宝在关键的脑发育期获得所需营养。 飞鹤奶粉的奶源地也非常特别，位于全球最大的丹顶鹤繁殖地，毗邻国家级自然保护区和“天然氧吧”大小兴安岭。这样的生态环境孕育出的奶源，质量自然是有保障的。\U0001F33F\
+            \ 在育儿的旅程中，我们都有过迷茫和不安的时刻。欢迎大家分享自己的育儿过程中遇到的难题，一起交流，共同成长。\U0001F497 #宝宝智力发育\
+            \ #宝宝大脑发育 #婴儿奶粉#奶粉推荐#聪明宝宝照书养 #冰雪聪明趣玩雪 |\n| 3+以上的小朋友们&大宝宝们&哥哥姐姐&叔叔阿姨&爷爷奶奶的选择之一[萌萌哒R]\
+            \ #鲜达牧场27牧 #鲜达牧场0乳糖有机全脂奶粉 #早餐 #零乳糖奶粉 #零乳糖牛奶 #乳糖不耐受喝什么 #无乳糖奶粉 #无乳糖牛奶 #奶粉\
+            \ #一人食吃什么 |\n| #国奶扶贫奶粉公益奶粉申领置顶#宝爸宝妈母婴育儿婴儿儿童成长奶粉养娃不易人类幼崽#奶粉怎么选 |\n| 直邮的没到，买的现货也还在衢州路上，急需线下哪里有卖！#温州奶粉\
+            \ #德爱白金 |\n| 小鸡炖蘑菇，嘎嘎地#山姆会员店 |\n| 深度水解奶粉是一种经过特殊水解工艺处理的奶粉，这种工艺使得奶粉中的蛋白质被分解成更小的分子，从而更适合那些对牛奶蛋白过敏或不耐受的宝宝。值得注意的是，虽然经历了特殊处理，但它的❗️营养价值❗️与普通奶粉是相似的哦！它依然能够为宝宝的成长提供充足且全面的营养支持。\
+            \ 牛栏深度水解奶粉富含多种对宝宝成长发育至关重要的营养成分。 DHA/AA 的存在就像是为宝宝的大脑和视力发育点亮了一盏明灯。 ✅DHA\
+            \ 是神经系统细胞生长及维持的一种主要元素，对于宝宝大脑神经发育有着不可替代的作用 ✅AA 则在宝宝的脑部和视网膜等重要器官的发育过程中扮演关键角色。\
+            \ ✅核苷酸同样是这款奶粉的一大亮点，它能够增强宝宝的免疫力，让宝宝在成长过程中有更强大的抵抗力来抵御外界病菌的侵袭，同时也为宝宝的身体机能正常运转提供帮助。\
+            \ ✅牛磺酸对于宝宝的视力健康有着特殊意义，助力宝宝拥有清晰明亮的视野。 ✅胆碱则是大脑发育的好帮手，积极参与到宝宝大脑神经递质的合成过程中，促进宝宝大脑更好地发育。\
+            \ 富含维生素 C 和 D 以及钙、铁、锌等矿物质。 ✅维生素 C 具有抗氧化作用，能增强宝宝的免疫力，同时对于宝宝胶原蛋白的合成等生理过程至关重要\
+            \ ✅维生素 D 则是促进钙吸收的关键因子，与钙协同作用，为宝宝骨骼的健康发育筑牢根基。 ✅钙是骨骼和牙齿的主要组成成分，充足的钙摄入能保证宝宝骨骼强壮，为宝宝的日常活动和成长提供有力支撑。\
+            \ ✅铁元素对于宝宝的造血功能有着不可或缺的作用，能够预防宝宝缺铁性贫血，保证宝宝面色红润、精力充沛。 ✅锌元素参与宝宝体内多种酶的合成，对宝宝的食欲、智力发育以及免疫功能都有着重要影响。\
+            \ 这些丰富的营养成分相互配合，全面支持宝宝骨骼和大脑的健康发育，就像为宝宝铺设了一条坚实的成长之路，助力宝宝在成长的每一步都走得稳、走得好。\
+            \ 深度水解奶粉作为一种特殊的医用产品，应在专业人士的指导下使用。 #牛栏深度水解 #牛栏Pepti直邮 #奶粉怎么选 #奶粉推荐 #过敏宝宝\
+            \ #Nutrilon Pepti #育儿干货 #新手爸妈 #牛栏水解 #深度水解 #奶粉过敏 #牛奶蛋白过敏 #宝宝喂养 #宝宝奶粉 #特配奶粉\
+            \ #特殊配方奶粉 |\n| 预产期在12月~3月份左右的姐妹看过来，这是一份超实用的冬天待产包清单\U0001F49E [烟花R][烟花R][烟花R]证件类，妈妈用品，宝宝用品和产房用品，都需要哪些东西都在图7里展示了，孕妈们可以按照清单囤货，待产包需要准备哪些？看照片基本就够了\U0001F49E\
+            \ 我的预产期是3月份，有没有一起坐月子的姐妹？ #分享待产准备 #待产必备 #入院待产包 #待产包 #母婴囤货 #宝宝用品分享 #孕晚期\
+            \ #待产包清单 |\n| #妈妈的人生也是旷野 近期有些妈妈说想要对标我的账号，所以我整理这一期，因为我自己全职妈妈，知道你们有多想实现自我价值。方法都在贴图里，还有妈妈们经常提到的问题，我在这里解答一下。\
+            \ [一R]\U0001F440少怎么办？ \U0001F440少是点 ji 率不行，标题封面决定了点 ji 率。 封面要有钩子，引人点 ji，有下面三种方法：\
+            \ 1️⃣ 竖图用 4 到 6 行字勾起好奇心或者有梗 2️⃣图片有看点：萌、搞笑、精美、独特… 3️⃣标题是写给系统看的，如果你想推给母婴频道，蕞好带妈妈、宝宝、幼崽等关键字\
+            \ 标题封面弄好我会把它存到草稿里，模拟别人刷到我的场景，推测别人会因为封面标题的哪些原因点进来？如果回答不上来，就需要改。 平时刷笔记的时候，你也留意自己的心态，我为什么会点开这篇笔记？它哪点儿吸引了我，逐渐这样培养网感，自然而然就知道怎么写了。\
+            \ [二R]为什么我的赞藏少？ 有点笔记\U0001F440是不差，但是赞藏很少，互动少系统也是不会推流的。这个说明你的封面标题有吸引力但是内容质量没跟上。\
+            \ 提高内容质量有两个方法： 一个是提高实用价值，比如我这篇就在讲干货，但是我的账号类型不是干货类，而是提供情绪价值，让别人发笑、感动、产生共鸣、觉得被治愈被理解都是情绪价值。\
+            \ 你在写文章的时候就应该想到，这篇我有没有提供到以上价值。 [三R]不知道怎么下手去写怎么办？ 不管三七二十一，先写开头，开头写好如果卡住了，就去做做其他事情，等想起来再把灵感记下来，我的每一篇笔记并不是一蹴而就，经过多番思考斟酌删改，所以真的急不来。\
+            \ 李诞说过，写段子没有诀窍，就是要有足够的练习量。每天坚持练 200 字，3 个月后肯定会有进步！ 另外我的合作入选了 pgy 优秀合作案例啦，\
+            \ 见蕞后一张图，报名 pgy 的格式，我放在倒数第二张图，大家可以模仿。 ㊗️愿所有想在\U0001F360恰饭的朋友们都能如愿以偿！\U0001F338\
+            \ 大家还有什么问题，\U0001F34E论区见，知无不言，言无不尽！\U0001F917\U0001F917 #边带娃边赚钱 #母婴博主#母婴赛道#副业\
+            \ #副业挣钱 #宝妈副业 #小红书变现 #挣钱#在家带娃赚钱 |\n| 以为很快会补货，结果这一次居然断货了一个多月了[哭惹R][哭惹R]。家里只剩一罐了，这每天蹲天猫山姆京东也没抢到[扶墙R][扶墙R]\
+            \ ！求一罐二段爱他美奇迹绿！ 有哪位奶粉富裕的宝妈可以匀一罐两罐我呀[抱拳R][抱拳R][抱拳R]#有机奶粉 #爱他美奇迹绿罐 #爱他美奇迹绿罐2段\
+            \ |\n| #新手妈妈 待产包不知道怎么买？别担心，整理了一份清单，一次性帮你解答，我负责出攻略，你负责抄作，不踩坑！#一个身体两个心跳\
+            \ #卸货倒计时 #孕晚期##孕期囤货 |\n| 入院待产准备你知道多少?待产包囤货劝退清单!!真实!都是大实话!\n在准备待产包和准备宝宝用品这件事情上也算是有些心得啦!\n\
+            #母子入院待产包 #育儿 #育婴知识 #怀孕 #孕妈 |\n| 老公在路边捡到一个弃婴。 我将他当成自己的孩子精心照料。 呕心沥血将他供到博士毕业，他从海外学成归来的那天。\
+            \ 老公向我摊牌。 “你怎么这么蠢？我对他比亲儿子还亲，你难道看不出来？”他嘲弄道。楚北辰将男婴抱回家，害怕我不抚养，对我说这是在路边捡到的弃婴。\
+            \ 我打断他，“你什么也不用说了，我会把他当成亲生孩子对待的。” 楚北辰很激动，当即给我发了一个万元大红包。 我不动声色地收下。 不收，会引起他的警觉。\
+            \ 把孩子放下后，楚北辰急着去公司开会，匆匆走了。 我叫来邻居大姐帮忙照看一下。 然后匆匆去超市买奶粉、婴儿车、尿不湿等，都要质量最好的。\
+            \ 置办好一切后。 我急匆匆赶了回来。 累得气喘吁吁。 邻居说：“秦晓，你保密工作做的太好了，啥时候生的孩子俺都不知道。” 我回答道：“孩子不是我生的。是楚北辰从外面捡来的。”\
+            \ 邻居笑了，“瞧你这一头汗吧，亲生的都没你这样。捡来的？别闹了。” 我没有解释。 道了声谢后，忙着料理孩子。 我发现光喂奶粉不行。 花钱从外面雇了个奶妈。\
+            \ 邻居大姐听说我雇奶妈，过来批评说，你这样可不行，孩子得吃自己母亲的奶，否则长大了对你不亲。 我不愿解释，借口说自己没有奶水不够。 大姐便耐心告诉我催奶的办法，比如多吃猪蹄子增加蛋白质。\
+            \ 我心不在焉应着。 邻居终于走了。 孩子也睡了。 我走到窗前，望着外面寒风中摇曳的柳枝。 伫立良久。 一个完美的计划在我脑子里渐渐酝酿形成。\
+            \ 第二天一大早。 楚北辰还没出门，他母亲从外面闯进来，大吵大嚷：“随便捡个孩子就让他姓楚，我们老两口怎么有脸去见祖宗？” 眼看向我，再次气不打一处来。\
+            \ “找个不下蛋的母鸡有什么用啊，要是娶别的女人，我们早就抱上孙子了。” 我和楚北辰结婚五年，一直没有孩子。 婆婆将责任归咎于我。 其实，原因在楚北辰不在我。\
+            \ 是他不愿和我生，却说我不能生。 真相只有我知道。 却从不点破。 每次婆婆指责时，楚北辰总是将话题岔开。 这次，他又是这样。 “妈，我从国外给你买的进口西洋参，货到了后我让小刘给您送过去。”\
+            \ 婆婆没有像往常一样被轻易打发走，她不依不饶…… \n搜索\"黑岩故事会\"后，搜索口令『275082』，开始阅读 |\n| #德爱 德爱白金#德爱白金\
+            \ #德爱白金2段 #德爱白金1+#德爱白金1 #澳洲a2 #澳洲a2 统统都有货#宝宝奶粉推荐 |\n| 君乐宝牛奶粉，宝宝的最爱~ |\n\
+            | 当神仙品牌遇到神仙大佬，观众大喊“顿悟了！”#露营玩点新鲜的 #北纬47度 飞鹤奶粉#微博VC计划#  [_山河故里_的微博视频]()\
+            \ |\n| 1.7k不包邮，宝宝乳糖不耐受，换了奶粉#启赋未来 |\n```\n\n\n## 期望输出格式\n\n\n```json\n\
+            {\n  \"table\": [\n    {\n      \"id\": 1,\n      \"content\": \"#爱家连锁超市抢购双十二[庆祝][庆祝][庆祝]\
+            \ 全场低至4.9折起[庆祝][庆祝][庆祝] 每周二，周三会员日的上午7：30至10：00水果全部进价销售，即日起早市开始每天早9:30—11:30新鲜蔬菜批发价销售，挑战寿县最低价。欢迎团购[庆祝][庆祝][庆祝][庆祝][烟花][烟花][烟花]每周一到周四晚上6：30至9：00蔬菜全场6.8折[庆祝][庆祝][庆祝]\
+            \ 购物\U0001F23568送6\U0001F23598送8\U0001F235188送18 更多优惠请进店选购[勾引]\"\n   \
+            \ },\n    {\n      \"id\": 2,\n      \"content\": \"#宝宝奶粉 #好消化吸收的奶粉 #新国标奶粉\
+            \ #宝宝奶粉选什么 #新生儿奶粉 #好喂养看得见 #给宝宝最好的 #易吸收好消化\"\n    },\n    {\n      \"id\"\
+            : 3,\n      \"content\": \"爱家连锁超市抢购双十二[庆祝][庆祝][庆祝] 全场低至4.9折起[庆祝][庆祝][庆祝]\
+            \ 每周二，周三会员日的上午7：30至10：00水果全部进价销售，即日起早市开始每天早9:30—11:30新鲜蔬菜批发价销售，挑战寿县最低价。欢迎团购[庆祝][庆祝][庆祝][庆祝][烟花][烟花][烟花]每周一到周四晚上6：30至9：00蔬菜全场6.8折[庆祝][庆祝][庆祝]\
+            \ 购物\U0001F23568送6\U0001F23598送8\U0001F235188送18 更多优惠请进店选购[勾引]#\"\n  \
+            \  },\n    {\n      \"id\": 4,\n      \"content\": \"姐妹们，宝宝现在7个月了，一直喝的适度特爱敏佳，娃肠胃不适很好，特爱喝了也快四个月了，打算转普奶合生元派星，喝过的宝妈觉得怎么样？对脾胃弱、肠胃差的宝宝友好吗？\
+            \ 另外，寻合生元派星的全网价格，你们都是多少买的？多少克？价格合适，收！\"\n    },\n    {\n      \"id\":\
+            \ 5,\n      \"content\": \"张书奶粉大放异彩！～特惠福利来啦，赶紧囤50元代金券母婴用品通用，带上家人和朋友一起选购宝宝所需，实现购物自由，享受愉快的时光。\
+            \ #张书奶粉 各门店来啦 #银方 #张书奶粉值得信赖 #广告\"\n    },\n    {\n      \"id\": 6,\n \
+            \     \"content\": \"许多宝妈在宝宝肠道健康方面都遇到过困扰，细菌滋生，宝宝容易出现肠道不适\U0001F623。作为一名母婴从业者，我一直在寻找合适的奶粉，帮助宝宝度过这些细菌旺盛期。\
+            \ 在了解了星飞帆卓睿后，我发现它的活性蛋白OPN能够内修保护屏障，助力宝宝肠道健康\U0001F4AA。飞鹤的“2小时生态圈”从挤奶到加工zui快只需2小时，新鲜看得见，让我对宝宝的口粮更加放心。\
+            \ 我身边的宝妈们也有选择这款奶粉的，她们的宝宝在喝了之后，记忆力一直不错，情绪也很稳定\U0001F60A。当然，这些都只是个体的经验分享，不能直接说是奶粉的作用，但选择一款合适的奶粉确实能让我们更安心。\
+            \ 如果你也在为宝宝的肠道健康烦恼，不妨试试这款奶粉，或许会有新的发现哦！分享你的育儿心得，一起探索更好的育儿方法吧！\U0001F31F\
+            \ #科学育儿 #母婴育儿 #育儿干货 #宝宝成长#聪明宝宝照书养 #冰雪聪明趣玩雪\"\n    },\n    {\n      \"\
+            id\": 7,\n      \"content\": \"才43天的女宝，每顿40-70不等，睡前喝的特别多一天总奶量500。喝的德爱PRE段，两小时一次，一天喂10次[笑哭R]\"\
+            \n    },\n    {\n      \"id\": 8,\n      \"content\": \"家里有孩子的，可以备点这个美林水水乐益生菌粉，特别好冲泡，小小一包方便携带，平时给宝宝冲水冲奶粉都可以#美林水水乐益生菌\
+            \ #母婴好物 #宝妈推荐 #益生菌 #益生菌粉\"\n    },\n    {\n      \"id\": 9,\n      \"\
+            content\": \"很多宝妈在育儿过程中都会遇到一个难题：宝宝刚起床时总是显得没精神，怎么才能快速补充夜晚流失的能量呢？\U0001F31E\
+            其实，选择一款合适的奶粉就能帮你解决这个问题。 飞鹤星飞帆卓睿在这方面表现得非常出色。它含有丰富的脑磷脂，这种物质占宝宝大脑总干物质的四分之一，是神经发育的重要元素。\U0001F4A1\
+            飞鹤特别添加了5种与母源中一致的脑磷脂，含量接近母源，帮助宝宝在关键的脑发育期获得所需营养。 飞鹤奶粉的奶源地也非常特别，位于全球最大的丹顶鹤繁殖地，毗邻国家级自然保护区和“天然氧吧”大小兴安岭。这样的生态环境孕育出的奶源，质量自然是有保障的。\U0001F33F\
+            \ 在育儿的旅程中，我们都有过迷茫和不安的时刻。欢迎大家分享自己的育儿过程中遇到的难题，一起交流，共同成长。\U0001F497 #宝宝智力发育\
+            \ #宝宝大脑发育 #婴儿奶粉#奶粉推荐#聪明宝宝照书养 #冰雪聪明趣玩雪\"\n    },\n    {\n      \"id\":\
+            \ 10,\n      \"content\": \"3+以上的小朋友们&大宝宝们&哥哥姐姐&叔叔阿姨&爷爷奶奶的选择之一[萌萌哒R] #鲜达牧场27牧\
+            \ #鲜达牧场0乳糖有机全脂奶粉 #早餐 #零乳糖奶粉 #零乳糖牛奶 #乳糖不耐受喝什么 #无乳糖奶粉 #无乳糖牛奶 #奶粉 #一人食吃什么\"\
+            \n    },\n    {\n      \"id\": 11,\n      \"content\": \"#国奶扶贫奶粉公益奶粉申领置顶#宝爸宝妈母婴育儿婴儿儿童成长奶粉养娃不易人类幼崽#奶粉怎么选\"\
+            \n    },\n    {\n      \"id\": 12,\n      \"content\": \"直邮的没到，买的现货也还在衢州路上，急需线下哪里有卖！#温州奶粉\
+            \ #德爱白金\"\n    },\n    {\n      \"id\": 13,\n      \"content\": \"小鸡炖蘑菇，嘎嘎地#山姆会员店\"\
+            \n    },\n    {\n      \"id\": 14,\n      \"content\": \"深度水解奶粉是一种经过特殊水解工艺处理的奶粉，这种工艺使得奶粉中的蛋白质被分解成更小的分子，从而更适合那些对牛奶蛋白过敏或不耐受的宝宝。值得注意的是，虽然经历了特殊处理，但它的❗️营养价值❗️与普通奶粉是相似的哦！它依然能够为宝宝的成长提供充足且全面的营养支持。\
+            \ 牛栏深度水解奶粉富含多种对宝宝成长发育至关重要的营养成分。 DHA/AA 的存在就像是为宝宝的大脑和视力发育点亮了一盏明灯。 ✅DHA\
+            \ 是神经系统细胞生长及维持的一种主要元素，对于宝宝大脑神经发育有着不可替代的作用 ✅AA 则在宝宝的脑部和视网膜等重要器官的发育过程中扮演关键角色。\
+            \ ✅核苷酸同样是这款奶粉的一大亮点，它能够增强宝宝的免疫力，让宝宝在成长过程中有更强大的抵抗力来抵御外界病菌的侵袭，同时也为宝宝的身体机能正常运转提供帮助。\
+            \ ✅牛磺酸对于宝宝的视力健康有着特殊意义，助力宝宝拥有清晰明亮的视野。 ✅胆碱则是大脑发育的好帮手，积极参与到宝宝大脑神经递质的合成过程中，促进宝宝大脑更好地发育。\
+            \ 富含维生素 C 和 D 以及钙、铁、锌等矿物质。 ✅维生素 C 具有抗氧化作用，能增强宝宝的免疫力，同时对于宝宝胶原蛋白的合成等生理过程至关重要\
+            \ ✅维生素 D 则是促进钙吸收的关键因子，与钙协同作用，为宝宝骨骼的健康发育筑牢根基。 ✅钙是骨骼和牙齿的主要组成成分，充足的钙摄入能保证宝宝骨骼强壮，为宝宝的日常活动和成长提供有力支撑。\
+            \ ✅铁元素对于宝宝的造血功能有着不可或缺的作用，能够预防宝宝缺铁性贫血，保证宝宝面色红润、精力充沛。 ✅锌元素参与宝宝体内多种酶的合成，对宝宝的食欲、智力发育以及免疫功能都有着重要影响。\
+            \ 这些丰富的营养成分相互配合，全面支持宝宝骨骼和大脑的健康发育，就像为宝宝铺设了一条坚实的成长之路，助力宝宝在成长的每一步都走得稳、走得好。\
+            \ 深度水解奶粉作为一种特殊的医用产品，应在专业人士的指导下使用。 #牛栏深度水解 #牛栏Pepti直邮 #奶粉怎么选 #奶粉推荐 #过敏宝宝\
+            \ #Nutrilon Pepti #育儿干货 #新手爸妈 #牛栏水解 #深度水解 #奶粉过敏 #牛奶蛋白过敏 #宝宝喂养 #宝宝奶粉 #特配奶粉\
+            \ #特殊配方奶粉\"\n    },\n    {\n      \"id\": 15,\n      \"content\": \"预产期在12月~3月份左右的姐妹看过来，这是一份超实用的冬天待产包清单\U0001F49E\
+            \ [烟花R][烟花R][烟花R]证件类，妈妈用品，宝宝用品和产房用品，都需要哪些东西都在图7里展示了，孕妈们可以按照清单囤货，待产包需要准备哪些？看照片基本就够了\U0001F49E\
+            \ 我的预产期是3月份，有没有一起坐月子的姐妹？ #分享待产准备 #待产必备 #入院待产包 #待产包 #母婴囤货 #宝宝用品分享 #孕晚期\
+            \ #待产包清单\"\n    },\n    {\n      \"id\": 16,\n      \"content\": \"#妈妈的人生也是旷野\
+            \ 近期有些妈妈说想要对标我的账号，所以我整理这一期，因为我自己全职妈妈，知道你们有多想实现自我价值。方法都在贴图里，还有妈妈们经常提到的问题，我在这里解答一下。\
+            \ [一R]\U0001F440少怎么办？ \U0001F440少是点 ji 率不行，标题封面决定了点 ji 率。 封面要有钩子，引人点 ji，有下面三种方法：\
+            \ 1️⃣ 竖图用 4 到 6 行字勾起好奇心或者有梗 2️⃣图片有看点：萌、搞笑、精美、独特… 3️⃣标题是写给系统看的，如果你想推给母婴频道，蕞好带妈妈、宝宝、幼崽等关键字\
+            \ 标题封面弄好我会把它存到草稿里，模拟别人刷到我的场景，推测别人会因为封面标题的哪些原因点进来？如果回答不上来，就需要改。 平时刷笔记的时候，你也留意自己的心态，我为什么会点开这篇笔记？它哪点儿吸引了我，逐渐这样培养网感，自然而然就知道怎么写了。\
+            \ [二R]为什么我的赞藏少？ 有点笔记\U0001F440是不差，但是赞藏很少，互动少系统也是不会推流的。这个说明你的封面标题有吸引力但是内容质量没跟上。\
+            \ 提高内容质量有两个方法： 一个是提高实用价值，比如我这篇就在讲干货，但是我的账号类型不是干货类，而是提供情绪价值，让别人发笑、感动、产生共鸣、觉得被治愈被理解都是情绪价值。\
+            \ 你在写文章的时候就应该想到，这篇我有没有提供到以上价值。 [三R]不知道怎么下手去写怎么办？ 不管三七二十一，先写开头，开头写好如果卡住了，就去做做其他事情，等想起来再把灵感记下来，我的每一篇笔记并不是一蹴而就，经过多番思考斟酌删改，所以真的急不来。\
+            \ 李诞说过，写段子没有诀窍，就是要有足够的练习量。每天坚持练 200 字，3 个月后肯定会有进步！ 另外我的合作入选了 pgy 优秀合作案例啦，\
+            \ 见蕞后一张图，报名 pgy 的格式，我放在倒数第二张图，大家可以模仿。 ㊗️愿所有想在\U0001F360恰饭的朋友们都能如愿以偿！\U0001F338\
+            \ 大家还有什么问题，\U0001F34E论区见，知无不言，言无不尽！\U0001F917\U0001F917 #边带娃边赚钱 #母婴博主#母婴赛道#副业\
+            \ #副业挣钱 #宝妈副业 #小红书变现 #挣钱#在家带娃赚钱\"\n    },\n    {\n      \"id\": 17,\n\
+            \      \"content\": \"以为很快会补货，结果这一次居然断货了一个多月了[哭惹R][哭惹R]。家里只剩一罐了，这每天蹲天猫山姆京东也没抢到[扶墙R][扶墙R]\
+            \ ！求一罐二段爱他美奇迹绿！ 有哪位奶粉富裕的宝妈可以匀一罐两罐我呀[抱拳R][抱拳R][抱拳R]#有机奶粉 #爱他美奇迹绿罐 #爱他美奇迹绿罐2段\"\
+            \n    },\n    {\n      \"id\": 18,\n      \"content\": \"#新手妈妈 待产包不知道怎么买？别担心，整理了一份清单，一次性帮你解答，我负责出攻略，你负责抄作，不踩坑！#一个身体两个心跳\
+            \ #卸货倒计时 #孕晚期##孕期囤货\"\n    },\n    {\n      \"id\": 19,\n      \"content\"\
+            : \"入院待产准备你知道多少?待产包囤货劝退清单!!真实!都是大实话!\n在准备待产包和准备宝宝用品这件事情上也算是有些心得啦!\n#母子入院待产包\
+            \ #育儿 #育婴知识 #怀孕 #孕妈\"\n    },\n    {\n      \"id\": 20,\n      \"content\"\
+            : \"老公在路边捡到一个弃婴。 我将他当成自己的孩子精心照料。 呕心沥血将他供到博士毕业，他从海外学成归来的那天。 老公向我摊牌。 “你怎么这么蠢？我对他比亲儿子还亲，你难道看不出来？”他嘲弄道。楚北辰将男婴抱回家，害怕我不抚养，对我说这是在路边捡到的弃婴。\
+            \ 我打断他，“你什么也不用说了，我会把他当成亲生孩子对待的。” 楚北辰很激动，当即给我发了一个万元大红包。 我不动声色地收下。 不收，会引起他的警觉。\
+            \ 把孩子放下后，楚北辰急着去公司开会，匆匆走了。 我叫来邻居大姐帮忙照看一下。 然后匆匆去超市买奶粉、婴儿车、尿不湿等，都要质量最好的。\
+            \ 置办好一切后。 我急匆匆赶了回来。 累得气喘吁吁。 邻居说：“秦晓，你保密工作做的太好了，啥时候生的孩子俺都不知道。” 我回答道：“孩子不是我生的。是楚北辰从外面捡来的。”\
+            \ 邻居笑了，“瞧你这一头汗吧，亲生的都没你这样。捡来的？别闹了。” 我没有解释。 道了声谢后，忙着料理孩子。 我发现光喂奶粉不行。 花钱从外面雇了个奶妈。\
+            \ 邻居大姐听说我雇奶妈，过来批评说，你这样可不行，孩子得吃自己母亲的奶，否则长大了对你不亲。 我不愿解释，借口说自己没有奶水不够。 大姐便耐心告诉我催奶的办法，比如多吃猪蹄子增加蛋白质。\
+            \ 我心不在焉应着。 邻居终于走了。 孩子也睡了。 我走到窗前，望着外面寒风中摇曳的柳枝。 伫立良久。 一个完美的计划在我脑子里渐渐酝酿形成。\
+            \ 第二天一大早。 楚北辰还没出门，他母亲从外面闯进来，大吵大嚷：“随便捡个孩子就让他姓楚，我们老两口怎么有脸去见祖宗？” 眼看向我，再次气不打一处来。\
+            \ “找个不下蛋的母鸡有什么用啊，要是娶别的女人，我们早就抱上孙子了。” 我和楚北辰结婚五年，一直没有孩子。 婆婆将责任归咎于我。 其实，原因在楚北辰不在我。\
+            \ 是他不愿和我生，却说我不能生。 真相只有我知道。 却从不点破。 每次婆婆指责时，楚北辰总是将话题岔开。 这次，他又是这样。 “妈，我从国外给你买的进口西洋参，货到了后我让小刘给您送过去。”\
+            \ 婆婆没有像往常一样被轻易打发走，她不依不饶…… \n搜索\\\"黑岩故事会\\\"后，搜索口令『275082』，开始阅读\"\n   \
+            \ },\n    {\n      \"id\": 21,\n      \"content\": \"#德爱 德爱白金#德爱白金 #德爱白金2段\
+            \ #德爱白金1+#德爱白金1 #澳洲a2 #澳洲a2 统统都有货#宝宝奶粉推荐\"\n    },\n    {\n      \"id\"\
+            : 22,\n      \"content\": \"君乐宝牛奶粉，宝宝的最爱~\"\n    },\n    {\n      \"id\"\
+            : 23,\n      \"content\": \"当神仙品牌遇到神仙大佬，观众大喊“顿悟了！”#露营玩点新鲜的 #北纬47度 飞鹤奶粉#微博VC计划#\
+            \  [_山河故里_的微博视频]()\"\n    },\n    {\n      \"id\": 24,\n      \"content\"\
+            : \"1.7k不包邮，宝宝乳糖不耐受，换了奶粉#启赋未来\"\n    }\n  ]\n}\n```\n\n\n## 详细说明\n\n\n\
+            1. **编号（`id`）**：\n   - 为每一行内容添加一个唯一的编号，便于后续引用和处理。\n\n\n2. **嵌套结构**：\n\
+            \   - 将所有内容项放入一个名为 `\"table\"` 的数组中，每个数组项是一个对象，包含 `id` 和 `content` 两个键。\n\
+            \n\n3. **内容清理**：\n   - 移除表格中的竖线（`|`）和多余的空白字符。\n   - 保留所有文本内容，包括 hashtags\
+            \ 和表情符号，以确保信息的完整性。"
+        - id: 41884138-2bec-4825-a0a7-86ed459b0c65
+          role: user
+          text: 输入：{{#1735110458065.text#}}将输入转化成json格式
+        selected: false
+        title: 文本内容转换为json格式
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 126
+      id: '1735187819607'
+      position:
+        x: 1067.3321576879669
+        y: 264.26906990295805
+      positionAbsolute:
+        x: 1067.3321576879669
+        y: 264.26906990295805
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 230
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"上传csv文件（需要是csv文件，并且只保留第一列文本内容，其余列删除，并且第一列第一行保留“文本内容”，为的是后面大模型提取markdown格式的文本内容不丢失行）","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"使用文档提取工具，将文本内容提取出来，转换为markdown格式","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"将文本内容转换成json格式，来减少大模型处理时丢失行数据的情况","type":"text","version":1},{"type":"linebreak","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 548
+      height: 230
+      id: '1735788157439'
+      position:
+        x: 44.08087937720963
+        y: 588.2582521553177
+      positionAbsolute:
+        x: 44.08087937720963
+        y: 588.2582521553177
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 548
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 111
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"首先，提取纯消费者声量，在上传的文本内容中，去除掉广告等无关因素，只保留下消费者声量用于后面的负面情绪处理","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 529
+      height: 111
+      id: '1735788347007'
+      position:
+        x: 1415.3413043620053
+        y: 509.5736108277183
+      positionAbsolute:
+        x: 1415.3413043620053
+        y: 509.5736108277183
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 529
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 219
+        selected: true
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"对于纯消费者声量中的内容，判断是否为负面情绪，判断的是完整的文本内容，关于商品、价格、物流等负面的情绪","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"为减少漏判negative情绪的能力，将大模型不能明确区分情绪的文本内容（other）一并输出","type":"text","version":1},{"type":"linebreak","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 602
+      height: 219
+      id: '1735788365579'
+      position:
+        x: 2789.3413043620053
+        y: 755.5736108277183
+      positionAbsolute:
+        x: 2789.3413043620053
+        y: 755.5736108277183
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 602
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 106
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"对负面情绪进行程度评分以及分析产出负面情绪的原因","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 371
+      height: 106
+      id: '1735788378113'
+      position:
+        x: 4471.341304362006
+        y: 18.573610827718312
+      positionAbsolute:
+        x: 4471.341304362006
+        y: 18.573610827718312
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 371
+    viewport:
+      x: 62.75869944147166
+      y: 206.0839124679482
+      zoom: 0.25

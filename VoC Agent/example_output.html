@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>舆情标签自动化分类智能体</title>
+  <style>
+    /* 全局重置与基础样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      line-height: 1.6;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* 主容器占满全宽 */
+    .container {
+      width: 100%;
+      margin: 0 auto;
+      padding-bottom: 40px; /* 给下方留空隙 */
+    }
+
+    /* 顶部导航/标题 */
+    header.top-nav {
+      width: 100%;
+      background-color: #fff;
+      border-bottom: 1px solid #e1e4e8;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+    }
+    header.top-nav .logo {
+      width: 36px;
+      height: 36px;
+      background-color: #409eff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    header.top-nav h2 {
+      font-size: 1.5rem;
+      color: #2c3e50;
+      margin-left: 12px;
+    }
+
+    /* 轮播/顶部大横幅区域 */
+    .hero {
+      width: 100%;
+      background-color: #409eff;
+      color: #fff;
+      padding: 80px 40px;
+      text-align: center;
+      border-radius: 0 0 8px 8px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+    .hero .pill-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .hero .pill-buttons .pill {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background-color 0.2s ease;
+      cursor: default;
+    }
+    .hero .pill-buttons .pill:hover {
+      background-color: rgba(255, 255, 255, 0.25);
+    }
+    .hero .pill-buttons .pill .icon {
+      font-size: 1.2rem;
+    }
+
+    /* 功能特色 */
+    .features {
+      display: flex;
+      justify-content: space-around;
+      margin-top: -20px;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px 40px;
+      background-color: #f4f6f8;
+    }
+    .feature-card {
+      background-color: #fff;
+      flex: 1 1 calc(25% - 40px);
+      min-width: 200px;
+      margin-top: 20px;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+    .feature-card .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: #409eff;
+    }
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* 流程展示 */
+    .process {
+      margin: 60px 0 20px;
+      text-align: center;
+      padding: 0 40px;
+    }
+    .process h2 {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 24px;
+    }
+    .steps {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .step-card {
+      background-color: #fff;
+      flex: 1 1 calc(25% - 40px);
+      min-width: 200px;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+    .step-card .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: #409eff;
+    }
+    .step-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+    .step-card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* 用户指令与上传表单 */
+    .instruction-section {
+      background-color: #fff;
+      width: 80%;
+      margin: 40px auto;
+      padding: 32px 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .instruction-section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 8px;
+      color: #2c3e50;
+      text-align: center;
+    }
+    .instruction-section p.subtitle {
+      font-size: 1rem;
+      color: #666;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .instruction-section .field {
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .instruction-section .field label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+    .instruction-section .field input[type="file"],
+    .instruction-section .field input[type="text"],
+    .instruction-section .field textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d1d9e0;
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #fafbfc;
+      transition: border-color 0.2s ease;
+    }
+    .instruction-section .field textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .instruction-section .field input[type="text"]:focus,
+    .instruction-section .field textarea:focus {
+      border-color: #409eff;
+      outline: none;
+      background-color: #fff;
+    }
+    /* 示例指令卡片 */
+    .example-container {
+      position: relative;
+      background-color: #f1f3f5;
+      padding: 12px 16px;
+      border-left: 4px solid #409eff;
+      margin-bottom: 24px;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.4;
+    }
+    .example-container pre {
+      margin: 0;
+      background: none;
+      padding: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: #409eff;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 0.85rem;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .copy-btn:hover {
+      background-color: #357cd2;
+    }
+
+    /* 提交按钮 */
+    #runBtn {
+      display: inline-block;
+      padding: 12px 28px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #409eff;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    #runBtn:disabled {
+      background-color: #a0bcd8;
+      cursor: not-allowed;
+    }
+    #runBtn:hover:not(:disabled) {
+      background-color: #357cd2;
+    }
+
+    /* 输出区域 */
+    #output {
+      margin: 32px auto;
+      width: 90%;
+      max-height: 60vh;           /* 限制高度，允许上下滚动 */
+      overflow-y: auto;           /* 垂直滚动 */
+      background-color: #fafbfc;
+      border-top: 1px solid #d1d9e0;
+      border-bottom: 1px solid #d1d9e0;
+      border-radius: 0 0 6px 6px;
+      display: none;
+    }
+    #output .inner {
+      width: 100%;
+      padding: 0 20px;
+      margin: 0 auto;
+    }
+
+    /* Markdown 渲染表格及横向滚动样式 */
+    .markdown-wrapper {
+      overflow-x: auto;
+      margin-top: 16px;
+      margin-bottom: 32px;
+    }
+
+    /* 固定布局并填满宽度 */
+    .markdown-wrapper table {
+      border-collapse: collapse;
+      width: 100%;
+      table-layout: fixed;   /* 新增：开启固定布局 */
+    }
+
+    /* 单元格边框和内边距不变 */
+    .markdown-wrapper th,
+    .markdown-wrapper td {
+      border: 1px solid #d1d9e0;
+      padding: 8px;
+      text-align: left;
+    }
+
+    /* 第一列“摘要”30%宽 */
+    .markdown-wrapper th:first-child,
+    .markdown-wrapper td:first-child {
+      width: 50%;
+    }
+
+    /* 其余 5 列平均分配剩余 70%（每列 14%） */
+    .markdown-wrapper th:nth-child(n+2),
+    .markdown-wrapper td:nth-child(n+2) {
+      width: 10%;
+    }
+
+
+    /* 页脚 */
+    footer {
+      width: 100%;
+      background-color: #2c3e50;
+      color: #dfe6eb;
+      padding: 24px 40px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    footer a {
+      color: #dfe6eb;
+      margin: 0 12px;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+    footer a:hover {
+      color: #fff;
+    }
+    footer p {
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+
+    /* 响应式处理 */
+    @media (max-width: 768px) {
+      .features, .steps {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+      }
+      .feature-card, .step-card {
+        width: 100%;
+        margin-top: 10px;
+      }
+      .hero {
+        padding: 60px 20px;
+      }
+      .features {
+        padding: 20px 20px;
+      }
+      .process {
+        padding: 0 20px;
+      }
+      .instruction-section {
+        width: 100%;
+        padding: 32px 20px;
+        margin: 20px 0;
+      }
+      #output .inner {
+        padding: 0 20px;
+      }
+      footer {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 顶部导航 -->
+    <header class="top-nav">
+      <div class="logo">AI</div>
+      <h2>舆情标签自动化分类智能体</h2>
+    </header>
+
+    <!-- 顶部大横幅 -->
+    <section class="hero">
+      <h1>舆情标签自动化分类</h1>
+      <p>自动根据用户提供的含舆情文本的 Excel 文件和标签需求，对文本进行自动化分类，帮助企业高效获取舆论标签并优化决策。</p>
+      <div class="pill-buttons">
+        <div class="pill"><span class="icon">🔍</span>内容识别</div>
+        <div class="pill"><span class="icon">⚡</span>快速响应</div>
+        <div class="pill"><span class="icon">🤖</span>AI智能</div>
+        <div class="pill"><span class="icon">📊</span>结果可视化</div>
+      </div>
+    </section>
+
+    <!-- 功能特色 -->
+    <section class="features">
+      <div class="feature-card">
+        <div class="icon">🔍</div>
+        <h3>智能分析</h3>
+        <p>快速解析舆情内容，精准定位关键信息。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">⚡</div>
+        <h3>精确分类</h3>
+        <p>根据自定义标签，自动标注文本，分类效果稳健。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🚀</div>
+        <h3>高速处理</h3>
+        <p>批量处理海量数据，大幅提升效率。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🎯</div>
+        <h3>多标签支持</h3>
+        <p>灵活配置多种标签，满足复合场景需求。</p>
+      </div>
+    </section>
+
+    <!-- 流程展示 -->
+    <section class="process">
+      <h2>舆情分类流程</h2>
+      <div class="steps">
+        <div class="step-card">
+          <div class="icon">📥</div>
+          <h3>上传 Excel 文件</h3>
+          <p>将含舆情内容的 Excel 文件上传系统。</p>
+        </div>
+        <div class="step-card">
+          <div class="icon">📝</div>
+          <h3>识别用户标签</h3>
+          <p>解析用户设置的标签需求，准备分类规则。</p>
+        </div>
+        <div class="step-card">
+          <div class="icon">🤖</div>
+          <h3>AI智能分类</h3>
+          <p>依托 AI 模型，为文本自动打上标签。</p>
+        </div>
+        <div class="step-card">
+          <div class="icon">✅</div>
+          <h3>生成结果</h3>
+          <p>导出带标签的 Excel，轻松获取分类报告。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 用户指令与上传表单 -->
+    <section class="instruction-section">
+      <h2>开始进行舆情标签分类</h2>
+      <p class="subtitle">输入舆情内容的 Excel 文件，AI 返回“摘要”对应四个标签，并在前端展示</p>
+
+      <!-- 示例指令展示 -->
+      <div class="field">
+        <label>用户指令示例：</label>
+        <div class="example-container">
+          <pre id="exampleText">按照四个方面对摘要打标签：
+1. 产品口味评价：好评、中评、差评
+2. 环境和服务评价：好评、中评、差评
+3. 品牌及股票资讯：是、否
+4. 品牌营销宣传：是、否</pre>
+          <button class="copy-btn" id="copyExampleBtn">复制示例</button>
+        </div>
+      </div>
+
+      <!-- 上传文件 -->
+      <div class="field">
+        <label for="fileInput">上传 .xlsx 文件（必须包含“摘要”列）</label>
+        <input type="file" id="fileInput" accept=".xlsx" />
+      </div>
+      <!-- 用户指令 -->
+      <div class="field">
+        <label for="instructionInput">用户指令</label>
+        <textarea id="instructionInput" rows="5" placeholder="请在此输入要执行的指令"></textarea>
+      </div>
+      <!-- 输出语言 -->
+      <div class="field">
+        <label for="langInput">输出语言（可选填）</label>
+        <input type="text" id="langInput" placeholder="例如：中文，留空则默认为文档输入语言" />
+      </div>
+      <!-- 提交按钮 -->
+      <button id="runBtn">执行</button>
+
+      <!-- 输出区域 -->
+      <div id="output">
+        <div class="inner">
+          <!-- 渲染后的 Markdown 表格会插入到这里 -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+      <p>© 2025 AI标签分类助手 – 让舆情分析更简单</p>
+      <div>
+        <a href="#">使用指南</a>｜  
+        <a href="#">常见问题</a>｜  
+        <a href="#">联系我们</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 引入 marked 用于 Markdown 渲染 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- 引入 SheetJS，用于在浏览器端解析 Excel -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <script>
+    // “复制示例”按钮逻辑：点击后把示例文本复制到用户指令框
+    document.getElementById('copyExampleBtn').addEventListener('click', () => {
+      const exampleText = document.getElementById('exampleText').innerText.trim();
+      navigator.clipboard.writeText(exampleText).then(() => {
+        alert('示例已复制到剪贴板');
+      });
+      document.getElementById('instructionInput').value = exampleText;
+    });
+
+    // kofei.cc 相关常量
+    const RUN_WORKFLOW_URL = 'https://www.kofei.cc/v1/workflows/run';
+    const API_KEY = 'app-yTXPrjWxjb8iHKmu53K8akM4';
+
+    const runBtn = document.getElementById('runBtn');
+    const output = document.getElementById('output');
+    const outputInner = document.querySelector('#output .inner');
+
+    runBtn.addEventListener('click', async () => {
+      const userId = (crypto.randomUUID && crypto.randomUUID()) || ('user_' + Date.now());
+      const fileEl = document.getElementById('fileInput');
+      const file = fileEl.files[0];
+      const instruction = document.getElementById('instructionInput').value.trim();
+      let lang = document.getElementById('langInput').value.trim();
+
+      if (!file) return alert('请上传 Excel 文件');
+      if (!instruction) return alert('请输入用户指令');
+      if (!lang) lang = '';
+
+      runBtn.disabled = true;
+      runBtn.textContent = '解析并提取“摘要”列…';
+      output.style.display = 'none';
+      outputInner.innerHTML = '';
+
+      try {
+        // 1. 读取 Excel
+        const arrayBuffer = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = evt => resolve(evt.target.result);
+          reader.onerror = err => reject(err);
+          reader.readAsArrayBuffer(file);
+        });
+
+        // 2. 解析为 JSON
+        const wb = XLSX.read(arrayBuffer, { type: 'array' });
+        const sheet = wb.Sheets[wb.SheetNames[0]];
+        const jsonArr = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+        if (jsonArr.length === 0) throw new Error('Excel 中无数据');
+        runBtn.textContent = `共读取 ${jsonArr.length} 行，正在提取摘要…`;
+
+        // 3. 找到“摘要”列、提取为一维数组
+        const keys = Object.keys(jsonArr[0]);
+        const summaryKey = keys.find(k => k.trim() === '摘要');
+        if (!summaryKey) throw new Error('未找到“摘要”列');
+        const summaryArr = jsonArr.map(r => String(r[summaryKey] || ''));
+
+        // 4. 每 50 条分一组
+        const groups = [];
+        for (let i = 0; i < summaryArr.length; i += 30) {
+          groups.push(summaryArr.slice(i, i + 30));
+        }
+        runBtn.textContent = `已分 ${groups.length} 组，每组最多50条，准备上传…`;
+
+        // 5. 序列化并上传
+        const row_grouped = JSON.stringify(groups);
+        const inputs = { row_grouped, user_instruction: instruction, language: lang };
+        const payload = { inputs, response_mode: 'blocking', user: userId };
+
+        runBtn.textContent = '调用工作流…';
+        const res = await fetch(RUN_WORKFLOW_URL, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        const text = await res.text();
+        if (!res.ok) throw new Error(`HTTP ${res.status}: ${text}`);
+        const data = JSON.parse(text);
+
+        // 6. 拿到 Markdown 并渲染
+        let md = '';
+        if (data.data?.outputs?.text) {
+          md = Array.isArray(data.data.outputs.text)
+            ? data.data.outputs.text.join('\n\n')
+            : data.data.outputs.text;
+        } else if (data.data?.result) {
+          md = Array.isArray(data.data.result)
+            ? data.data.result.join('\n\n')
+            : data.data.result;
+        }
+        output.style.display = 'block';
+        outputInner.innerHTML = `
+          <h3>摘要内容及其标签：</h3>
+          <div class="markdown-wrapper">
+            ${marked.parse(md)}
+          </div>
+        `;
+        runBtn.textContent = '执行完成';
+      } catch (err) {
+        output.style.display = 'block';
+        outputInner.innerHTML = `<h3>错误：</h3><pre>${err.message}</pre>`;
+      } finally {
+        runBtn.disabled = false;
+        runBtn.textContent = '执行';
+      }
+    });
+  </script>
+
+</body>
+</html>

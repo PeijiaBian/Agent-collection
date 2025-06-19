@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>VoC 客户之声智能分析平台</title>
+  <style>
+    /* 全局重置与基础样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      line-height: 1.6;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* 主容器 */
+    .container {
+      width: 100%;
+      margin: 0 auto;
+      padding-bottom: 40px;
+    }
+
+    /* 顶部导航 */
+    header.top-nav {
+      width: 100%;
+      background-color: #fff;
+      border-bottom: 1px solid #e1e4e8;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+    }
+    .logo {
+      width: 36px;
+      height: 36px;
+      background-color: #409eff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    header.top-nav h2 {
+      font-size: 1.5rem;
+      color: #2c3e50;
+      margin-left: 12px;
+    }
+
+    /* 横幅 */
+    .hero {
+      width: 100%;
+      background-color: #409eff;
+      color: #fff;
+      padding: 80px 40px;
+      text-align: center;
+      border-radius: 0 0 8px 8px;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      margin-bottom: 24px;
+    }
+    .pill-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .pill {
+      background-color: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pill .icon {
+      font-size: 1.2rem;
+    }
+
+    /* 功能特色 */
+    .features {
+      display: flex;
+      justify-content: space-around;
+      margin-top: -20px;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px 40px;
+      background-color: #f4f6f8;
+    }
+    .feature-card {
+      background-color: #fff;
+      flex: 1 1 calc(25% - 40px);
+      min-width: 200px;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+    .feature-card .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: #409eff;
+    }
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+    .feature-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* 流程 */
+    .process {
+      margin: 60px 0 20px;
+      text-align: center;
+      padding: 0 40px;
+    }
+    .process h2 {
+      font-size: 2rem;
+      color: #2c3e50;
+      margin-bottom: 24px;
+    }
+    .steps {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .step-card {
+      background-color: #fff;
+      flex: 1 1 calc(25% - 40px);
+      min-width: 200px;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      text-align: center;
+    }
+    .step-card .icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      color: #409eff;
+    }
+    .step-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+    .step-card p {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    /* 教程与示例 */
+    .tutorial {
+      background-color: #fff;
+      width: 80%;
+      margin: 40px auto;
+      padding: 32px 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .tutorial h2 {
+      font-size: 1.75rem;
+      margin-bottom: 16px;
+      color: #2c3e50;
+      text-align: center;
+    }
+    .tutorial ol {
+      margin-bottom: 32px;
+      padding-left: 20px;
+      color: #333;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    .markdown-wrapper {
+      overflow-x: auto;
+      margin-bottom: 32px;
+    }
+    .markdown-wrapper table {
+      border-collapse: collapse;
+      width: 100%;
+      table-layout: fixed;
+      margin-top: 12px;
+    }
+    .markdown-wrapper th,
+    .markdown-wrapper td {
+      border: 1px solid #d1d9e0;
+      padding: 8px;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+    .markdown-wrapper th {
+      background-color: #f1f3f5;
+    }
+
+    /* 表单与执行区 */
+    .instruction-section {
+      background-color: #fff;
+      width: 80%;
+      margin: 40px auto;
+      padding: 32px 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+    .instruction-section h2 {
+      font-size: 1.75rem;
+      margin-bottom: 16px;
+      color: #2c3e50;
+      text-align: center;
+    }
+    .field {
+      margin-bottom: 24px;
+      position: relative;
+    }
+    .field label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #2c3e50;
+    }
+    .example-container {
+      position: relative;
+      background-color: #f1f3f5;
+      padding: 12px 16px;
+      border-left: 4px solid #409eff;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      color: #555;
+      line-height: 1.4;
+    }
+    .example-container pre {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .copy-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: #409eff;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 0.85rem;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    .copy-btn:hover {
+      background-color: #357cd2;
+    }
+    input[type="file"],
+    textarea,
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #d1d9e0;
+      border-radius: 6px;
+      font-size: 1rem;
+      background-color: #fafbfc;
+      transition: border-color 0.2s ease;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    input:focus,
+    textarea:focus {
+      border-color: #409eff;
+      outline: none;
+      background-color: #fff;  
+    }
+    #runBtn {
+      display: inline-block;
+      padding: 12px 28px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 6px;
+      background-color: #409eff;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+    #runBtn:disabled {
+      background-color: #a0bcd8;
+      cursor: not-allowed;
+    }
+    #runBtn:hover:not(:disabled) {
+      background-color: #357cd2;
+    }
+
+    /* 输出区域（移至分析区内） */
+    #output {
+      margin-top: 32px;
+      width: 100%;
+      max-height: 60vh;
+      overflow-y: auto;
+      background-color: #fafbfc;
+      border-top: 1px solid #d1d9e0;
+      border-bottom: 1px solid #d1d9e0;
+      border-radius: 0 0 6px 6px;
+      display: none;
+    }
+    #output .inner {
+      width: 100%;
+      padding: 20px;
+    }
+
+    /* 页脚 */
+    footer {
+      width: 100%;
+      background-color: #2c3e50;
+      color: #dfe6eb;
+      padding: 24px 40px;
+      text-align: center;
+      margin-top: 40px;
+    }
+    footer a {
+      color: #dfe6eb;
+      margin: 0 12px;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+    footer a:hover {
+      color: #fff;
+    }
+    footer p {
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+      .features, .steps {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 20px;
+      }
+      .feature-card, .step-card {
+        width: 100%;
+        margin-top: 10px;
+      }
+      .hero {
+        padding: 60px 20px;
+      }
+      .tutorial, .instruction-section {
+        width: 100%;
+        padding: 32px 20px;
+        margin: 20px 0;
+      }
+      #output .inner {
+        padding: 0 20px;
+      }
+      footer {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- 顶部导航 -->
+    <header class="top-nav">
+      <div class="logo">VoC</div>
+      <h2>客户之声智能分析平台</h2>
+    </header>
+
+    <!-- 横幅 -->
+    <section class="hero">
+      <h1>全面洞察客户反馈</h1>
+      <p>上传包含客户反馈的 Excel 文件，AI 自动进行情感分析、主题提取与报告生成，助力企业优化产品与服务。</p>
+      <div class="pill-buttons">
+        <div class="pill"><span class="icon">😊</span>情感分析</div>
+        <div class="pill"><span class="icon">🔑</span>主题提取</div>
+        <div class="pill"><span class="icon">⚡</span>极速处理</div>
+        <div class="pill"><span class="icon">📈</span>洞察可视化</div>
+      </div>
+    </section>
+
+    <!-- 功能特色 -->
+    <section class="features">
+      <div class="feature-card">
+        <div class="icon">😊</div>
+        <h3>情感分析</h3>
+        <p>自动判断正面、中性和负面反馈，迅速把握客户满意度。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔑</div>
+        <h3>主题提取</h3>
+        <p>识别产品、服务、交付、价格等关键主题。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🚀</div>
+        <h3>极速处理</h3>
+        <p>批量处理海量客户反馈，分钟级完成分析。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🎯</div>
+        <h3>多渠道支持</h3>
+        <p>支持在线表单、社交媒体、客服记录等多种数据源。</p>
+      </div>
+    </section>
+
+    <!-- 分析流程 -->
+    <section class="process">
+      <h2>分析流程</h2>
+      <div class="steps">
+        <div class="step-card">
+          <div class="icon">📥</div>
+          <h3>上传 Excel 文件</h3>
+          <p>上传包含“摘要”列的 Excel 文件。</p>
+        </div>
+        <div class="step-card">
+          <div class="icon">⚙️</div>
+          <h3>配置分析参数</h3>
+          <p>设置情感类别和主题维度等分析指令。</p>
+        </div>
+        <div class="step-card">
+          <div class="icon">🤖</div>
+          <h3>AI 智能分析</h3>
+          <p>依托先进模型，生成情感分数及主题标签。</p>
+        </div>
+        <div class="step-card">
+          <div class="icon">✅</div>
+          <h3>导出报告</h3>
+          <p>获得含情感与主题标签的 Excel 文件和图表。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 使用教程与示例 -->
+    <section class="tutorial">
+      <h2>使用教程</h2>
+      <ol>
+        <li>上传包含“摘要”列的 Excel 文件，其他列名称与内容不受影响；</li>
+        <li>在“用户指令”中，明确写出要打的标签类别及各类别下的具体标签；</li>
+        <li>处理完成后，系统将返回原“摘要”列，以及每条对应的标签列和信心值列。</li>
+      </ol>
+
+      <div class="markdown-wrapper">
+        <h3>示例上传文件：</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>摘要</th>
+              <th>客户ID</th>
+              <th>日期</th>
+              <th>渠道</th>
+              <th>备注</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>味道非常好，下次还会购买。</td><td>C001</td><td>2025-06-10</td><td>App</td><td>无</td></tr>
+            <tr><td>服务态度一般，等餐时间过长。</td><td>C002</td><td>2025-06-11</td><td>官网</td><td>已投诉</td></tr>
+            <tr><td>品牌活动信息很有吸引力。</td><td>C003</td><td>2025-06-12</td><td>微信</td><td>回复快</td></tr>
+            <tr><td>包装设计缺乏创新。</td><td>C004</td><td>2025-06-13</td><td>门店</td><td>建议改进</td></tr>
+            <tr><td>股票走势分析报告很专业。</td><td>C005</td><td>2025-06-14</td><td>Email</td><td>阅读率高</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="field">
+        <label>示例“用户指令”：</label>
+        <div class="example-container">
+          <pre>请按照以下四个方面进行打标签：
+1. 产品口味评价：好评、中评、差评
+2. 环境和服务评价：好评、中评、差评
+3. 品牌及股票资讯：是、否
+4. 品牌营销宣传：是、否</pre>
+        </div>
+      </div>
+
+      <div class="markdown-wrapper">
+        <h3>示例输出：</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>摘要</th>
+              <th>产品口味评价</th>
+              <th>环境和服务评价</th>
+              <th>品牌及股票资讯</th>
+              <th>品牌营销宣传</th>
+              <th>信心值</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>味道非常好，下次还会购买。</td>
+              <td>好评</td>
+              <td>中评</td>
+              <td>否</td>
+              <td>否</td>
+              <td>92</td>
+            </tr>
+            <tr>
+              <td>服务态度一般，等餐时间过长。</td>
+              <td>中评</td>
+              <td>中评</td>
+              <td>否</td>
+              <td>否</td>
+              <td>88</td>
+            </tr>
+            <tr>
+              <td>品牌活动信息很有吸引力。</td>
+              <td>中评</td>
+              <td>中评</td>
+              <td>否</td>
+              <td>是</td>
+              <td>94</td>
+            </tr>
+            <tr>
+              <td>包装设计缺乏创新。</td>
+              <td>中评</td>
+              <td>中评</td>
+              <td>否</td>
+              <td>否</td>
+              <td>80</td>
+            </tr>
+            <tr>
+              <td>股票走势分析报告很专业。</td>
+              <td>中评</td>
+              <td>中评</td>
+              <td>是</td>
+              <td>否</td>
+              <td>90</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 输入与执行分析 -->
+    <section class="instruction-section">
+      <h2>开始客户反馈分析</h2>
+      <div class="field">
+        <label for="fileInput">上传 .xlsx 文件（必须包含“摘要”列）</label>
+        <input type="file" id="fileInput" accept=".xlsx" />
+      </div>
+      <div class="field">
+        <label for="instructionInput">分析指令</label>
+        <textarea id="instructionInput" rows="5" placeholder="请在此输入分析指令"></textarea>
+        <button class="copy-btn" id="copyExampleBtn">复制示例</button>
+      </div>
+      <div class="field">
+        <label for="langInput">输出语言（可选）</label>
+        <input type="text" id="langInput" placeholder="例如：中文，留空则使用原文语言" />
+      </div>
+      <button id="runBtn">执行分析</button>
+
+      <!-- 将反馈分析结果区域放在这里 -->
+      <div id="output">
+        <div class="inner"></div>
+      </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+      <p>© 2025 VoC 客户之声智能分析平台</p>
+      <div>
+        <a href="#">使用指南</a>｜  
+        <a href="#">常见问题</a>｜  
+        <a href="#">联系我们</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 脚本 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+  <script>
+    document.getElementById('copyExampleBtn').addEventListener('click', () => {
+      const text = document.querySelector('.tutorial pre').innerText;
+      document.getElementById('instructionInput').value = text;
+      alert('示例指令已复制到输入框');
+    });
+
+    const RUN_WORKFLOW_URL = 'https://www.kofei.cc/v1/workflows/run';
+    const API_KEY = 'app-yTXPrjWxjb8iHKmu53K8akM4';
+    const runBtn = document.getElementById('runBtn');
+    const output = document.getElementById('output');
+    const outputInner = document.querySelector('#output .inner');
+
+    runBtn.addEventListener('click', async () => {
+      const userId = crypto.randomUUID?.() || ('user_' + Date.now());
+      const fileEl = document.getElementById('fileInput');
+      const file = fileEl.files[0];
+      const instruction = document.getElementById('instructionInput').value.trim();
+      let lang = document.getElementById('langInput').value.trim();
+      if (!file) return alert('请上传 Excel 文件');
+      if (!instruction) return alert('请输入分析指令');
+      if (!lang) lang = '';
+
+      runBtn.disabled = true;
+      runBtn.textContent = '读取并解析文件…';
+      output.style.display = 'none';
+      outputInner.innerHTML = '';
+
+      try {
+        const arrayBuffer = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = evt => resolve(evt.target.result);
+          reader.onerror = err => reject(err);
+          reader.readAsArrayBuffer(file);
+        });
+        const wb = XLSX.read(arrayBuffer, { type: 'array' });
+        const sheet = wb.Sheets[wb.SheetNames[0]];
+        const jsonArr = XLSX.utils.sheet_to_json(sheet, { defval: '' });
+        if (!jsonArr.length) throw new Error('Excel 中无数据');
+
+        runBtn.textContent = `共读取 ${jsonArr.length} 行，提取“摘要”列…`;
+        const keys = Object.keys(jsonArr[0]);
+        const fbKey = keys.find(k => k.trim() === '摘要');
+        if (!fbKey) throw new Error('未找到“摘要”列');
+
+        const feedbackArr = jsonArr.map(r => String(r[fbKey] || ''));
+        const groups = [];
+        for (let i = 0; i < feedbackArr.length; i += 30) {
+          groups.push(feedbackArr.slice(i, i + 30));
+        }
+
+        runBtn.textContent = `分为 ${groups.length} 组，上传分析…`;
+        const payload = {
+          inputs: {
+            row_grouped: JSON.stringify(groups),
+            user_instruction: instruction,
+            language: lang
+          },
+          response_mode: 'blocking',
+          user: userId
+        };
+
+        const res = await fetch(RUN_WORKFLOW_URL, {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${API_KEY}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+        const text = await res.text();
+        if (!res.ok) throw new Error(`HTTP ${res.status}: ${text}`);
+        const data = JSON.parse(text);
+
+        let md = '';
+        if (data.data?.outputs?.text) {
+          md = Array.isArray(data.data.outputs.text)
+            ? data.data.outputs.text.join('\n\n')
+            : data.data.outputs.text;
+        } else if (data.data?.result) {
+          md = Array.isArray(data.data.result)
+            ? data.data.result.join('\n\n')
+            : data.data.result;
+        }
+        output.style.display = 'block';
+        outputInner.innerHTML = `
+          <h3>反馈分析结果：</h3>
+          <div class="markdown-wrapper">
+            ${marked.parse(md)}
+          </div>
+        `;
+        runBtn.textContent = '分析完成';
+      } catch (err) {
+        output.style.display = 'block';
+        outputInner.innerHTML = `<h3>错误：</h3><pre>${err.message}</pre>`;
+      } finally {
+        runBtn.disabled = false;
+        runBtn.textContent = '执行分析';
+      }
+    });
+  </script>
+</body>
+</html>

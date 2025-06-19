@@ -1,0 +1,118 @@
+identity:
+  name: bbc_emailtool
+  author: kofe
+  label:
+    en_US: BCC Email Sender
+    zh_Hans: 发送邮件bcc方式
+    pt_BR: BCC Email Sender
+description:
+  human:
+    en_US: A tool for bcc email send
+    zh_Hans: 一个发送BCC邮件的工具
+    pt_BR: A tool for bcc email send
+  llm: A tool for bcc email send
+parameters:
+  - name: receiver_email
+    type: string
+    required: true
+    label:
+      en_US: receiver email
+      zh_Hans: 收件邮箱
+      pt_BR: receiver email
+    human_description:
+      en_US: receiver email
+      zh_Hans: 收件邮箱
+      pt_BR: receiver email
+    llm_description: receiver email
+    form: llm
+  - name: subject
+    type: string
+    required: true
+    label:
+      en_US: subject
+      zh_Hans: 邮件主题
+      pt_BR: subject
+    human_description:
+      en_US: subject
+      zh_Hans: 邮件主题
+      pt_BR: subject
+    llm_description: subject
+    form: llm
+  - name: text
+    type: string
+    required: true
+    label:
+      en_US: text
+      zh_Hans: 邮件正文
+      pt_BR: text
+    human_description:
+      en_US: email text
+      zh_Hans: 邮件正文
+      pt_BR: email text
+    llm_description: text
+    form: llm
+  - name: sender_email
+    type: string
+    required: false
+    label:
+      en_US: sender email
+      zh_Hans: 发件邮箱
+      pt_BR: sender email
+    human_description:
+      en_US: sender email
+      zh_Hans: 收件邮箱，不填写会采用默认邮箱发送
+      pt_BR: sender email
+    llm_description: sender email
+    form: llm
+  - name: password
+    type: string
+    required: false
+    label:
+      en_US: password
+      zh_Hans: 密码
+      pt_BR: password
+    human_description:
+      en_US: the password of sender email
+      zh_Hans: 发件邮箱密码，不填写会采用默认邮箱发送
+      pt_BR: the password of sender email
+    llm_description: the password of sender email
+    form: llm
+  - name: SMTP_HOST
+    type: string
+    required: false
+    label:
+      en_US: SMTP host
+      zh_Hans: 发件邮箱服务器
+      pt_BR: SMTP host
+    human_description:
+      en_US: SMTP host
+      zh_Hans: 发件邮箱服务器，不填写会采用默认邮箱发送
+      pt_BR: SMTP host
+    llm_description: SMTP host
+    form: llm
+  - name: SMTP_PORT
+    type: string
+    required: false
+    label:
+      en_US: SMTP port
+      zh_Hans: 发件邮箱服务器
+      pt_BR: SMTP port
+    human_description:
+      en_US: SMTP port
+      zh_Hans: 发件邮箱服务器端口，不填写会采用默认邮箱发送
+      pt_BR: SMTP port
+    llm_description: SMTP port
+    form: llm
+  - name: bcc_list
+    type: string
+    required: false
+    label:
+      en_US: BCC List
+      zh_Hans: 密送邮箱列表
+      pt_BR: BCC List
+    human_description:
+      en_US: A list of email addresses to send as BCC
+      zh_Hans: 要密送的邮箱地址列表
+      pt_BR: A list of email addresses to send as BCC
+    llm_description: A list of email addresses to send as BCC
+    form: llm

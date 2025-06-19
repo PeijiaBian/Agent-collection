@@ -1,0 +1,699 @@
+app:
+  description: 'Summarize the website content. This AI takes in a website URL and
+    tries to describe it to you. '
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: workflow
+  name: Website Summary Agent
+  use_icon_as_answer_icon: false
+kind: app
+version: 0.1.5
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 60
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: false
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        sourceType: start
+        targetType: if-else
+      id: 1733144300365-source-1733192612482-target
+      source: '1733144300365'
+      sourceHandle: source
+      target: '1733192612482'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: variable-aggregator
+      id: 17331927629070-source-1734660470019-target
+      source: '17331927629070'
+      sourceHandle: source
+      target: '1734660470019'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: variable-aggregator
+      id: 1733145237505-source-1734660470019-target
+      source: '1733145237505'
+      sourceHandle: source
+      target: '1734660470019'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: code
+        targetType: variable-aggregator
+      id: 17331929195390-source-1734660470019-target
+      source: '17331929195390'
+      sourceHandle: source
+      target: '1734660470019'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: variable-aggregator
+        targetType: llm
+      id: 1734660470019-source-17346605471650-target
+      source: '1734660470019'
+      sourceHandle: source
+      target: '17346605471650'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: llm
+        targetType: end
+      id: 17346605471650-source-17346605805860-target
+      source: '17346605471650'
+      sourceHandle: source
+      target: '17346605805860'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: tool
+      id: 1733192612482-true-1735024953547-target
+      source: '1733192612482'
+      sourceHandle: 'true'
+      target: '1735024953547'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: code
+      id: 1735024953547-source-17331927629070-target
+      source: '1735024953547'
+      sourceHandle: source
+      target: '17331927629070'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: code
+      id: 1735025701256-source-1733145237505-target
+      source: '1735025701256'
+      sourceHandle: source
+      target: '1733145237505'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: tool
+      id: 1733192612482-417cecd1-95eb-4f10-bae1-7fbdce68805c-1735025701256-target
+      source: '1733192612482'
+      sourceHandle: 417cecd1-95eb-4f10-bae1-7fbdce68805c
+      target: '1735025701256'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: tool
+        targetType: code
+      id: 1735025846198-source-17331929195390-target
+      source: '1735025846198'
+      sourceHandle: source
+      target: '17331929195390'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: tool
+      id: 1733192612482-4523aca2-caa5-4ece-aa9b-511d28927fd5-1735025846198-target
+      source: '1733192612482'
+      sourceHandle: 4523aca2-caa5-4ece-aa9b-511d28927fd5
+      target: '1735025846198'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        sourceType: if-else
+        targetType: tool
+      id: 1733192612482-false-1735024953547-target
+      source: '1733192612482'
+      sourceHandle: 'false'
+      target: '1735024953547'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: true
+        title: 开始
+        type: start
+        variables:
+        - label: Web site address
+          max_length: 256
+          options: []
+          required: true
+          type: text-input
+          variable: url
+        - label: Prompt for summarization
+          max_length: 256
+          options: []
+          required: false
+          type: text-input
+          variable: user_prompt
+        - label: Output language
+          max_length: 24
+          options: []
+          required: false
+          type: text-input
+          variable: output_language
+        - label: Select Summary Type
+          max_length: 48
+          options:
+          - Single Page Summary
+          - Simple Summary
+          required: false
+          type: select
+          variable: Select_Summary_Type
+      height: 168
+      id: '1733144300365'
+      position:
+        x: -78.44948909298917
+        y: 1037.6629615264344
+      positionAbsolute:
+        x: -78.44948909298917
+        y: 1037.6629615264344
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: list) -> dict:\n    # 将列表转换为 JSON 字符串\n\
+          \    json_result = json.dumps(arg1, ensure_ascii=False)\n    # 截断字符串长度，最多保留\
+          \ 80,000 字符\n    truncated_result = json_result[:80000]\n    return {\"\
+          result\": truncated_result}\n\n"
+        code_language: python3
+        desc: 转换爬取结果
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: simple-代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1735025701256'
+          - json
+          variable: arg1
+      height: 82
+      id: '1733145237505'
+      position:
+        x: 1441.6441015663474
+        y: 708.168709732101
+      positionAbsolute:
+        x: 1441.6441015663474
+        y: 708.168709732101
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        cases:
+        - case_id: 'true'
+          conditions:
+          - comparison_operator: is
+            id: a72c8e37-9a1d-4910-a210-8fe16468814f
+            value: Single Page Summary
+            varType: string
+            variable_selector:
+            - '1733144300365'
+            - Select_Summary_Type
+          id: 'true'
+          logical_operator: and
+        - case_id: 417cecd1-95eb-4f10-bae1-7fbdce68805c
+          conditions:
+          - comparison_operator: is
+            id: b3e06f39-9494-49ce-9f4d-808185aceaf6
+            value: Simple Summary
+            varType: string
+            variable_selector:
+            - '1733144300365'
+            - Select_Summary_Type
+          id: 417cecd1-95eb-4f10-bae1-7fbdce68805c
+          logical_operator: and
+        - case_id: 4523aca2-caa5-4ece-aa9b-511d28927fd5
+          conditions:
+          - comparison_operator: is
+            id: 9a46adc8-86ed-4801-b680-147d4bd6b7c8
+            value: Detailed Summary
+            varType: string
+            variable_selector:
+            - '1733144300365'
+            - Select_Summary_Type
+          id: 4523aca2-caa5-4ece-aa9b-511d28927fd5
+          logical_operator: and
+        desc: ''
+        selected: false
+        title: 条件分支
+        type: if-else
+      height: 222
+      id: '1733192612482'
+      position:
+        x: 310.9397213205758
+        y: 947.3062188343656
+      positionAbsolute:
+        x: 310.9397213205758
+        y: 947.3062188343656
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: list) -> dict:\n    # 将列表转换为 JSON 字符串\n\
+          \    json_result = json.dumps(arg1, ensure_ascii=False)\n    # 截断字符串长度，最多保留\
+          \ 80,000 字符\n    truncated_result = json_result[:80000]\n    return {\"\
+          result\": truncated_result}\n\n"
+        code_language: python3
+        desc: 转换爬取结果
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: single-代码执行
+        type: code
+        variables:
+        - value_selector:
+          - '1735024953547'
+          - json
+          variable: arg1
+      height: 82
+      id: '17331927629070'
+      position:
+        x: 1179.061146751695
+        y: 380.4114596236952
+      positionAbsolute:
+        x: 1179.061146751695
+        y: 380.4114596236952
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: kofe
+        provider_name: kofe
+        provider_type: builtin
+        selected: false
+        title: Deep 3/20-深度爬取
+        tool_configurations:
+          excludePaths: blog/*,news/*,press/*,facebook.com/*,twitter.com/*,linkedin.com/*,instagram.com/*,comments/*,forum/*,reviews/*,privacy-policy,terms-of-service,terms-and-conditions,login,signup,register,cart,checkout,search,query,ads/*,promo/*,404,error,api/*,ajax/*,video/*,audio/*,sitemap,robots.txt,temp/*,test/*
+          excludeTags: selection,img,h3,link,button,script,a,style,iframe,#ad,#footer
+          limit: 20
+          maxDepth: 3
+          onlyMainContent: 0
+          waitFor: 60000
+        tool_label: Kofe Crawler
+        tool_name: crawl
+        tool_parameters:
+          url:
+            type: mixed
+            value: '{{#1733144300365.url#}}'
+        type: tool
+      height: 220
+      id: '1735025846198'
+      position:
+        x: 1006.4890969149203
+        y: 1199.416609771355
+      positionAbsolute:
+        x: 1006.4890969149203
+        y: 1199.416609771355
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        code: "import json\n\ndef main(arg1: list) -> dict:\n    # 将列表转换为 JSON 字符串\n\
+          \    json_result = json.dumps(arg1, ensure_ascii=False)\n    # 截断字符串长度，最多保留\
+          \ 80,000 字符\n    truncated_result = json_result[:80000]\n    return {\"\
+          result\": truncated_result}\n\n"
+        code_language: python3
+        desc: 转换爬取结果
+        outputs:
+          result:
+            children: null
+            type: string
+        selected: false
+        title: 'deep-代码执行 '
+        type: code
+        variables:
+        - value_selector:
+          - '1735025846198'
+          - json
+          variable: arg1
+      height: 82
+      id: '17331929195390'
+      position:
+        x: 1410.8110872580792
+        y: 1254.155808000611
+      positionAbsolute:
+        x: 1410.8110872580792
+        y: 1254.155808000611
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 225
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"用户可以选择爬取的深度。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"·
+          single URL对应单页面爬取","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"·
+          Simple Summary 对应爬取深度为2，最大爬取页面数5","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"·
+          Deep Summary 对应爬取深度为3，最大爬取页面数20","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"根据用户的选择进行条件判断，进入爬虫的不同分支","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 549
+      height: 225
+      id: '1733195097820'
+      position:
+        x: 414.2656631391792
+        y: 1247.2960601762259
+      positionAbsolute:
+        x: 414.2656631391792
+        y: 1247.2960601762259
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 549
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 106
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"将json格式，转换为可以后续处理的string格式。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"有最多字符80,000的限制，所以当提取字符数超过80,000时，后面的字符自动忽略。","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 326
+      height: 106
+      id: '1733195325252'
+      position:
+        x: 1273.3340197334057
+        y: 1069.6961580930354
+      positionAbsolute:
+        x: 1273.3340197334057
+        y: 1069.6961580930354
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 326
+    - data:
+        desc: 哪个变量不为空，输出哪个变量
+        output_type: string
+        selected: false
+        title: 变量输出
+        type: variable-aggregator
+        variables:
+        - - '17331927629070'
+          - result
+        - - '1733145237505'
+          - result
+        - - '17331929195390'
+          - result
+      height: 181
+      id: '1734660470019'
+      position:
+        x: 2236.7942266979317
+        y: 844.4838588594417
+      positionAbsolute:
+        x: 2236.7942266979317
+        y: 844.4838588594417
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        desc: 根据爬取内容生成网站内容总结
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: ea01-eus01-gpt-4o-mini-2024-07-18
+          provider: azure_openai
+        prompt_template:
+        - id: 1eace4da-3dda-41db-bf74-c845a8248e99
+          role: system
+          text: "You are tasked with gathering and describing information from the\
+            \ website of a company.\n\n# Details\n\nRead, parse, and review the company's\
+            \ website and gather the following information:\n\n- **Company Background**:\
+            \ Provide a brief overview of the company, its history, and significant\
+            \ milestones or achievements.\n- **Products and Services**: List and describes\
+            \ all of the products and services of the company, including product names,\
+            \ features, services, solutions, selling points, pricing, availability,\
+            \ and all details. \n- **Offerings**: Break down all of the company’s\
+            \ current offerings, including any special programs, promotions, features,\
+            \ clearance, or industry-specific solutions.\n\n# Steps\n\n1. Visit the\
+            \ company's website and explore the relevant pages that contain information\
+            \ on the background, products, services, and current offerings.\n2. Describe\
+            \ the information comprehensively under each category mentioned above.\n\
+            3.  The response must be in {{#1733144300365.output_language#}} language.\n\
+            \n# Output Format\n\n- **Company Overview**: Present an overview detailing\
+            \ the company's history and major milestones. Include all of the marketing\
+            \ content written on the wen pages as well.\n- **Products**: Provide a\
+            \ complete list of all products, including product name and comprehensive\
+            \ description of each product offered by the company. Include all the\
+            \ marketing content written on the wen pages as well.\n- **Solution and\
+            \ Services**: Provide a comprehensive description of each  solution or\
+            \ service offered by the company. Include all the marketing content written\
+            \ on the wen pages as well.\n- **Key Differentiators**: Describe the key\
+            \ differentiators, important offerings, core product and services key\
+            \ success factors.\n- **Full Offerings**: Break down all current offerings,\
+            \ ensuring to mention any additional programs, features, or specialized\
+            \ solutions.\n- **Company Background**: Describe the history of the company,\
+            \ culture of the company, and value of the company.\n- **Blog Summary**:\
+            \ Describe the recent blogs posted by the company.\n\n# User Requirements:\n\
+            {{#1733144300365.user_prompt#}}\n\n# Notes\n\n- **Language**: The response\
+            \ must be in {{#1733144300365.output_language#}}\n- Maintain a clear distinction\
+            \ between the categories for ease of readability.\n- Structure the information\
+            \ in a way that clearly separates each requested section.\n\n\n## 网站内容\n\
+            {{#1734660470019.output#}}"
+        selected: false
+        title: 生成网站总结
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 126
+      id: '17346605471650'
+      position:
+        x: 2624.2563223353486
+        y: 844.4838588594417
+      positionAbsolute:
+        x: 2624.2563223353486
+        y: 844.4838588594417
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        outputs:
+        - value_selector:
+          - '17346605471650'
+          - text
+          variable: text
+        selected: false
+        title: 结束-输出
+        type: end
+      height: 90
+      id: '17346605805860'
+      position:
+        x: 3007.4180021539014
+        y: 844.4838588594417
+      positionAbsolute:
+        x: 3007.4180021539014
+        y: 844.4838588594417
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        author: 边沛佳
+        desc: ''
+        height: 313
+        selected: false
+        showAuthor: true
+        text: '{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"usage：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"·
+          url 是用户输入的希望分析总结的网站地址，必填","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"·
+          user_prompt是用户自定义的prompt，非必填","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"·
+          output_language是用户可以定义报告使用什么语言输出","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"·
+          select_summary_type是用户选择分析的深度：","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"   -
+          Single Page Summary对应单页面爬取数据","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"   -
+          Simple Summary对应爬取深度为2，总爬取页面最大为5","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"   -
+          Deep Summary对应爬取深度为3，总爬取页面最大为20","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[],"direction":null,"format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"Example：","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"URL：https://www.nvidia.com/en-us/","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"user_prompt：主要帮我分析财务情况","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"output_language：中文","type":"text","version":1},{"type":"linebreak","version":1},{"detail":0,"format":0,"mode":"normal","style":"","text":"Select_Summary_Type：下拉选项选择三者中的一个","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0},{"children":[{"type":"linebreak","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}'
+        theme: blue
+        title: ''
+        type: ''
+        width: 610
+      height: 313
+      id: '1734661358500'
+      position:
+        x: -201.99728730876586
+        y: 1274.7895314114544
+      positionAbsolute:
+        x: -201.99728730876586
+        y: 1274.7895314114544
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom-note
+      width: 610
+    - data:
+        desc: ''
+        provider_id: kofe
+        provider_name: kofe
+        provider_type: builtin
+        selected: false
+        title: 单页面爬取
+        tool_configurations:
+          excludePaths: blog/*,news/*,press/*,facebook.com/*,twitter.com/*,linkedin.com/*,instagram.com/*,comments/*,forum/*,reviews/*,privacy-policy,terms-of-service,terms-and-conditions,login,signup,register,cart,checkout,search,query,ads/*,promo/*,404,error,api/*,ajax/*,video/*,audio/*,sitemap,robots.txt,temp/*,test/*
+          excludeTags: selection,img,h3,link,button,script,a,style,iframe,#ad,#footer
+          limit: 1
+          maxDepth: ''
+          onlyMainContent: 0
+          waitFor: 30000
+        tool_label: Kofe Crawler
+        tool_name: crawl
+        tool_parameters:
+          url:
+            type: mixed
+            value: '{{#1733144300365.url#}}'
+        type: tool
+      height: 220
+      id: '1735024953547'
+      position:
+        x: 639.2655865795357
+        y: 521.7033540146205
+      positionAbsolute:
+        x: 639.2655865795357
+        y: 521.7033540146205
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        desc: ''
+        provider_id: kofe
+        provider_name: kofe
+        provider_type: builtin
+        selected: false
+        title: simple2/5-深度爬取
+        tool_configurations:
+          excludePaths: blog/*,news/*,press/*,facebook.com/*,twitter.com/*,linkedin.com/*,instagram.com/*,comments/*,forum/*,reviews/*,privacy-policy,terms-of-service,terms-and-conditions,login,signup,register,cart,checkout,search,query,ads/*,promo/*,404,error,api/*,ajax/*,video/*,audio/*,sitemap,robots.txt,temp/*,test/*
+          excludeTags: selection,img,h3,link,button,script,a,style,iframe,#ad,#footer
+          limit: 5
+          maxDepth: 2
+          onlyMainContent: 0
+          waitFor: 60000
+        tool_label: Kofe Crawler
+        tool_name: crawl
+        tool_parameters:
+          url:
+            type: mixed
+            value: '{{#1733144300365.url#}}'
+        type: tool
+      height: 220
+      id: '1735025701256'
+      position:
+        x: 1001.7291666341155
+        y: 722.8862990312707
+      positionAbsolute:
+        x: 1001.7291666341155
+        y: 722.8862990312707
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: 527.3500425631322
+      y: 102.75112908870346
+      zoom: 0.5190127411614337
